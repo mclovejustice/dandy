@@ -1,0 +1,45 @@
+{
+  "name": "Dandy's World HQ",
+  "short_name": "DW HQ",
+  "description": "The ultimate Dandy's World fan companion. Track toons, build teams, research Twisteds, play games and more.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0d0a1a",
+  "theme_color": "#ff6eb4",
+  "categories": ["games", "entertainment"],
+  "lang": "en",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "screenshot-1.png",
+      "sizes": "1080x1920",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Toon Tracker"
+    },
+    {
+      "src": "screenshot-2.png",
+      "sizes": "1080x1920",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Team Builder"
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false
+}
