@@ -1,0 +1,27 @@
+{
+  "name": "Fan HQ for Dandy's World",
+  "short_name": "DW Fan HQ",
+  "description": "The ultimate Dandy's World fan companion. Track toons, build teams, research Twisteds, and play mini-games.",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0d0a1a",
+  "theme_color": "#ff6eb4",
+  "categories": ["games", "entertainment"],
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [],
+  "lang": "en"
+}
