@@ -1,0 +1,1615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="theme-color" content="#ff6eb4">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Fan HQ for DW">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Fan HQ for Dandy's World — Toon Tracker, Team Builder &amp; Games</title>
+<meta name="description" content="The ultimate Dandy's World fan companion. Track toons, build teams, research Twisteds, play Wordle and mini-games, and more.">
+<meta name="keywords" content="Dandy's World, Dandy's World toons, team builder, tracker, Roblox, Wordle, tier list, Poppy, Astro, Vee, Shelly">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Fan HQ for Dandy's World — Toon Tracker, Team Builder &amp; Games">
+<meta property="og:description" content="The ultimate Dandy's World fan companion app.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Fan HQ for Dandy's World — Toon Tracker, Team Builder &amp; Games">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0d0a1a;--s1:#1a1530;--s2:#231d40;--s3:#2d2550;--acc:#ff6eb4;--acc2:#7ee8fa;--acc3:#ffe066;--acc4:#a78bfa;--grn:#4ade80;--red:#f87171;--org:#fb923c;--txt:#f0e6ff;--mut:#8b7aaa;--bdr:rgba(167,139,250,.18);}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--txt);min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 60% 40% at 20% 10%,rgba(255,110,180,.1) 0%,transparent 60%),radial-gradient(ellipse 50% 60% at 80% 80%,rgba(126,232,250,.08) 0%,transparent 60%);pointer-events:none;z-index:0;}
+.dots{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
+.dot{position:absolute;border-radius:50%;animation:fdot linear infinite;opacity:.14;}
+@keyframes fdot{0%{transform:translateY(110vh) scale(.5);opacity:0}10%{opacity:.14}90%{opacity:.14}100%{transform:translateY(-10vh);opacity:0}}
+.wrap{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:0 12px 110px;}
+
+/* HEADER */
+header{text-align:center;padding:20px 0 6px;}
+.logo{font-family:'Fredoka One',cursive;font-size:clamp(1.6rem,7vw,3rem);background:linear-gradient(135deg,var(--acc),var(--acc4),var(--acc2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 0 16px rgba(255,110,180,.3));}
+.tagline{color:var(--mut);font-size:.72rem;margin-top:2px;font-weight:600;}
+
+/* TABS — two rows on mobile */
+.tabs{display:grid;grid-template-columns:repeat(11,1fr);gap:4px;margin:14px 0 18px;}
+@media(max-width:700px){.tabs{grid-template-columns:repeat(5,1fr);}}
+@media(max-width:380px){.tabs{grid-template-columns:repeat(4,1fr);}}
+.tab{font-family:'Fredoka One',cursive;font-size:.65rem;padding:7px 2px;border-radius:10px;border:2px solid var(--bdr);background:var(--s1);color:var(--mut);cursor:pointer;text-align:center;line-height:1.3;transition:all .2s;-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
+.tab.active{background:linear-gradient(135deg,var(--acc),var(--acc4));border-color:transparent;color:#fff;box-shadow:0 3px 12px rgba(255,110,180,.3);}
+.tab:hover:not(.active){border-color:var(--acc4);color:var(--acc4);}
+
+/* SECTIONS */
+.sec{display:none;animation:fup .3s ease both;}
+.sec.active{display:block;}
+@keyframes fup{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+/* SHARED */
+.card{background:var(--s1);border:2px solid var(--bdr);border-radius:15px;padding:15px;}
+.h2{font-family:'Fredoka One',cursive;font-size:1.05rem;color:var(--acc2);margin-bottom:11px;display:flex;align-items:center;gap:7px;}
+.h3{font-family:'Fredoka One',cursive;font-size:.88rem;color:var(--acc3);margin-bottom:9px;}
+.badge{display:inline-block;font-size:.57rem;font-weight:800;letter-spacing:.7px;text-transform:uppercase;padding:2px 7px;border-radius:50px;margin-bottom:5px;}
+.bc{background:rgba(148,163,184,.18);color:#94a3b8;}
+.bu{background:rgba(74,222,128,.13);color:var(--grn);}
+.br{background:rgba(96,165,250,.13);color:#60a5fa;}
+.bm{background:rgba(245,158,11,.13);color:#f59e0b;}
+.be{background:rgba(244,114,182,.18);color:#f472b6;}
+.pill{padding:6px 12px;border-radius:50px;border:2px solid var(--bdr);background:var(--s1);color:var(--mut);cursor:pointer;font-family:'Nunito',sans-serif;font-size:.75rem;font-weight:700;transition:all .18s;-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
+.pill.active,.pill:hover{background:var(--s2);color:var(--txt);border-color:var(--acc4);}
+.pill.fc.active{border-color:#94a3b8;color:#94a3b8;}.pill.fu.active{border-color:var(--grn);color:var(--grn);}.pill.fr.active{border-color:#60a5fa;color:#60a5fa;}.pill.fm.active{border-color:#f59e0b;color:#f59e0b;}.pill.fe.active{border-color:#f472b6;color:#f472b6;}
+.sbox{background:var(--s1);border:2px solid var(--bdr);border-radius:50px;padding:9px 15px;color:var(--txt);font-family:'Nunito',sans-serif;font-size:1rem;outline:none;-webkit-appearance:none;width:100%;}
+.sbox:focus{border-color:var(--acc);}
+.sbox::placeholder{color:var(--mut);}
+.controls{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:13px;align-items:center;}
+.controls .sbox{flex:1;min-width:130px;}
+.bwrap{height:7px;background:rgba(255,255,255,.07);border-radius:7px;overflow:hidden;}
+.bfill{height:100%;border-radius:7px;transition:width .5s;}
+.prow{background:var(--s1);border:2px solid var(--bdr);border-radius:11px;padding:10px 14px;margin-bottom:13px;display:flex;align-items:center;gap:10px;}
+.plbl{font-family:'Fredoka One',cursive;font-size:.82rem;color:var(--acc3);white-space:nowrap;}
+.ptr{flex:1;min-width:40px;height:8px;background:rgba(255,255,255,.07);border-radius:8px;overflow:hidden;}
+.pfill{height:100%;background:linear-gradient(90deg,var(--acc),var(--acc4));border-radius:8px;transition:width .5s;}
+.pnum{font-weight:800;font-size:.75rem;white-space:nowrap;}
+
+/* TOON GRID */
+.tgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;}
+@media(max-width:440px){.tgrid{grid-template-columns:repeat(2,1fr);gap:8px;}}
+.tc{background:var(--s1);border:2px solid var(--bdr);border-radius:14px;padding:12px 8px 10px;cursor:pointer;transition:all .2s;position:relative;overflow:visible;text-align:center;-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
+.tc:hover{border-color:var(--acc4);transform:translateY(-2px);}
+.tc.unlocked{border-color:rgba(74,222,128,.35);background:linear-gradient(135deg,#1a1530,#192818);}
+.tc.inteam{border-color:var(--acc);box-shadow:0 0 14px rgba(255,110,180,.2);}
+.tem{font-size:1.9rem;display:block;margin-bottom:4px;}
+.tnm{font-family:'Fredoka One',cursive;font-size:.85rem;margin-bottom:3px;}
+.mstats{display:flex;flex-direction:column;gap:2px;margin-top:4px;}
+.sr{display:flex;align-items:center;gap:3px;}
+.sl{font-size:.52rem;color:var(--mut);width:15px;text-align:right;font-weight:700;}
+.sb{flex:1;height:3px;background:rgba(255,255,255,.07);border-radius:3px;overflow:hidden;}
+.sf-hp{background:var(--red);}.sf-spd{background:var(--acc2);}.sf-stam{background:var(--acc3);}.sf-stlth{background:var(--acc4);}.sf-sk{background:var(--grn);}
+.chk{position:absolute;top:6px;right:6px;width:21px;height:21px;border-radius:50%;border:2px solid var(--bdr);background:var(--s2);display:flex;align-items:center;justify-content:center;font-size:.62rem;cursor:pointer;transition:all .18s;z-index:2;-webkit-tap-highlight-color:transparent;}
+.tc.unlocked .chk{background:var(--grn);border-color:var(--grn);color:#000;}
+.tlbl{position:absolute;top:5px;left:5px;background:var(--acc);color:#fff;font-size:.5rem;font-weight:800;padding:1px 5px;border-radius:50px;text-transform:uppercase;display:none;}
+.tc.inteam .tlbl{display:block;}
+.abtn{margin-top:7px;width:100%;padding:6px;border-radius:8px;border:1.5px solid var(--bdr);background:transparent;color:var(--mut);font-family:'Nunito',sans-serif;font-size:.68rem;font-weight:700;cursor:pointer;transition:all .18s;-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
+.abtn:hover{border-color:var(--acc);color:var(--acc);}
+.tc.inteam .abtn{background:rgba(255,110,180,.13);border-color:var(--acc);color:var(--acc);}
+
+/* TEAM */
+.tslots{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:13px;}
+@media(max-width:440px){.tslots{grid-template-columns:repeat(2,1fr);}}
+.slot{background:var(--s2);border:2px dashed rgba(167,139,250,.2);border-radius:13px;padding:11px 6px;text-align:center;min-height:95px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;transition:all .2s;}
+.slot.filled{border-style:solid;border-color:var(--acc);background:linear-gradient(135deg,var(--s2),#271035);}
+.slot .se{font-size:1.7rem;margin-bottom:2px;}.slot .sn{font-family:'Fredoka One',cursive;font-size:.75rem;}.slot .sa{font-size:.57rem;color:var(--mut);margin-top:2px;line-height:1.3;}.slot .se2{color:var(--mut);font-size:.72rem;font-weight:600;}
+.slx{position:absolute;top:4px;right:6px;background:none;border:none;color:var(--mut);font-size:.72rem;cursor:pointer;-webkit-tap-highlight-color:transparent;}
+.slx:hover{color:var(--red);}
+.synbox{background:var(--s2);border-radius:11px;padding:11px 13px;margin-top:3px;}
+.stag{display:inline-block;padding:2px 8px;border-radius:50px;font-size:.64rem;font-weight:800;margin:2px 2px 2px 0;}
+.sg{background:rgba(74,222,128,.13);color:var(--grn);border:1px solid rgba(74,222,128,.25);}
+.sw{background:rgba(251,191,36,.13);color:var(--acc3);border:1px solid rgba(251,191,36,.25);}
+.stip{font-size:.72rem;color:var(--mut);margin-top:6px;line-height:1.5;}
+
+/* TWISTED */
+.twgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px;}
+@media(max-width:440px){.twgrid{grid-template-columns:1fr;}}
+.twc{background:var(--s1);border:2px solid var(--bdr);border-radius:13px;padding:12px;}
+.twc:hover{border-color:var(--red);}
+.twh{display:flex;align-items:center;gap:7px;margin-bottom:7px;}
+.twe{font-size:1.35rem;flex-shrink:0;}.twn{font-family:'Fredoka One',cursive;font-size:.82rem;flex:1;}.twp{font-size:.8rem;font-weight:800;color:var(--acc3);flex-shrink:0;}
+.rbtns{display:flex;gap:5px;margin-top:6px;}
+.rbtn{flex:1;padding:7px 2px;border-radius:8px;border:1.5px solid var(--bdr);background:var(--s2);color:var(--mut);font-size:.69rem;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
+.rbtn:hover{border-color:var(--acc3);color:var(--acc3);}
+.twhint{margin-top:7px;font-size:.63rem;color:var(--acc4);line-height:1.5;}
+.twhint.done{color:var(--grn);}
+
+/* HELPER */
+.hgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;}
+@media(max-width:440px){.hgrid{grid-template-columns:1fr;}}
+.hcard{background:var(--s1);border:2px solid var(--bdr);border-radius:14px;padding:15px;}
+.htitle{font-family:'Fredoka One',cursive;font-size:.9rem;color:var(--acc3);margin-bottom:10px;}
+.frow{display:flex;gap:7px;padding:6px 0;border-bottom:1px solid var(--bdr);font-size:.75rem;}
+.frow:last-child{border-bottom:none;}
+.fnum{font-family:'Fredoka One',cursive;color:var(--acc);font-size:.8rem;width:54px;flex-shrink:0;}
+.ftip{color:var(--mut);flex:1;line-height:1.4;}
+.fdng{color:var(--red);font-size:.64rem;font-weight:700;flex-shrink:0;}
+.ical label{display:block;font-size:.72rem;color:var(--mut);margin-bottom:3px;margin-top:8px;font-weight:700;}
+.ical input,.ical select{width:100%;background:var(--s2);border:1.5px solid var(--bdr);border-radius:8px;padding:8px 10px;color:var(--txt);font-family:'Nunito',sans-serif;font-size:.85rem;outline:none;-webkit-appearance:none;}
+.ical select option{background:#1a1530;}
+.cbtn{margin-top:10px;width:100%;padding:9px;border-radius:10px;border:none;background:linear-gradient(135deg,var(--acc),var(--acc4));color:#fff;font-family:'Fredoka One',cursive;font-size:.88rem;cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
+.cres{margin-top:8px;padding:8px 10px;border-radius:9px;background:var(--s2);font-size:.75rem;line-height:1.6;display:none;}
+.cres.show{display:block;}
+.tl{list-style:none;}
+.tl li{padding:5px 0;border-bottom:1px solid var(--bdr);font-size:.75rem;line-height:1.5;color:var(--mut);}
+.tl li:last-child{border-bottom:none;}
+.tl li::before{content:'• ';color:var(--acc);}
+.tl strong{color:var(--txt);}
+.spinbox{text-align:center;padding:6px 0;}
+.spinem{font-size:1.9rem;display:block;margin:9px 0 4px;min-height:42px;}
+.spinnm{font-family:'Fredoka One',cursive;font-size:.95rem;color:var(--acc);}
+.spindsc{font-size:.7rem;color:var(--mut);margin-top:3px;line-height:1.5;}
+.spinbtn{margin-top:9px;padding:8px 20px;border-radius:50px;border:none;background:linear-gradient(135deg,var(--acc3),var(--org));color:#000;font-family:'Fredoka One',cursive;font-size:.88rem;cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
+.cl{display:flex;flex-direction:column;gap:6px;}
+.ci{display:flex;align-items:center;gap:8px;background:var(--s2);border-radius:9px;padding:8px 10px;flex-wrap:wrap;}
+.ct{font-family:'Fredoka One',cursive;font-size:.78rem;color:var(--acc3);background:rgba(255,224,102,.1);border:1px solid rgba(255,224,102,.2);padding:3px 8px;border-radius:6px;cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation;flex-shrink:0;}
+.cinfo{font-size:.7rem;color:var(--mut);line-height:1.4;flex:1;}
+.crwd{color:var(--grn);font-weight:700;}
+.cpd{font-size:.65rem;color:var(--grn);opacity:0;transition:opacity .3s;flex-shrink:0;}
+
+/* NEWS */
+.ngrid{display:flex;flex-direction:column;gap:12px;}
+.ncard{background:var(--s1);border:2px solid var(--bdr);border-radius:14px;overflow:hidden;}
+.nhead{display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid var(--bdr);}
+.nico{font-size:1.3rem;flex-shrink:0;}
+.nmeta{flex:1;min-width:0;}
+.ntitle{font-family:'Fredoka One',cursive;font-size:.85rem;}
+.ndate{font-size:.6rem;color:var(--mut);margin-top:2px;}
+.ntag{font-size:.55rem;font-weight:800;padding:2px 7px;border-radius:50px;text-transform:uppercase;letter-spacing:.5px;flex-shrink:0;}
+.ta{background:rgba(74,222,128,.18);color:var(--grn);}
+.tu{background:rgba(96,165,250,.18);color:#60a5fa;}
+.tp{background:rgba(167,139,250,.18);color:var(--acc4);}
+.nbody{padding:10px 14px;font-size:.76rem;color:var(--mut);line-height:1.6;}
+.nbody strong{color:var(--txt);}
+.nbody ul{margin:5px 0 0 12px;}
+.nbody li{margin-bottom:2px;}
+.cdrow{display:flex;gap:9px;justify-content:center;flex-wrap:wrap;margin:11px 0 3px;}
+.cdbox{background:var(--s2);border-radius:10px;padding:9px 13px;text-align:center;min-width:54px;}
+.cdnum{font-family:'Fredoka One',cursive;font-size:1.5rem;color:var(--acc2);line-height:1;}
+.cdlbl{font-size:.55rem;color:var(--mut);font-weight:700;text-transform:uppercase;margin-top:3px;}
+
+/* SKINS GALLERY */
+.skin-filters{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px;}
+.skin-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;}
+@media(max-width:440px){.skin-grid{grid-template-columns:1fr;}}
+.skin-toon-card{background:var(--s1);border:2px solid var(--bdr);border-radius:14px;overflow:hidden;}
+.skin-toon-head{display:flex;align-items:center;gap:9px;padding:11px 13px;border-bottom:1px solid var(--bdr);cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent;}
+.ste{font-size:1.6rem;flex-shrink:0;}
+.stnm{font-family:'Fredoka One',cursive;font-size:.9rem;flex:1;}
+.stcount{font-size:.65rem;color:var(--mut);background:var(--s2);padding:2px 8px;border-radius:50px;font-weight:700;flex-shrink:0;}
+.stoggle{font-size:.75rem;color:var(--mut);flex-shrink:0;}
+.skin-list{padding:10px 13px;display:none;}
+.skin-list.open{display:block;}
+.skin-item{display:flex;align-items:flex-start;gap:8px;padding:7px 0;border-bottom:1px solid rgba(167,139,250,.1);}
+.skin-item:last-child{border-bottom:none;}
+.skin-icon{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;}
+.si-vintage{background:rgba(148,163,184,.15);}
+.si-store{background:rgba(167,139,250,.15);}
+.si-event{background:rgba(244,114,182,.15);}
+.si-golden{background:rgba(245,158,11,.15);}
+.si-gamepass{background:rgba(96,165,250,.15);}
+.skin-info{flex:1;}
+.skin-name{font-family:'Fredoka One',cursive;font-size:.8rem;color:var(--txt);}
+.skin-how{font-size:.64rem;color:var(--mut);margin-top:1px;line-height:1.4;}
+.skin-cost{font-size:.62rem;color:var(--acc3);font-weight:700;margin-top:2px;}
+.wiki-link{font-size:.62rem;color:var(--acc2);text-decoration:none;font-weight:700;flex-shrink:0;padding:3px 6px;border:1px solid rgba(126,232,250,.3);border-radius:5px;white-space:nowrap;}
+.wiki-link:hover{background:rgba(126,232,250,.1);}
+
+/* GAMES */
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:12px;}
+@media(max-width:440px){.ggrid{grid-template-columns:1fr;}}
+.gcard{background:var(--s1);border:2px solid var(--bdr);border-radius:14px;padding:15px;}
+.gtitle{font-family:'Fredoka One',cursive;font-size:.9rem;color:var(--acc3);margin-bottom:9px;}
+
+/* Memory Game */
+.mem-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;max-width:300px;margin:0 auto;}
+.mem-card{aspect-ratio:1;border-radius:10px;border:2px solid var(--bdr);background:var(--s2);display:flex;align-items:center;justify-content:center;font-size:1.5rem;cursor:pointer;transition:all .25s;-webkit-tap-highlight-color:transparent;touch-action:manipulation;user-select:none;}
+.mem-card.flipped{background:var(--s3);border-color:var(--acc4);}
+.mem-card.matched{background:rgba(74,222,128,.15);border-color:var(--grn);cursor:default;}
+.mem-card.hidden{opacity:0;}
+.mem-back{display:block;}.mem-front{display:none;}
+.mem-card.flipped .mem-back,.mem-card.matched .mem-back{display:none;}
+.mem-card.flipped .mem-front,.mem-card.matched .mem-front{display:block;}
+.mem-info{display:flex;justify-content:space-between;align-items:center;margin-bottom:9px;font-size:.75rem;color:var(--mut);}
+.mem-info strong{color:var(--acc3);font-family:'Fredoka One',cursive;}
+
+/* Scramble */
+.scram-word{font-family:'Fredoka One',cursive;font-size:2rem;color:var(--acc);letter-spacing:4px;text-align:center;margin:8px 0;}
+.scram-hint{font-size:.72rem;color:var(--mut);text-align:center;margin-bottom:10px;}
+.scram-input{width:100%;background:var(--s2);border:2px solid var(--bdr);border-radius:9px;padding:9px 12px;color:var(--txt);font-family:'Fredoka One',cursive;font-size:1.1rem;text-align:center;text-transform:uppercase;outline:none;letter-spacing:3px;-webkit-appearance:none;}
+.scram-input:focus{border-color:var(--acc);}
+.scram-btns{display:flex;gap:7px;margin-top:8px;}
+.gbtn{flex:1;padding:8px;border-radius:9px;border:none;background:linear-gradient(135deg,var(--acc),var(--acc4));color:#fff;font-family:'Fredoka One',cursive;font-size:.82rem;cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
+.gbtn.sec2{background:var(--s2);border:1.5px solid var(--bdr);color:var(--mut);}
+.gmsg{text-align:center;font-size:.78rem;font-weight:700;margin-top:7px;min-height:18px;}
+.gscore{font-size:.72rem;color:var(--mut);text-align:center;margin-bottom:6px;}
+
+/* Chase Game */
+.chase-area{position:relative;width:100%;height:200px;background:var(--s2);border-radius:12px;overflow:hidden;border:2px solid var(--bdr);cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation;user-select:none;}
+.chase-toon{position:absolute;font-size:1.8rem;transition:none;cursor:pointer;line-height:1;}
+.chase-twisted{position:absolute;font-size:1.8rem;pointer-events:none;line-height:1;}
+.chase-info{display:flex;justify-content:space-between;margin-bottom:8px;font-size:.75rem;color:var(--mut);}
+.chase-info strong{color:var(--acc3);font-family:'Fredoka One',cursive;}
+.chase-msg{text-align:center;font-size:.85rem;font-weight:700;color:var(--acc3);margin-top:7px;min-height:20px;}
+
+
+/* QUIZ / TRIVIA */
+.qbox{background:var(--s2);border-radius:14px;padding:16px 13px;text-align:center;}
+.qdots{display:flex;justify-content:center;gap:4px;margin-bottom:11px;}
+.qdot{width:5px;height:5px;border-radius:50%;background:var(--bdr);transition:background .3s;}
+.qdot.done{background:var(--acc4);}.qdot.cur{background:var(--acc);}
+.qq{font-family:'Fredoka One',cursive;font-size:.95rem;margin-bottom:13px;line-height:1.4;}
+.qopts{display:grid;grid-template-columns:1fr 1fr;gap:7px;}
+@media(max-width:360px){.qopts{grid-template-columns:1fr;}}
+.qopt{padding:10px 7px;border-radius:10px;border:2px solid var(--bdr);background:var(--s3);color:var(--txt);font-family:'Nunito',sans-serif;font-size:.77rem;font-weight:700;cursor:pointer;transition:all .2s;line-height:1.3;-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
+.qopt:hover{border-color:var(--acc);}
+.qopt.sel{border-color:var(--acc);background:rgba(255,110,180,.1);}
+.qres{display:none;flex-direction:column;align-items:center;gap:6px;}
+.qres.show{display:flex;}
+.rem{font-size:2.8rem;}.rnm{font-family:'Fredoka One',cursive;font-size:1.35rem;color:var(--acc);}
+.rrar{font-size:.6rem;color:var(--acc4);font-weight:800;text-transform:uppercase;letter-spacing:.5px;}
+.rdsc{color:var(--mut);font-size:.76rem;line-height:1.6;max-width:290px;}
+.rbtn2{margin-top:6px;padding:9px 20px;border-radius:50px;border:none;background:linear-gradient(135deg,var(--acc),var(--acc4));color:#fff;font-family:'Fredoka One',cursive;font-size:.85rem;cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
+.tvscore{font-size:.7rem;color:var(--mut);margin-bottom:8px;}
+.tvq{font-family:'Fredoka One',cursive;font-size:.88rem;line-height:1.4;margin-bottom:11px;}
+.tvopts{display:flex;flex-direction:column;gap:6px;}
+.tvopt{padding:9px 12px;border-radius:10px;border:2px solid var(--bdr);background:var(--s2);color:var(--txt);font-family:'Nunito',sans-serif;font-size:.78rem;font-weight:700;cursor:pointer;transition:all .2s;text-align:left;-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
+.tvopt:hover{border-color:var(--acc4);}
+.tvopt.correct{border-color:var(--grn);background:rgba(74,222,128,.13);color:var(--grn);}
+.tvopt.wrong{border-color:var(--red);background:rgba(248,113,113,.09);color:var(--red);}
+.tvopt.reveal{border-color:var(--grn);background:rgba(74,222,128,.08);}
+.tvnxt{margin-top:8px;width:100%;padding:8px;border-radius:10px;border:none;background:linear-gradient(135deg,var(--acc),var(--acc4));color:#fff;font-family:'Fredoka One',cursive;font-size:.83rem;cursor:pointer;display:none;-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
+
+/* WORDLE */
+.wlives{display:flex;gap:3px;justify-content:center;margin-bottom:6px;font-size:.85rem;}
+.wgrid{display:grid;grid-template-columns:repeat(5,36px);gap:4px;justify-content:center;margin:0 auto 9px;}
+.wcell{width:36px;height:36px;border:2px solid var(--bdr);border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:'Fredoka One',cursive;font-size:.9rem;text-transform:uppercase;transition:all .2s;}
+.wcell.correct{background:rgba(74,222,128,.2);border-color:var(--grn);color:var(--grn);}
+.wcell.present{background:rgba(255,224,102,.16);border-color:var(--acc3);color:var(--acc3);}
+.wcell.absent{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.08);color:var(--mut);}
+.wcell.cur{border-color:var(--acc4);}
+.wbtns{display:flex;gap:6px;justify-content:center;margin-top:6px;}
+.wbtn{padding:6px 14px;border-radius:8px;border:1.5px solid var(--bdr);background:var(--s2);color:var(--txt);font-family:'Fredoka One',cursive;font-size:.77rem;cursor:pointer;transition:all .2s;-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
+.wbtn:hover{border-color:var(--acc);color:var(--acc);}
+.wkeyboard{display:flex;flex-direction:column;gap:5px;margin:8px auto 0;max-width:340px;}
+.wkrow{display:flex;gap:4px;justify-content:center;}
+.wkey{height:36px;min-width:28px;flex:1;border-radius:6px;border:1.5px solid var(--bdr);background:var(--s2);color:var(--txt);font-family:'Fredoka One',cursive;font-size:.7rem;cursor:pointer;transition:all .15s;-webkit-tap-highlight-color:transparent;touch-action:manipulation;padding:0;}
+.wkey:active{transform:scale(.92);}
+.wkey-wide{min-width:52px;flex:1.8;font-size:.6rem;}
+.wkey.correct{background:rgba(74,222,128,.3);border-color:var(--grn);color:var(--grn);}
+.wkey.present{background:rgba(255,224,102,.2);border-color:var(--acc3);color:var(--acc3);}
+.wkey.absent{background:rgba(255,255,255,.03);border-color:rgba(255,255,255,.06);color:var(--mut);}
+.wmsg{font-size:.72rem;margin-top:6px;color:var(--acc3);min-height:16px;font-weight:700;text-align:center;}
+
+/* LORE */
+.lcard{cursor:pointer;user-select:none;margin-bottom:8px;}
+.lcard:last-child{margin-bottom:0;}
+.lq{font-family:'Fredoka One',cursive;font-size:.83rem;color:var(--acc2);}
+.la{margin-top:6px;font-size:.73rem;color:var(--mut);line-height:1.6;display:none;}
+.la.show{display:block;}
+.lhint{font-size:.6rem;color:var(--mut);margin-top:4px;}
+
+/* TIER */
+.tierrow{display:flex;align-items:flex-start;gap:7px;margin-bottom:8px;}
+.tierlbl{font-family:'Fredoka One',cursive;font-size:.88rem;width:18px;text-align:center;flex-shrink:0;padding-top:4px;}
+.tierbar{flex:1;background:var(--s2);border-radius:7px;padding:5px 8px;display:flex;flex-wrap:wrap;gap:4px;}
+
+/* EMPTY */
+.empty{text-align:center;padding:36px 20px;color:var(--mut);grid-column:1/-1;}
+.ei{font-size:2.4rem;margin-bottom:8px;}
+
+.favbtn{position:absolute;top:6px;left:6px;font-size:1rem;cursor:pointer;color:var(--mut);-webkit-tap-highlight-color:transparent;touch-action:manipulation;transition:color .18s,transform .18s;user-select:none;line-height:1;}
+.favbtn:hover{transform:scale(1.3);}
+.favbtn.faved{color:var(--acc3);}
+.tc.faved{border-color:rgba(255,224,102,.4);}
+.faves-empty{text-align:center;padding:48px 20px;color:var(--mut);grid-column:1/-1;}
+.meta-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;margin-bottom:14px;}
+@media(max-width:460px){.meta-grid{grid-template-columns:1fr;}}
+.meta-card{background:var(--s1);border:2px solid var(--bdr);border-radius:14px;padding:14px;transition:all .2s;}
+.meta-card:hover{border-color:var(--acc4);transform:translateY(-2px);}
+.meta-title{font-family:'Fredoka One',cursive;font-size:.9rem;color:var(--acc3);margin-bottom:4px;}
+.meta-desc{font-size:.72rem;color:var(--mut);line-height:1.5;margin-bottom:9px;}
+.meta-toons{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:8px;}
+.meta-toon{display:flex;align-items:center;gap:4px;background:var(--s2);border-radius:7px;padding:3px 7px;font-size:.7rem;}
+.meta-tag{font-size:.58rem;font-weight:800;padding:2px 7px;border-radius:50px;}
+.mt-s{background:rgba(245,158,11,.15);color:#f59e0b;border:1px solid rgba(245,158,11,.3);}
+.mt-a{background:rgba(74,222,128,.12);color:var(--grn);border:1px solid rgba(74,222,128,.3);}
+.mt-b{background:rgba(96,165,250,.12);color:#60a5fa;border:1px solid rgba(96,165,250,.3);}
+.meta-apply{margin-top:9px;width:100%;padding:7px;border-radius:9px;border:none;background:linear-gradient(135deg,var(--acc),var(--acc4));color:#fff;font-family:'Fredoka One',cursive;font-size:.78rem;cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
+.roster-controls{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;}
+.size-toggle{display:flex;gap:6px;margin-bottom:12px;}
+.size-btn{padding:6px 14px;border-radius:50px;border:2px solid var(--bdr);background:var(--s1);color:var(--mut);cursor:pointer;font-family:'Nunito',sans-serif;font-size:.78rem;font-weight:700;transition:all .18s;-webkit-tap-highlight-color:transparent;}
+.size-btn.active{background:linear-gradient(135deg,var(--acc),var(--acc4));border-color:transparent;color:#fff;}
+
+/* ── LORE TAB ── */
+.lore-filters{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px;}
+.lore-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:13px;}
+@media(max-width:500px){.lore-grid{grid-template-columns:1fr;}}
+.lore-card{background:var(--s1);border:2px solid var(--bdr);border-radius:15px;overflow:hidden;transition:border-color .2s;}
+.lore-card:hover{border-color:var(--acc4);}
+.lore-card-head{display:flex;align-items:center;gap:11px;padding:13px 14px;border-bottom:1px solid var(--bdr);}
+.lore-em{font-size:2.1rem;flex-shrink:0;}
+.lore-head-info{flex:1;min-width:0;}
+.lore-name{font-family:'Fredoka One',cursive;font-size:1rem;color:var(--txt);}
+.lore-fullname{font-size:.63rem;color:var(--acc3);font-weight:700;margin-top:1px;}
+.lore-desig{font-size:.58rem;color:var(--mut);font-weight:700;letter-spacing:.5px;text-transform:uppercase;margin-top:1px;}
+.lore-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;margin-top:2px;}
+.lore-body{padding:12px 14px;}
+.lore-desc{font-size:.76rem;color:var(--mut);line-height:1.65;margin-bottom:10px;}
+.lore-facts{display:flex;flex-direction:column;gap:5px;margin-bottom:10px;}
+.lore-fact{display:flex;gap:7px;font-size:.72rem;line-height:1.5;}
+.lore-fact-i{flex-shrink:0;font-size:.88rem;}
+.lore-fact-t{color:var(--mut);}
+.lore-fact-t strong{color:var(--txt);}
+.lore-tags{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:10px;}
+.lore-tag{font-size:.6rem;font-weight:700;padding:2px 7px;border-radius:50px;border:1px solid;}
+.lt-p{background:rgba(167,139,250,.1);color:var(--acc4);border-color:rgba(167,139,250,.28);}
+.lt-r{background:rgba(126,232,250,.08);color:var(--acc2);border-color:rgba(126,232,250,.25);}
+.lt-t{background:rgba(255,224,102,.08);color:var(--acc3);border-color:rgba(255,224,102,.25);}
+.lt-e{background:rgba(244,114,182,.1);color:#f472b6;border-color:rgba(244,114,182,.28);}
+.lore-wiki{display:inline-block;margin-top:4px;font-size:.63rem;color:var(--acc2);text-decoration:none;font-weight:700;padding:3px 8px;border:1px solid rgba(126,232,250,.28);border-radius:6px;}
+.lore-wiki:hover{background:rgba(126,232,250,.08);}
+.lore-empty{text-align:center;padding:48px 20px;color:var(--mut);grid-column:1/-1;}
+</style>
+</head>
+<body>
+<div class="dots" id="dots"></div>
+<div class="wrap">
+
+<header>
+  <div class="logo">🌀 Dandy's World HQ</div>
+  <div class="tagline">Toon Tracker · Team · Research · Helper · News · Skins · Games</div>
+    <div style="font-size:.58rem;color:rgba(255,255,255,0.3);margin-top:4px;font-weight:600;letter-spacing:.5px;">Fan-made · Not affiliated with Roblox or the Dandy's World dev team</div>
+</header>
+
+<div class="tabs">
+  <button class="tab active" onclick="showTab('tracker',this)">📋<br>Toons</button>
+  <button class="tab" onclick="showTab('team',this)">⚔️<br>Team</button>
+  <button class="tab" onclick="showTab('research',this)">🧪<br>Research</button>
+  <button class="tab" onclick="showTab('helper',this)">🛠️<br>Helper</button>
+  <button class="tab" onclick="showTab('news',this)">📰<br>News</button>
+  <button class="tab" onclick="showTab('skins',this)">🎨<br>Skins</button>
+  <button class="tab" onclick="showTab('games',this)">🎮<br>Games</button>
+  <button class="tab" onclick="showTab('faves',this)">⭐<br>Faves</button>
+  <button class="tab" onclick="showTab('lore',this)">📖<br>Lore</button>
+  <button class="tab" onclick="showTab('backup',this)">💾<br>Backup</button>
+</div>
+
+<!-- ═══════════════════ TAB 1: TOONS ═══════════════════ -->
+<div class="sec active" id="tab-tracker">
+  <div class="prow"><span class="plbl">🧩 Collection</span><div class="ptr"><div class="pfill" id="pfill" style="width:0%"></div></div><span class="pnum" id="pnum">0 / 0</span></div>
+  <div class="controls">
+    <input class="sbox" type="text" placeholder="🔍 Search…" id="tsearch" oninput="renderToons()">
+    <button class="pill active" onclick="setF('all',this)">All</button>
+    <button class="pill fc" onclick="setF('common',this)">Common</button>
+    <button class="pill fu" onclick="setF('uncommon',this)">Uncommon</button>
+    <button class="pill fr" onclick="setF('rare',this)">Rare</button>
+    <button class="pill fm" onclick="setF('main',this)">⭐ Main</button>
+    <button class="pill fe" onclick="setF('event',this)">🎉 Event</button>
+  </div>
+  <div class="tgrid" id="tgrid"></div>
+</div>
+
+<!-- ═══════════════════ TAB 2: TEAM ═══════════════════ -->
+<div class="sec" id="tab-team">
+  <div class="card" style="margin-bottom:12px">
+    <div class="h2">⚔️ Your Team (up to 8)</div>
+    <div class="tslots" id="tslots"></div>
+    <div class="synbox"><div style="font-family:'Fredoka One',cursive;font-size:.82rem;color:var(--acc3);margin-bottom:6px;">✨ Analysis</div><div id="syntags"></div><div class="stip" id="syntip">Add toons to see synergy tips!</div></div>
+  </div>
+  <div class="h2" style="color:var(--acc2);margin-top:4px;">➕ Add from Roster</div>
+  <div class="roster-controls">
+    <button class="pill active" onclick="setRosterF('all',this)">All</button>
+    <button class="pill" onclick="setRosterF('main',this)">⭐ Main</button>
+    <button class="pill" onclick="setRosterF('event',this)">🎉 Event</button>
+    <button class="pill fc" onclick="setRosterF('common',this)">Common</button>
+    <button class="pill fu" onclick="setRosterF('uncommon',this)">Uncommon</button>
+    <button class="pill fr" onclick="setRosterF('rare',this)">Rare</button>
+  </div>
+  <div class="tgrid" id="troster"></div>
+  <div class="h2" style="color:var(--acc2);margin-top:20px;">🏆 Recommended Team Comps</div>
+  <p style="font-size:.73rem;color:var(--mut);margin-bottom:10px;line-height:1.5;">Tap a comp to load it into your team slots!</p>
+  <div class="size-toggle">
+    <button class="size-btn active" id="size4" onclick="setMetaSize(4)">👥 4-Player</button>
+    <button class="size-btn" id="size8" onclick="setMetaSize(8)">👥👥 8-Player</button>
+  </div>
+  <div class="meta-grid" id="meta-grid"></div>
+</div>
+
+<!-- ═══════════════════ TAB 3: RESEARCH ═══════════════════ -->
+<div class="sec" id="tab-research">
+  <div class="card" style="margin-bottom:13px;">
+    <div class="h2">🧪 Twisted Research Log</div>
+    <p style="font-size:.73rem;color:var(--mut);line-height:1.6;">Reach 100% on a Twisted to unlock their Toon. Event Twisteds only spawn during their event!</p>
+    <div class="prow" style="margin-top:10px;margin-bottom:0;"><span class="plbl">🔬 Progress</span><div class="ptr"><div class="pfill" id="resfill" style="width:0%"></div></div><span class="pnum" id="resnum">0/0</span></div>
+  </div>
+  <div class="twgrid" id="twgrid"></div>
+</div>
+
+<!-- ═══════════════════ TAB 4: HELPER ═══════════════════ -->
+<div class="sec" id="tab-helper">
+  <div class="hgrid">
+    <div class="hcard"><div class="htitle">🏢 Floor Survival Tips</div>
+      <div class="frow"><span class="fnum">Floors 1–3</span><span class="ftip">Learn routes, build Ichor. Buy at least 1 Tape from Dandy!</span></div>
+      <div class="frow"><span class="fnum">Even Floors</span><span class="ftip">Dandy pops up — buy cheap Tapes or Twisted Dandy spawns!</span><span class="fdng">⚠️ BUY</span></div>
+      <div class="frow"><span class="fnum">Floor 4+</span><span class="ftip">2 Twisteds spawn. Call out failed skill checks to your team.</span></div>
+      <div class="frow"><span class="fnum">Floor 10+</span><span class="ftip">Rare Twisteds increase. High stealth toons shine here.</span></div>
+      <div class="frow"><span class="fnum">Panic Mode</span><span class="ftip">All machines done — SPRINT to the elevator! Twisted Dandy charges completed machines.</span><span class="fdng">🚨 RUN</span></div>
+    </div>
+    <div class="hcard"><div class="htitle">💰 Ichor Calculator</div>
+      <div class="ical">
+        <label>Current Ichor</label><input type="number" id="ichav" placeholder="e.g. 1200" min="0">
+        <label>Target Toon</label><select id="ichtgt"><option value="">Choose a toon…</option></select>
+        <button class="cbtn" onclick="calcIchor()">Calculate 🧮</button>
+        <div class="cres" id="cres"></div>
+      </div>
+    </div>
+    <div class="hcard"><div class="htitle">🎰 Random Toon Spinner</div>
+      <p style="font-size:.7rem;color:var(--mut);margin-bottom:5px;">Can't decide? Spin for a random toon!</p>
+      <div class="spinbox"><span class="spinem" id="spinem">🎰</span><div class="spinnm" id="spinnm">Press Spin!</div><div class="spindsc" id="spindsc">Your toon will appear here</div><button class="spinbtn" onclick="spinToon()">🎲 SPIN!</button></div>
+    </div>
+    <div class="hcard"><div class="htitle">🎁 Active Codes</div>
+      <p style="font-size:.7rem;color:var(--mut);margin-bottom:10px;">Tap a code to copy it!</p>
+      <div class="cl" id="codeslist"></div>
+    </div>
+    <div class="hcard"><div class="htitle">⚠️ Twisted Danger Tiers</div><div id="dangertier"></div></div>
+      <ul class="tl">
+        <li><strong>Buy a Tape on even floors</strong> — any cheap one keeps Twisted Dandy away.</li>
+        <li><strong>Failed skill check?</strong> Move away fast — Twisteds charge to your machine.</li>
+        <li><strong>Team up on machines</strong> — multiple players complete extraction much faster.</li>
+        <li><strong>Use Vee's Mic Check</strong> before starting a machine run to see all Twisteds.</li>
+        <li><strong>High stealth toons</strong> can walk right past Twisteds without being spotted!</li>
+        <li><strong>Spring Fever (Easter 2026)</strong> — +50% speed but Twisted Bassie throws vines; Cocoa hops obstacles!</li>
+      </ul>
+    </div>
+    <div class="hcard"><div class="htitle">💎 Earn Ichor Fast</div>
+      <ul class="tl">
+        <li><strong>Complete machines</strong> — 1 Ichor per 20% contributed (max 5 per machine).</li>
+        <li><strong>Survive deep floors</strong> — Ichor scales with floor depth.</li>
+        <li><strong>Encounter Twisteds</strong> — each unique encounter = 1 Ichor.</li>
+        <li><strong>Use active ability</strong> once per floor for 5 bonus Ichor.</li>
+        <li><strong>Easter 2026</strong>: earn Baskets from floors, daily logins, Lobby Egg Hunt & Dandy's elevator shop. Need ~10,300 for full completion!</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ TAB 5: NEWS ═══════════════════ -->
+<div class="sec" id="tab-news">
+  <div class="ngrid" id="ngrid"></div>
+</div>
+
+<!-- ═══════════════════ TAB 6: SKINS ═══════════════════ -->
+<div class="sec" id="tab-skins">
+  <div class="card" style="margin-bottom:13px;">
+    <div class="h2">🎨 Skin Gallery</div>
+    <p style="font-size:.73rem;color:var(--mut);line-height:1.6;margin-bottom:8px;">All known skins organised by toon. Tap a toon to expand their skins. Tap <strong>Wiki ↗</strong> to see the actual image on the official Fandom wiki.</p>
+    <div style="font-size:.7rem;color:var(--acc4);background:rgba(167,139,250,.1);border-radius:8px;padding:8px 10px;line-height:1.5;">
+      📌 <strong>Skin Types:</strong> 🖤 Vintage (Mastery) · 🛍️ Dyle's Store (600 Ichor) · 🎉 Event (seasonal currency) · 🥇 Golden (quest reward) · 💎 Gamepass (Robux)
+    </div>
+  </div>
+  <div class="skin-filters">
+    <button class="pill active" onclick="setSkinF('all',this)">All Toons</button>
+    <button class="pill" onclick="setSkinF('main',this)">⭐ Mains</button>
+    <button class="pill" onclick="setSkinF('event',this)">🎉 Event</button>
+    <button class="pill" onclick="setSkinF('base',this)">Base Game</button>
+  </div>
+  <div class="skin-grid" id="skin-grid"></div>
+</div>
+
+<!-- ═══════════════════ TAB 7: GAMES ═══════════════════ -->
+<div class="sec" id="tab-games">
+  <div class="ggrid">
+
+    <!-- Memory Match -->
+    <div class="gcard">
+      <div class="gtitle">🃏 Memory Match</div>
+      <div class="mem-info"><span>Moves: <strong id="mmoves">0</strong></span><span>Matches: <strong id="mmatches">0</strong>/8</span><button class="gbtn" style="flex:0;padding:5px 12px;font-size:.72rem;" onclick="newMemory()">🔄 New</button></div>
+      <div class="mem-grid" id="mem-grid"></div>
+    </div>
+
+    <!-- Toon Scramble -->
+    <div class="gcard">
+      <div class="gtitle">🔤 Toon Scramble</div>
+      <div class="gscore" id="scram-score">Score: 0 | Streak: 0</div>
+      <div class="scram-word" id="scram-word"></div>
+      <div class="scram-hint" id="scram-hint"></div>
+      <input class="scram-input" id="scram-input" maxlength="12" placeholder="TYPE HERE" oninput="this.value=this.value.toUpperCase()">
+      <div class="scram-btns">
+        <button class="gbtn" onclick="checkScram()">✓ Check</button>
+        <button class="gbtn sec2" onclick="skipScram()">⏭ Skip</button>
+      </div>
+      <div class="gmsg" id="scram-msg"></div>
+    </div>
+
+    <!-- Twisted Chase -->
+    <div class="gcard">
+      <div class="gtitle">🏃 Twisted Chase!</div>
+      <div class="chase-info"><span>Score: <strong id="cscore">0</strong></span><span>Lives: <strong id="clives">❤️❤️❤️</strong></span><span>Time: <strong id="ctimer">30</strong>s</span></div>
+      <div class="chase-area" id="chase-area" onclick="chaseAreaClick(event)"></div>
+      <div class="chase-msg" id="chase-msg">Tap the toon to start! Avoid the Twisted!</div>
+    </div>
+
+    <!-- Wordle -->
+    <div class="gcard">
+      <div class="gtitle">🟩 Toon Wordle</div>
+      <div class="wlives" id="wlives"></div>
+      <div class="wgrid" id="wgrid" onclick="document.getElementById('wkeyboard').scrollIntoView({behavior:'smooth',block:'nearest'})"></div>
+      <div class="wmsg" id="wmsg">Guess the 5-letter toon name!</div>
+      <div style="text-align:center;font-size:.6rem;color:var(--mut);margin-bottom:4px;">👇 Use the keyboard below</div>
+      <div class="wkeyboard" id="wkeyboard">
+        <div class="wkrow">
+          <button class="wkey" onclick="wKeyPress('Q')">Q</button><button class="wkey" onclick="wKeyPress('W')">W</button><button class="wkey" onclick="wKeyPress('E')">E</button><button class="wkey" onclick="wKeyPress('R')">R</button><button class="wkey" onclick="wKeyPress('T')">T</button><button class="wkey" onclick="wKeyPress('Y')">Y</button><button class="wkey" onclick="wKeyPress('U')">U</button><button class="wkey" onclick="wKeyPress('I')">I</button><button class="wkey" onclick="wKeyPress('O')">O</button><button class="wkey" onclick="wKeyPress('P')">P</button>
+        </div>
+        <div class="wkrow">
+          <button class="wkey" onclick="wKeyPress('A')">A</button><button class="wkey" onclick="wKeyPress('S')">S</button><button class="wkey" onclick="wKeyPress('D')">D</button><button class="wkey" onclick="wKeyPress('F')">F</button><button class="wkey" onclick="wKeyPress('G')">G</button><button class="wkey" onclick="wKeyPress('H')">H</button><button class="wkey" onclick="wKeyPress('J')">J</button><button class="wkey" onclick="wKeyPress('K')">K</button><button class="wkey" onclick="wKeyPress('L')">L</button>
+        </div>
+        <div class="wkrow">
+          <button class="wkey wkey-wide" onclick="submitGuess()">ENTER</button><button class="wkey" onclick="wKeyPress('Z')">Z</button><button class="wkey" onclick="wKeyPress('X')">X</button><button class="wkey" onclick="wKeyPress('C')">C</button><button class="wkey" onclick="wKeyPress('V')">V</button><button class="wkey" onclick="wKeyPress('B')">B</button><button class="wkey" onclick="wKeyPress('N')">N</button><button class="wkey" onclick="wKeyPress('M')">M</button><button class="wkey wkey-wide" onclick="wKeyPress('⌫')">⌫</button>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:6px;">
+        <button class="wbtn" onclick="newWordle()">🔄 New word</button>
+      </div>
+    </div>
+
+    <!-- Toon Quiz -->
+    <div class="gcard">
+      <div class="gtitle">🎭 Which Toon Are You?</div>
+      <div class="qbox" id="qbox">
+        <div id="qinner"><div class="qdots" id="qdots"></div><div class="qq" id="qq"></div><div class="qopts" id="qopts"></div></div>
+        <div class="qres" id="qres"><div class="rem" id="rem"></div><div class="rnm" id="rnm"></div><div class="rrar" id="rrar"></div><div class="rdsc" id="rdsc"></div><button class="rbtn2" onclick="startQuiz()">🎲 Again</button></div>
+      </div>
+    </div>
+
+    <!-- Trivia -->
+    <div class="gcard">
+      <div class="gtitle">🧠 Trivia Challenge</div>
+      <div class="tvscore" id="tvscore">Score: 0 | Q 1/10</div>
+      <div class="tvq" id="tvq"></div>
+      <div class="tvopts" id="tvopts"></div>
+      <button class="tvnxt" id="tvnxt" onclick="nextTrivia()">Next ➡️</button>
+    </div>
+
+    <!-- Lore Cards -->
+    <div class="gcard" style="grid-column:1/-1">
+      <div class="gtitle">📖 Lore Reveal Cards</div>
+      <p style="font-size:.7rem;color:var(--mut);margin-bottom:10px;">Tap a card to reveal the answer!</p>
+      <div id="lorecards"></div>
+    </div>
+
+    <!-- Tier List -->
+    <div class="gcard" style="grid-column:1/-1">
+      <div class="gtitle">📊 Survival Tier List</div>
+      <p style="font-size:.7rem;color:var(--mut);margin-bottom:10px;">Community meta — Easter 2026.</p>
+      <div id="tierdisp"></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════ TAB 8: CREATOR ═══════════════════ -->
+
+<div class="sec" id="tab-faves">
+  <div class="card" style="margin-bottom:14px;">
+    <div class="h2">⭐ Favourite Toons</div>
+    <p style="font-size:.73rem;color:var(--mut);line-height:1.6;">Tap the ☆ star on any toon card to add it here. Your personal shortlist!</p>
+  </div>
+  <div class="tgrid" id="faves-grid"></div>
+</div>
+
+<div class="sec" id="tab-backup">
+  <div class="card" style="max-width:480px;margin:0 auto;">
+    <div class="h2">💾 Backup &amp; Restore</div>
+    <p style="font-size:.78rem;color:var(--mut);line-height:1.6;margin-bottom:20px;">Save your unlocked toons, favourites, team and research as a file.</p>
+    <button class="cbtn" onclick="backupData()" style="width:100%;margin-bottom:12px;padding:14px;font-size:1rem;">📥 Download Backup</button>
+    <label class="cbtn" style="width:100%;display:block;text-align:center;cursor:pointer;padding:14px;font-size:1rem;">
+      📤 Restore from Backup
+      <input type="file" accept=".json" onchange="restoreData(event)" style="display:none;">
+    </label>
+    <div id="backupMsg" style="font-size:.75rem;text-align:center;margin-top:14px;min-height:20px;font-weight:700;"></div>
+    <div style="margin-top:24px;padding-top:16px;border-top:1px solid var(--bdr);">
+      <div style="font-family:'Fredoka One',cursive;font-size:.88rem;color:var(--acc3);margin-bottom:10px;">📊 Current Save Data</div>
+      <div id="backup-stats" style="font-size:.78rem;color:var(--mut);line-height:1.8;"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ LORE TAB ═══ -->
+<div class="sec" id="tab-lore">
+  <div class="card" style="margin-bottom:13px;">
+    <div class="h2">📖 Toon Lore Library</div>
+    <p style="font-size:.73rem;color:var(--mut);line-height:1.6;">The story behind every toon in the Gardenview Center. Tap <strong>Wiki ↗</strong> on any card for the full wiki page.</p>
+  </div>
+  <div class="lore-filters">
+    <button class="pill active" onclick="setLoreF('all',this)">All Toons</button>
+    <button class="pill fm" onclick="setLoreF('main',this)">⭐ Mains</button>
+    <button class="pill fe" onclick="setLoreF('event',this)">🎉 Event</button>
+    <button class="pill fc" onclick="setLoreF('common',this)">Common</button>
+    <button class="pill fu" onclick="setLoreF('uncommon',this)">Uncommon</button>
+    <button class="pill fr" onclick="setLoreF('rare',this)">Rare</button>
+  </div>
+  <div class="lore-grid" id="lore-grid"></div>
+</div>
+</div><!-- /wrap -->
+
+<script>
+// ═══════════════════════════════════════════════════════
+// DATA
+// ═══════════════════════════════════════════════════════
+const TOONS=[
+  {id:'boxten',name:'Boxten',emoji:'📦',rarity:'common',hp:4,spd:3,stam:3,stlth:2,sk:3,cost:0,ability:'Sturdy — takes one extra hit before losing a heart',free:true},
+  {id:'poppy',name:'Poppy',emoji:'🫧',rarity:'common',hp:3,spd:3,stam:3,stlth:3,sk:3,cost:0,ability:'Cozy — passively heals nearby teammates slowly',free:true},
+  {id:'scraps',name:'Scraps',emoji:'🗞',rarity:'common',hp:3,spd:3,stam:5,stlth:3,sk:4,cost:800,ability:'Tinker — skill check windows are bigger and easier'},
+  {id:'looey',name:'Looey',emoji:'🎈',rarity:'common',hp:3,spd:3,stam:3,stlth:2,sk:4,cost:800,ability:'Fanfare — boosts skill check windows for nearby teammates'},
+  {id:'teagan',name:'Teagan',emoji:'🫖',rarity:'common',hp:3,spd:4,stam:3,stlth:3,sk:2,cost:800,ability:'Current — briefly speeds up nearby teammates'},
+  {id:'tisha',name:'Tisha',emoji:'🧻',rarity:'common',hp:3,spd:3,stam:3,stlth:3,sk:3,cost:800,ability:'Tidy Up! — speeds up toons in a nearby radius'},
+  {id:'yatta',name:'Yatta',emoji:'🍬',rarity:'common',hp:3,spd:3,stam:3,stlth:3,sk:3,cost:800,ability:'Celebration — grants a brief speed burst to the team'},
+  {id:'goob',name:'Goob',emoji:'🤗',rarity:'uncommon',hp:3,spd:3,stam:4,stlth:3,sk:2,cost:1200,ability:'Sleepy Shuffle — reduces noise while moving'},
+  {id:'brightney',name:'Brightney',emoji:'💡',rarity:'uncommon',hp:3,spd:3,stam:3,stlth:2,sk:4,cost:1200,ability:'Flash — illuminates dark areas around machines'},
+  {id:'toodles',name:'Toodles',emoji:'🎱',rarity:'uncommon',hp:3,spd:3,stam:3,stlth:4,sk:2,cost:1200,ability:'Mystery Missions — rolls a random useful item or buff'},
+  {id:'cosmo',name:'Cosmo',emoji:'🍩',rarity:'uncommon',hp:2,spd:4,stam:4,stlth:4,sk:1,cost:1200,ability:'Moonwalk — silent movement for a short duration'},
+  {id:'connie',name:'Connie',emoji:'👻',rarity:'uncommon',hp:3,spd:3,stam:3,stlth:4,sk:3,cost:1200,ability:'Disguise — briefly freeze a Twisted by standing still'},
+  {id:'brusha',name:'Brusha',emoji:'🖌',rarity:'uncommon',hp:3,spd:2,stam:4,stlth:3,sk:4,cost:1200,ability:'Artistic Inspiration — boosts extraction speed nearby (Brusha slows)'},
+  {id:'finn',name:'Finn',emoji:'🐟',rarity:'rare',hp:2,spd:5,stam:3,stlth:3,sk:2,cost:2000,ability:'Reel In — fastest sprint; gains extra speed per floor'},
+  {id:'flutter',name:'Flutter',emoji:'🦋',rarity:'rare',hp:2,spd:4,stam:4,stlth:4,sk:1,cost:2000,ability:'Wing Dust — leaves a trail slowing Twisteds'},
+  {id:'gigi',name:'Gigi',emoji:'🪙',rarity:'rare',hp:3,spd:4,stam:3,stlth:3,sk:2,cost:2000,ability:'Glam — randomly rolls a useful item'},
+  {id:'glisten',name:'Glisten',emoji:'🪞',rarity:'rare',hp:3,spd:4,stam:3,stlth:4,sk:1,cost:2000,ability:'Frostbite — temporarily slows a nearby Twisted'},
+  {id:'rodger',name:'Rodger',emoji:'🔍',rarity:'rare',hp:4,spd:2,stam:4,stlth:2,sk:3,cost:2000,ability:'Overclock — earns 20 Tapes each time you stand near Twisted Rodger'},
+  {id:'blot',name:'Blot',emoji:'🖋',rarity:'rare',hp:3,spd:3,stam:5,stlth:4,sk:3,cost:2000,ability:'Inkblot — leaves ink puddles to confuse Twisteds'},
+  {id:'shrimpo',name:'Shrimpo',emoji:'🍤',rarity:'rare',hp:1,spd:5,stam:2,stlth:1,sk:1,cost:2000,ability:'Challenge Toon — tiny, ultra fast, only 1 heart!'},
+  {id:'squirm',name:'Squirm',emoji:'🐛',rarity:'rare',hp:3,spd:3,stam:3,stlth:4,sk:3,cost:2000,ability:'Distressed Delicacy — Twisteds obsessively chase her (great distractor)'},
+  {id:'eclipse',name:'Eclipse',emoji:'🐺',rarity:'rare',hp:3,spd:4,stam:3,stlth:2,sk:3,cost:2000,ability:'Howl — boosts own speed and marks nearby Twisteds'},
+  {id:'razzle',name:'Razzle & Dazzle',emoji:'🎭',rarity:'rare',hp:3,spd:3,stam:3,stlth:3,sk:3,cost:2000,ability:'Showtime — stats change between odd/even floors'},
+  {id:'astro',name:'Astro',emoji:'🌒',rarity:'main',hp:2,spd:3,stam:5,stlth:2,sk:3,cost:5000,ability:'Nap Time — fully restores own stamina. Passive: stamina boost nearby.',unlock:'5,000 Ichor + 100% Twisted Astro + encounter Twisted Dandy'},
+  {id:'pebble',name:'Pebble',emoji:'🪨',rarity:'main',hp:2,spd:4,stam:4,stlth:5,sk:1,cost:0,ability:"Bark! — boosts stealth & marks all nearby Twisteds.",unlock:'Complete ALL Toodles missions'},
+  {id:'vee',name:'Vee',emoji:'📺',rarity:'main',hp:2,spd:3,stam:3,stlth:3,sk:3,cost:3500,ability:'Mic Check — highlights ALL Twisteds for 5 sec.',unlock:'3,500 Ichor + 100% Twisted Vee'},
+  {id:'shelly',name:'Shelly',emoji:'🐚',rarity:'main',hp:2,spd:2,stam:3,stlth:2,sk:5,cost:3500,ability:'Inspiration — extraction speed +75% when 3+ Twisteds researched.',unlock:'3,500 Ichor + 100% Twisted Shelly + Floor 10'},
+  {id:'sprout',name:'Sprout',emoji:'🍓',rarity:'main',hp:2,spd:3,stam:5,stlth:4,sk:2,cost:3500,ability:'Heal Bloom — plants a healing flower.',unlock:'3,500 Ichor + 100% Twisted Sprout'},
+  {id:'bassie',name:'Bassie',emoji:'🧺',rarity:'main',hp:2,spd:5,stam:3,stlth:4,sk:1,cost:2500,ability:'Springful Sharing — drops all items to share with teammates.',unlock:'2,500 Ichor + 3,000 Baskets + 100% Twisted Bassie',event:'Easter 🐣'},
+  {id:'bobette',name:'Bobette',emoji:'🎄',rarity:'main',hp:2,spd:3,stam:5,stlth:2,sk:4,cost:2500,ability:'Precious Packaging — hides in gift box. Festive Aura — nearby toons get +50% stamina regen.',unlock:'2,500 Ichor + 3,000 Ornaments + 100% Twisted Bobette',event:'Christmas 🎄'},
+  {id:'coal',name:'Coal',emoji:'🗿',rarity:'event',hp:3,spd:4,stam:4,stlth:3,sk:2,cost:0,ability:'Rock Solid — briefly stuns a Twisted.',unlock:"Free at Bobette's Store (Christmas Event)",event:'Christmas 🎄'},
+  {id:'ginger',name:'Ginger',emoji:'🍪',rarity:'event',hp:3,spd:4,stam:2,stlth:3,sk:4,cost:0,ability:'Warm Up! — heals nearby toon using Tapes.',unlock:"Free at Bobette's Store (Christmas Event)",event:'Christmas 🎄'},
+  {id:'rudie',name:'Rudie',emoji:'🫎',rarity:'event',hp:3,spd:3,stam:3,stlth:3,sk:3,cost:0,ability:'Hooves — grants a sprint boost to nearby toons.',unlock:"Free at Bobette's Store (Christmas Event)",event:'Christmas 🎄'},
+  {id:'gourdy',name:'Gourdy',emoji:'🎃',rarity:'main',hp:2,spd:3,stam:1,stlth:1,sk:5,cost:2500,ability:'Pumpkin Power — boosts all nearby toons stats briefly.',unlock:'2,500 Ichor + 3,000 Candy Corn + 100% Twisted Gourdy',event:'Halloween 🎃'},
+  {id:'soulvester',name:'Soulvester',emoji:'👻',rarity:'event',hp:3,spd:4,stam:5,stlth:3,sk:5,cost:0,ability:"Soul Sword — slows a Twisted with a sword swing.",unlock:"Halloween Event (Gourdy's Store)",event:'Halloween 🎃'},
+  {id:'ribecca',name:'Ribecca',emoji:'💀',rarity:'event',hp:3,spd:4,stam:2,stlth:4,sk:3,cost:0,ability:'Cobweb — passively slows Twisteds nearby.',unlock:'Halloween Event',event:'Halloween 🎃'},
+  {id:'eggson',name:'Eggson',emoji:'🍳',rarity:'event',hp:3,spd:3,stam:3,stlth:3,sk:3,cost:700,ability:'Fixer Upper — instantly fills 20% of a machine at floor start.',unlock:'50% Twisted Eggson + 700 Baskets (Easter Event)',event:'Easter 🐣'},
+  {id:'flyte',name:'Flyte',emoji:'🦋',rarity:'event',hp:3,spd:4,stam:4,stlth:4,sk:2,cost:700,ability:'Gust — wind zone boosts nearby toons +15% speed for 5 sec.',unlock:'50% Twisted Flyte + 700 Baskets (Easter Event)',event:'Easter 🐣'},
+  {id:'cocoa',name:'Cocoa',emoji:'🍫',rarity:'event',hp:3,spd:3,stam:4,stlth:4,sk:2,cost:700,ability:'Bonbon — gives a chocolate item with a speed boost to a nearby toon.',unlock:'700 Baskets + Twisted Cocoa research (Easter Event)',event:'Easter 🐣'},
+];
+
+const TWISTEDS=[
+  {id:'tw-dandy',name:'Twisted Dandy',emoji:'🌀',unlock:'Encounter him once to unlock path to Astro',warn:'Spawns if you skip buying from Dandy on even floors!'},
+  {id:'tw-astro',name:'Twisted Astro',emoji:'👾',unlock:'100% → helps unlock Astro (+ 5,000 Ichor + encounter Twisted Dandy)'},
+  {id:'tw-pebble',name:'Twisted Pebble',emoji:'🐺',unlock:'100% + Toodles missions → Pebble',warn:'Fastest Twisted — do NOT try to outrun!'},
+  {id:'tw-vee',name:'Twisted Vee',emoji:'📢',unlock:'100% → helps unlock Vee',warn:'Huge detection range — fails skill checks from far away!'},
+  {id:'tw-shelly',name:'Twisted Shelly',emoji:'🦕',unlock:'100% → helps unlock Shelly'},
+  {id:'tw-sprout',name:'Twisted Sprout',emoji:'🥀',unlock:'100% → helps unlock Sprout'},
+  {id:'tw-goob',name:'Twisted Goob',emoji:'💤',unlock:'100% → unlocks Goob'},
+  {id:'tw-gigi',name:'Twisted Gigi',emoji:'🎭',unlock:'100% → unlocks Gigi'},
+  {id:'tw-finn',name:'Twisted Finn',emoji:'🐙',unlock:'100% → unlocks Finn'},
+  {id:'tw-flutter',name:'Twisted Flutter',emoji:'🦇',unlock:'100% → unlocks Flutter'},
+  {id:'tw-rodger',name:'Twisted Rodger',emoji:'🦾',unlock:'100% → unlocks Rodger',warn:'Stationary — stand near him for 20 free Tapes per encounter!'},
+  {id:'tw-connie',name:'Twisted Connie',emoji:'🎪',unlock:'100% → unlocks Connie',warn:'Passive — ignores failed skill checks entirely.'},
+  {id:'tw-glisten',name:'Twisted Glisten',emoji:'🌨️',unlock:'100% → unlocks Glisten',warn:'Passive state before turning aggressive.'},
+  {id:'tw-blot',name:'Twisted Blot',emoji:'🌑',unlock:'100% → unlocks Blot'},
+  {id:'tw-squirm',name:'Twisted Squirm',emoji:'🐛',unlock:'100% → unlocks Squirm'},
+  {id:'tw-eclipse',name:'Twisted Eclipse',emoji:'🌕',unlock:'100% → unlocks Eclipse'},
+  {id:'tw-bobette',name:'Twisted Bobette',emoji:'🎁',unlock:'100% + 3,000 Ornaments → unlocks Bobette',event:true},
+  {id:'tw-gourdy',name:'Twisted Gourdy',emoji:'🎃',unlock:'100% + 3,000 Candy Corn → unlocks Gourdy',event:true,warn:'Very dangerous — erratic movement!'},
+  {id:'tw-soulvester',name:'Twisted Soulvester',emoji:'👻',unlock:'Research → unlocks Soulvester (Halloween)',event:true},
+  {id:'tw-bassie',name:'Twisted Bassie',emoji:'🌿',unlock:'100% + Baskets → helps unlock Bassie (Easter)',event:true,warn:'Easter 2026: throws vine lines — dodge sideways!'},
+  {id:'tw-eggson',name:'Twisted Eggson',emoji:'🥚',unlock:'50% research → part of Eggson unlock (Easter)',event:true},
+  {id:'tw-flyte',name:'Twisted Flyte',emoji:'🦗',unlock:'50% research → part of Flyte unlock (Easter)',event:true},
+  {id:'tw-cocoa',name:'Twisted Cocoa',emoji:'🍫',unlock:'Research → part of Cocoa unlock (Easter)',event:true,warn:'Easter 2026: can now hop over obstacles!'},
+];
+
+const SKIN_DATA=[
+  {id:'astro',name:'Astro',emoji:'🌒',rarity:'main',skins:[
+    {n:'Vintage Astro',type:'vintage',how:'Complete all Astro Mastery quests',cost:'Free (Mastery)'},
+    {n:'Star-Time Astro',type:'gamepass',how:'Buy Star-Time Cosmetic Pack (Robux)',cost:'200 Robux'},
+    {n:'Cosmic Voyager Astro',type:'store',how:"Buy from Dyle's Store",cost:'600 Ichor'},
+    {n:'Lunar Dreamer Astro',type:'store',how:"Buy from Dyle's Store",cost:'600 Ichor'},
+  ]},
+  {id:'vee',name:'Vee',emoji:'📺',rarity:'main',skins:[
+    {n:'Vintage Vee',type:'vintage',how:'Complete all Vee Mastery quests',cost:'Free (Mastery)'},
+    {n:'Star-Time Vee',type:'gamepass',how:'Buy Star-Time Cosmetic Pack (Robux)',cost:'200 Robux'},
+    {n:'Showtime Vee',type:'gamepass',how:'Buy Showtime Cosmetic Pack (Robux)',cost:'200 Robux'},
+    {n:'Static Signal Vee',type:'store',how:"Buy from Dyle's Store",cost:'600 Ichor'},
+    {n:'ChocoBerry Vee',type:'store',how:"Buy from Dyle's Store",cost:'600 Ichor'},
+    {n:'Holiday Vee',type:'event',how:'Buy during Christmas Event',cost:'Ornaments + Ichor'},
+  ]},
+  {id:'shelly',name:'Shelly',emoji:'🐚',rarity:'main',skins:[
+    {n:'Vintage Shelly',type:'vintage',how:'Complete all Shelly Mastery quests',cost:'Free (Mastery)'},
+    {n:'Star-Time Shelly',type:'gamepass',how:'Buy Star-Time Cosmetic Pack (Robux)',cost:'200 Robux'},
+    {n:'Fossil Glow Shelly',type:'store',how:"Buy from Dyle's Store",cost:'600 Ichor'},
+    {n:'Christmas Shelly',type:'event',how:'Buy during Christmas Event',cost:'Ornaments + Ichor'},
+  ]},
+  {id:'sprout',name:'Sprout',emoji:'🍓',rarity:'main',skins:[
+    {n:'Vintage Sprout',type:'vintage',how:'Complete all Sprout Mastery quests',cost:'Free (Mastery)'},
+    {n:'Star-Time Sprout',type:'gamepass',how:'Buy Star-Time Cosmetic Pack (Robux)',cost:'200 Robux'},
+    {n:'ChocoBerry Sprout',type:'store',how:"Buy from Dyle's Store",cost:'600 Ichor'},
+    {n:'Autumn Bloom Sprout',type:'store',how:"Buy from Dyle's Store",cost:'600 Ichor'},
+  ]},
+  {id:'pebble',name:'Pebble',emoji:'🪨',rarity:'main',skins:[
+    {n:'Vintage Pebble',type:'vintage',how:'Complete all Pebble Mastery quests',cost:'Free (Mastery)'},
+    {n:'Star-Time Pebble',type:'gamepass',how:'Buy Star-Time Cosmetic Pack (Robux)',cost:'200 Robux'},
+    {n:'Christmas Pebble',type:'event',how:'Buy during Christmas Event',cost:'Ornaments + Ichor'},
+  ]},
+  {id:'bassie',name:'Bassie',emoji:'🧺',rarity:'main',skins:[
+    {n:'Vintage Bassie',type:'vintage',how:'Complete all Bassie Mastery quests',cost:'Free (Mastery)'},
+    {n:'Golden Bassie',type:'golden',how:'Complete all Bassie Holiday Quests (Easter Event)',cost:'Free (Quest) — Event only!'},
+    {n:'Egg Hunting Bassie',type:'golden',how:'Complete all 12 daily logins in Easter 2026 event',cost:'Free (Daily Login) — Event only!'},
+    {n:'Snow-Time Bassie',type:'gamepass',how:'Buy Snow-Time Cosmetic Pack (Robux)',cost:'200 Robux'},
+    {n:'Spring Bassie',type:'event',how:"Buy from Bassie's Store (Easter Event)",cost:'Baskets'},
+  ]},
+  {id:'gourdy',name:'Gourdy',emoji:'🎃',rarity:'main',skins:[
+    {n:'Vintage Gourdy',type:'vintage',how:'Complete all Gourdy Mastery quests',cost:'Free (Mastery)'},
+    {n:'Midnight Sleeper Gourdy',type:'store',how:"Buy from Dyle's Store",cost:'600 Ichor'},
+    {n:'Halloween Gourdy',type:'event',how:"Buy from Gourdy's Store (Halloween Event)",cost:'Pumpkins + Ichor'},
+  ]},
+  {id:'bobette',name:'Bobette',emoji:'🎄',rarity:'event',skins:[
+    {n:'Vintage Bobette',type:'vintage',how:'Complete all Bobette Mastery quests',cost:'Free (Mastery)'},
+    {n:'Golden Bauble Bobette',type:'golden',how:'Complete all Bobette Holiday Quests (Christmas Event)',cost:'Free (Quest) — Event only!'},
+    {n:'Hot Chocolate Bobette',type:'golden',how:'Complete 12 days of Christmas 2025 Advent Calendar',cost:'Free (Advent Calendar) — Event only!'},
+    {n:'Holly Lace Bobette',type:'event',how:"Buy from Bobette's Store (Christmas Event)",cost:'Ornaments + Ichor'},
+    {n:'Snow-Time Bobette',type:'gamepass',how:'Buy Snow-Time Cosmetic Pack (Robux)',cost:'200 Robux'},
+  ]},
+  {id:'boxten',name:'Boxten',emoji:'📦',rarity:'common',skins:[
+    {n:'Vintage Boxten',type:'vintage',how:'Complete all Boxten Mastery quests',cost:'Free (Mastery)'},
+    {n:'Clear Dream Boxten',type:'store',how:"Buy from Dyle's Store",cost:'600 Ichor'},
+    {n:'Wisteria Boxten',type:'store',how:"Buy from Dyle's Store",cost:'600 Ichor'},
+  ]},
+  {id:'poppy',name:'Poppy',emoji:'🫧',rarity:'common',skins:[
+    {n:'Vintage Poppy',type:'vintage',how:'Complete all Poppy Mastery quests',cost:'Free (Mastery)'},
+    {n:'Rose Gold Poppy',type:'store',how:"Buy from Dyle's Store",cost:'600 Ichor'},
+    {n:'Christmas Poppy',type:'event',how:'Buy during Christmas Event',cost:'Ornaments'},
+  ]},
+  {id:'scraps',name:'Scraps',emoji:'🗞',rarity:'common',skins:[
+    {n:'Vintage Scraps',type:'vintage',how:'Complete all Scraps Mastery quests',cost:'Free (Mastery)'},
+    {n:'Rusty Scraps',type:'store',how:"Buy from Dyle's Store",cost:'600 Ichor'},
+    {n:'Spooky Scraps',type:'event',how:'Buy during Halloween Event',cost:'Pumpkins'},
+  ]},
+  {id:'blot',name:'Blot',emoji:'🖋',rarity:'rare',skins:[
+    {n:'Vintage Blot',type:'vintage',how:'Complete all Blot Mastery quests',cost:'Free (Mastery)'},
+    {n:'Cozy Pink Blot',type:'store',how:"Buy from Dyle's Store",cost:'600 Ichor'},
+    {n:'Showtime Blot',type:'gamepass',how:'Buy Showtime Cosmetic Pack (Robux)',cost:'200 Robux'},
+  ]},
+  {id:'goob',name:'Goob',emoji:'🤗',rarity:'uncommon',skins:[
+    {n:'Vintage Goob',type:'vintage',how:'Complete all Goob Mastery quests',cost:'Free (Mastery)'},
+    {n:'Dreamy Goob',type:'store',how:"Buy from Dyle's Store",cost:'600 Ichor'},
+  ]},
+  {id:'finn',name:'Finn',emoji:'🐟',rarity:'rare',skins:[
+    {n:'Vintage Finn',type:'vintage',how:'Complete all Finn Mastery quests',cost:'Free (Mastery)'},
+    {n:'Deep Sea Finn',type:'store',how:"Buy from Dyle's Store",cost:'600 Ichor'},
+  ]},
+  {id:'flutter',name:'Flutter',emoji:'🦋',rarity:'rare',skins:[
+    {n:'Vintage Flutter',type:'vintage',how:'Complete all Flutter Mastery quests',cost:'Free (Mastery)'},
+    {n:'Moonlit Flutter',type:'store',how:"Buy from Dyle's Store",cost:'600 Ichor'},
+  ]},
+  {id:'gigi',name:'Gigi',emoji:'🪙',rarity:'rare',skins:[
+    {n:'Vintage Gigi',type:'vintage',how:'Complete all Gigi Mastery quests',cost:'Free (Mastery)'},
+    {n:'Pastel Gigi',type:'store',how:"Buy from Dyle's Store",cost:'600 Ichor'},
+  ]},
+  {id:'shrimpo',name:'Shrimpo',emoji:'🍤',rarity:'rare',skins:[
+    {n:'Vintage Shrimpo',type:'vintage',how:'Complete all Shrimpo Mastery quests',cost:'Free (Mastery)'},
+    {n:'Spicy Shrimpo',type:'store',how:"Buy from Dyle's Store",cost:'600 Ichor'},
+  ]},
+  {id:'cosmo',name:'Cosmo',emoji:'🍩',rarity:'uncommon',skins:[
+    {n:'Vintage Cosmo',type:'vintage',how:'Complete all Cosmo Mastery quests',cost:'Free (Mastery)'},
+    {n:'Snow-Time Cosmo',type:'gamepass',how:'Buy Snow-Time Cosmetic Pack (Robux)',cost:'200 Robux'},
+    {n:'Galaxy Cosmo',type:'store',how:"Buy from Dyle's Store",cost:'600 Ichor'},
+  ]},
+  {id:'yatta',name:'Yatta',emoji:'🍬',rarity:'common',skins:[
+    {n:'Vintage Yatta',type:'vintage',how:'Complete all Yatta Mastery quests',cost:'Free (Mastery)'},
+    {n:'Colorful April Yatta',type:'store',how:'Was available via limited April Fools code (now expired)',cost:'Code only — Expired'},
+    {n:'Showtime Yatta',type:'gamepass',how:'Buy Showtime Cosmetic Pack (Robux)',cost:'200 Robux'},
+  ]},
+  {id:'looey',name:'Looey',emoji:'🎈',rarity:'common',skins:[
+    {n:'Vintage Looey',type:'vintage',how:'Complete all Looey Mastery quests',cost:'Free (Mastery)'},
+    {n:'Showtime Looey',type:'gamepass',how:'Buy Showtime Cosmetic Pack (Robux)',cost:'200 Robux'},
+    {n:'Christmas Looey',type:'event',how:'Buy during Christmas Event',cost:'Ornaments'},
+  ]},
+  {id:'eggson',name:'Eggson',emoji:'🍳',rarity:'event',skins:[
+    {n:'Vintage Eggson',type:'vintage',how:'Complete all Eggson Mastery quests',cost:'Free (Mastery)'},
+    {n:'Golden Eggson',type:'golden',how:'Complete all Eggson Holiday Quests (Easter Event)',cost:'Free (Quest) — Event only!'},
+    {n:'Spring Eggson',type:'event',how:"Buy from Bassie's Store (Easter Event)",cost:'Baskets + Ichor'},
+  ]},
+  {id:'flyte',name:'Flyte',emoji:'🦋',rarity:'event',skins:[
+    {n:'Vintage Flyte',type:'vintage',how:'Complete all Flyte Mastery quests',cost:'Free (Mastery)'},
+    {n:'Golden Flyte',type:'golden',how:'Complete all Flyte Holiday Quests (Easter Event)',cost:'Free (Quest) — Event only!'},
+    {n:'Spring Flyte',type:'event',how:"Buy from Bassie's Store (Easter Event)",cost:'Baskets'},
+  ]},
+  {id:'cocoa',name:'Cocoa',emoji:'🍫',rarity:'event',skins:[
+    {n:'Vintage Cocoa',type:'vintage',how:'Complete all Cocoa Mastery quests',cost:'Free (Mastery)'},
+    {n:'Golden Cocoa',type:'golden',how:'Complete all Cocoa Holiday Quests (Easter Event — Part 2)',cost:'Free (Quest) — Event only!'},
+    {n:'Spring Cocoa',type:'event',how:"Buy from Bassie's Store (Easter Event)",cost:'Baskets'},
+  ]},
+  {id:'razzle',name:'Razzle & Dazzle',emoji:'🎭',rarity:'rare',skins:[
+    {n:'Vintage Razzle & Dazzle',type:'vintage',how:'Complete all Razzle & Dazzle Mastery quests',cost:'Free (Mastery)'},
+    {n:'Showtime Razzle & Dazzle',type:'gamepass',how:'Buy Showtime Cosmetic Pack (Robux)',cost:'200 Robux'},
+  ]},
+  {id:'ginger',name:'Ginger',emoji:'🍪',rarity:'event',skins:[
+    {n:'Vintage Ginger',type:'vintage',how:'Complete all Ginger Mastery quests',cost:'Free (Mastery)'},
+    {n:'New Years Ginger',type:'golden',how:'Complete 10 days of Christmas 2025 New Years Calendar',cost:'Free (Calendar) — Event only!'},
+    {n:'Holiday Ginger',type:'event',how:"Buy from Bobette's Store (Christmas Event)",cost:'Ornaments'},
+    {n:'Snow-Time Ginger',type:'gamepass',how:'Buy Snow-Time Cosmetic Pack (Robux)',cost:'200 Robux'},
+  ]},
+  {id:'coal',name:'Coal',emoji:'🗿',rarity:'event',skins:[
+    {n:'Vintage Coal',type:'vintage',how:'Complete all Coal Mastery quests',cost:'Free (Mastery)'},
+    {n:'Holiday Coal',type:'event',how:"Buy from Bobette's Store (Christmas Event)",cost:'Ornaments'},
+    {n:'Snow-Time Coal',type:'gamepass',how:'Buy Snow-Time Cosmetic Pack (Robux)',cost:'200 Robux'},
+  ]},
+  {id:'rudie',name:'Rudie',emoji:'🫎',rarity:'event',skins:[
+    {n:'Vintage Rudie',type:'vintage',how:'Complete all Rudie Mastery quests',cost:'Free (Mastery)'},
+    {n:'Golden Rudie',type:'golden',how:'Complete all Rudie Golden Skin Quests (Christmas Event)',cost:'Free (Quest) — Event only!'},
+    {n:'Holiday Rudie',type:'event',how:"Buy from Bobette's Store (Christmas Event)",cost:'Ornaments'},
+    {n:'Snow-Time Rudie',type:'gamepass',how:'Buy Snow-Time Cosmetic Pack (Robux)',cost:'200 Robux'},
+  ]},
+];
+
+const CODES=[
+  {code:'ICHOR',reward:'50 free Ichor',expires:'No known expiry'},
+  {code:'EASTER2026',reward:'Easter Baskets bonus',expires:'April 24, 2026'},
+];
+
+const NEWS=[
+  {icon:'🐰',title:'Easter Event 2026 — LIVE NOW!',date:'March 20 – April 24, 2026',tag:'a',body:`The 2026 Easter Event is active! Bassie, Cocoa, Eggson, and Flyte have all returned. Key changes:<ul><li><strong>Spring Fever modifier</strong>: +50% speed but reduced visibility and Tired 2 debuff</li><li><strong>Twisted Bassie rework</strong>: throws vine lines — dodge sideways!</li><li><strong>Twisted Cocoa rework</strong>: can hop over obstacles on every map</li><li><strong>Eggson buff</strong>: Fixer Upper now fills 20% of a machine (was 10%)</li><li>Daily login calendar starting March 25 (12 days = exclusive Egg Hunting Bassie skin)</li><li>Golden Skin quests for all 4 Easter toons</li></ul>Full completion requires ~10,300 Baskets and 2,500 Ichor.`,countdown:new Date('2026-04-24T15:00:00-05:00')},
+  {icon:'🐛',title:'v0.17 — Squirm + Achievements',date:'February 28, 2026',tag:'u',body:`New Rare toon <strong>Squirm the Bookworm</strong> added alongside the new <strong>Achievement System</strong>. Squirm's <em>Distressed Delicacy</em> makes Twisteds obsessively chase her — perfect distractor!`},
+  {icon:'🎄',title:'2025 Christmas Event — Ended',date:'Ended January 16, 2026',tag:'u',body:`Bobette, Coal, Ginger and Rudie no longer purchasable but still usable. The 2025 Christmas Event was the first to happen in December (the 2024 one started in January). 44 new skins were added.`},
+  {icon:'🔮',title:'Upcoming: Twisted Dandy Buff + More',date:'Coming in 2026',tag:'p',body:`Confirmed upcoming:<ul><li>Twisted Dandy will receive a buff (details in progress)</li><li>Vintage Blot Jr. skin coming soon</li><li>Golden Skin quests for Halloween toons likely</li><li>Potential Pebble Floor addition</li><li>Tutorial added when game enters full release</li></ul>`},
+];
+
+const TRIVIA=[
+  {q:"Which Twisted attacks from afar if provoked?",opts:["Twisted Vee","Twisted Rodger","Twisted Pebble","Twisted Dandy"],a:1},
+  {q:"What does Shelly's Inspiration passive do?",opts:["Heals teammates","Highlights Twisteds","Gives stamina","Gives 25% speed boost"],a:3},
+  {q:"How much Ichor does code 'ICHOR' give?",opts:["25","50","100","200"],a:1},
+  {q:"Which two toons are free starters?",opts:["Poppy & Vee","Boxten & Astro","Boxten & Poppy","Finn & Scraps"],a:2},
+  {q:"What spawns if you don't buy from Dandy on even floors?",opts:["Twisted Vee","Twisted Bassie","Twisted Dandy","Twisted Pebble"],a:2},
+  {q:"Which Easter 2026 Twisted can hop over obstacles?",opts:["Twisted Bassie","Twisted Eggson","Twisted Flyte","Twisted Cocoa"],a:3},
+  {q:"Which toons share the highest sprint speed (spd 5)?",opts:["Pebble & Flyte","Finn & Bassie","Shelly & Sprout","Bassie & Flyte"],a:1},
+  {q:"How many total Main toons are there?",opts:["5","6","8","10"],a:2},
+  {q:"What currency does the Christmas Event use?",opts:["Baskets","Candy Corn","Ornaments","Eggs"],a:2},
+  {q:"Eggson's Fixer Upper completes what % of a machine?",opts:["10%","15%","20%","25%"],a:2},
+  {q:"Which active ability reveals ALL Twisteds?",opts:["Pebble's Bark!","Astro's Nap Time","Vee's Mic Check","Gourdy's Pumpkin Power"],a:2},
+  {q:"What is the Easter 2026 floor modifier called?",opts:["Pollen Rush","Spring Fever","Egg Hunt","Bloom Mode"],a:1},
+  {q:"Which toon has only 1 heart?",opts:["Finn","Shrimpo","Eclipse","Squirm"],a:1},
+  {q:"Who is Bobette's pet?",opts:["Rudie","Ginger","Coal","Gourdy"],a:2},
+  {q:"How do you get Vintage skins?",opts:["Buy with Ichor","Complete Mastery quests","Event currency","Robux only"],a:1},
+];
+
+const LORE=[
+  {q:"What is the name of the location in Dandy's World?",a:"The Gardenview Center — a mysterious facility with many underground floors full of machines and Twisteds."},
+  {q:"Who developed Dandy's World?",a:"BlushCrunch Studio, led by developer Qwel. The game launched on Roblox in June 2024."},
+  {q:"What are Twisteds?",a:"Twisted are corrupted versions of Toons — once normal mascots of the Gardenview Center that became monsters."},
+  {q:"What is Dandy's full name?",a:"Dandicus Dancifer — the shopkeeper toon who sells items and becomes dangerous if you ignore his shop."},
+  {q:"What is Bobette's full name?",a:"Bobette Carolynne — Christmas Event Main Character. Her last name is inspired by carolling!"},
+  {q:"What is Gourdy's backstory?",a:"Gourdy Holloway is a cheerful jack-o-lantern friends with Toodles, but troubled by a lack of memories about his parents."},
+  {q:"How is Pebble unlocked?",a:"Complete ALL of Toodles' Mystery Missions. Pebble is Toodles' dog and one of the trickiest toons to unlock!"},
+  {q:"How are Flyte and Flutter related?",a:"Flyte is Flutter's older brother! He's laid-back but deeply cares for his sister, who finds him a bit annoying."},
+];
+
+const QUIZ_Q=[
+  {q:"When things get scary, you…",opts:[{t:"🏃 Sprint away fast",tr:['speed']},{t:"🛡️ Stand your ground",tr:['tank']},{t:"🤫 Hide and wait",tr:['stealth']},{t:"🤝 Help teammates",tr:['support']}]},
+  {q:"Your dream superpower is…",opts:[{t:"⚡ Super speed",tr:['speed']},{t:"👁️ See through walls",tr:['utility']},{t:"💚 Healing others",tr:['support']},{t:"🧱 Unbreakable skin",tr:['tank']}]},
+  {q:"Pick your vibe:",opts:[{t:"🌸 Spring & flowers",tr:['support']},{t:"🎃 Spooky & dark",tr:['stealth']},{t:"🎄 Cosy & warm",tr:['tank']},{t:"🚀 Space adventure",tr:['speed','utility']}]},
+  {q:"Best survival strategy:",opts:[{t:"🔧 Fix everything fast",tr:['skillcheck']},{t:"👻 Be invisible",tr:['stealth']},{t:"⚡ Outrun everything",tr:['speed']},{t:"🗣️ Coordinate the team",tr:['utility']}]},
+  {q:"What describes you best?",opts:[{t:"🧠 Always planning",tr:['utility','skillcheck']},{t:"💨 Act first, think later",tr:['speed']},{t:"❤️ Everyone's favourite",tr:['support']},{t:"🌑 Quiet & mysterious",tr:['stealth']}]},
+];
+
+const QUIZ_RES={
+  speed:{emoji:'🐟',name:'Finn',rarity:'Rare',desc:"Lightning fast and always moving — Finn's incredible speed perfectly matches your energy!"},
+  stealth:{emoji:'🪨',name:'Pebble',rarity:'⭐ Main',desc:"Quiet and clever. Pebble's stealth mastery is built for careful thinkers like you."},
+  tank:{emoji:'🐚',name:'Shelly',rarity:'⭐ Main',desc:"Tough, reliable, great under pressure. Shelly is the backbone of any team!"},
+  support:{emoji:'🫧',name:'Poppy',rarity:'Common',desc:"Warm and caring. Poppy's healing aura perfectly matches your supportive nature!"},
+  utility:{emoji:'📺',name:'Vee',rarity:'⭐ Main',desc:"Strategic — Vee's ability to reveal ALL Twisteds makes you the ultimate team asset."},
+  skillcheck:{emoji:'🗞',name:'Scraps',rarity:'Common',desc:"Smart and machine-focused. Scraps' giant skill check windows mean you extract faster than anyone!"},
+};
+
+const TIERS={S:['Vee','Shelly','Gourdy','Pebble','Bassie'],A:['Sprout','Astro','Bobette','Flyte','Squirm'],B:['Scraps','Brusha','Glisten','Cosmo','Flutter','Blot','Eggson'],C:['Finn','Goob','Gigi','Toodles','Coal','Ginger']};
+
+// ═══════════════════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════════════════
+let unlocked=JSON.parse(localStorage.getItem('dw_u')||'[]');
+let team=JSON.parse(localStorage.getItem('dw_t')||'[]');
+let research=JSON.parse(localStorage.getItem('dw_r')||'{}');
+let faves=JSON.parse(localStorage.getItem('dw_f')||'[]');
+let savedToons=JSON.parse(localStorage.getItem('dw_ct')||'[]');
+let filt='all',skinFilt='all';
+let qAns=[],qStep=0;
+let tvIdx=0,tvScore=0,tvQ=[];
+let wWord='',wGuesses=[],wLives=6,wActive=true,wCurrent='';
+let spinning=false;
+// Memory
+let memCards=[],memFlipped=[],memMatches=0,memMoves=0,memLocked=false;
+// Scramble
+let scramWord='',scramScore=0,scramStreak=0;
+// Chase
+let chaseScore=0,chaseLives=3,chaseTimer=30,chaseInterval=null,chaseActive=false;
+
+function save(){localStorage.setItem('dw_u',JSON.stringify(unlocked));localStorage.setItem('dw_t',JSON.stringify(team));localStorage.setItem('dw_r',JSON.stringify(research));localStorage.setItem('dw_f',JSON.stringify(faves));}
+
+// Floating dots
+(()=>{const c=document.getElementById('dots');const cols=['#ff6eb4','#7ee8fa','#a78bfa','#ffe066','#4ade80'];for(let i=0;i<14;i++){const d=document.createElement('div');d.className='dot';const s=Math.random()*10+4;d.style.cssText=`width:${s}px;height:${s}px;left:${Math.random()*100}%;background:${cols[Math.floor(Math.random()*cols.length)]};animation-duration:${Math.random()*18+10}s;animation-delay:${Math.random()*12}s;`;c.appendChild(d);}})();
+
+// ═══════════════════════════════════════════════════════
+// TABS
+// ═══════════════════════════════════════════════════════
+function showTab(id,btn){
+  document.querySelectorAll('.sec').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  btn.classList.add('active');
+  if(id==='team')renderTeam();
+  if(id==='research')renderTw();
+  if(id==='helper')initHelper();
+  if(id==='news')renderNews();
+  if(id==='skins')renderSkins();
+  if(id==='games')initGames();
+  if(id==='faves')renderFaves();
+  if(id==='backup')renderBackupStats();
+  if(id==='lore')renderLoreTab();
+}
+
+// ═══════════════════════════════════════════════════════
+// TOON TRACKER
+// ═══════════════════════════════════════════════════════
+function setF(f,btn){filt=f;document.querySelectorAll('.pill').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderToons();}
+function renderToons(){
+  const q=document.getElementById('tsearch').value.toLowerCase();
+  const g=document.getElementById('tgrid');
+  const list=TOONS.filter(t=>{const mr=filt==='all'||(filt==='event'?(t.rarity==='event'||t.event):t.rarity===filt);const mq=!q||t.name.toLowerCase().includes(q);return mr&&mq;}).sort((a,b)=>a.name.localeCompare(b.name));
+  if(!list.length){g.innerHTML=`<div class="empty"><div class="ei">🔍</div>No toons found!</div>`;upProg();return;}
+  g.innerHTML=list.map(t=>tCard(t)).join('');upProg();
+}
+function tCard(t,forTeam=false){
+  const u=unlocked.includes(t.id),it=team.includes(t.id),fv=faves.includes(t.id);
+  const rl=t.rarity==='main'?'⭐ Main':t.rarity==='event'?'🎉 Event':t.rarity.charAt(0).toUpperCase()+t.rarity.slice(1);
+  const bars=['hp','spd','stam','stlth','sk'].map(s=>`<div class="sr"><span class="sl">${s==='stlth'?'ST':s==='stam'?'SM':s.toUpperCase()}</span><div class="sb"><div class="bfill sf-${s}" style="width:${(t[s]/5)*100}%"></div></div></div>`).join('');
+  const evt=t.event?`<div style="font-size:.57rem;color:#f472b6;margin-top:1px;">${t.event}</div>`:'';
+  return `<div class="tc${u?' unlocked':''}${it?' inteam':''}${fv?' faved':''}" id="tc-${t.id}"${forTeam?` onclick="tTeam('${t.id}')"`:''}>
+    <div class="tlbl">TEAM</div>
+    ${!forTeam?`<div class="chk" onclick="tUnlock('${t.id}')">${u?'✓':''}</div>`:''}
+    ${!forTeam?`<div class="favbtn${fv?' faved':''}" onclick="tFave('${t.id}')">${fv?'★':'☆'}</div>`:''}
+    <span class="tem">${t.emoji}</span><div class="tnm">${t.name}</div>
+    <span class="badge b${t.rarity[0]}">${rl}</span>${evt}
+    <div class="mstats">${bars}</div>
+    <button class="abtn" onclick="${forTeam?`tTeam('${t.id}')`:`tAddTeam('${t.id}')`}">${it?'✓ In Team':'+ Add to Team'}</button>
+  </div>`;
+}
+function tUnlock(id){unlocked.includes(id)?unlocked=unlocked.filter(x=>x!==id):unlocked.push(id);save();renderToons();}
+function tAddTeam(id){if(team.includes(id)){team=team.filter(x=>x!==id);}else{if(team.length>=8)team.shift();team.push(id);}save();renderToons();}
+function upProg(){const tot=TOONS.length,cnt=unlocked.length;document.getElementById('pfill').style.width=(cnt/tot*100)+'%';document.getElementById('pnum').textContent=cnt+'/'+tot;}
+
+// ═══════════════════════════════════════════════════════
+// TEAM
+// ═══════════════════════════════════════════════════════
+function renderTeam(){renderSlots();renderRoster();renderSyn();renderMetaTeams();}
+function renderSlots(){let h='';for(let i=0;i<8;i++){const id=team[i];if(id){const t=TOONS.find(x=>x.id===id);h+=`<div class="slot filled"><button class="slx" onclick="rmTeam('${id}')">✕</button><div class="se">${t.emoji}</div><div class="sn">${t.name}</div><div class="sa">${t.ability.slice(0,55)}…</div></div>`;}else h+=`<div class="slot"><div class="se2">+ Empty Slot</div></div>`;}document.getElementById('tslots').innerHTML=h;}
+function tTeam(id){if(team.includes(id)){team=team.filter(x=>x!==id);}else{if(team.length>=8)team.shift();team.push(id);}save();renderTeam();}
+function rmTeam(id){team=team.filter(x=>x!==id);save();renderTeam();}
+function renderSyn(){
+  const te=document.getElementById('syntags'),tip=document.getElementById('syntip');
+  if(!team.length){te.innerHTML='';tip.textContent='Add toons to see synergy tips!';return;}
+  const toons=team.map(id=>TOONS.find(t=>t.id===id)).filter(Boolean);
+  const tags=[],tips=[];
+  if(team.includes('vee')){tags.push(['sg','👁️ Twisted Awareness']);tips.push("Vee reveals ALL Twisteds for 5 sec!");}
+  if(team.includes('shelly')){tags.push(['sg','⚙️ Fast Extraction']);tips.push("Shelly's 75% extraction boost = machines done fast.");}
+  if(team.includes('astro')){tags.push(['sg','💨 Stamina Reserve']);tips.push("Astro restores stamina for long sprints.");}
+  if(team.includes('pebble')){tags.push(['sg','🤫 Stealth Master']);tips.push("Pebble marks Twisteds silently!");}
+  if(team.includes('gourdy')){tags.push(['sg','🎃 Stat Boost']);tips.push("Gourdy boosts everyone's stats — use before Panic Mode!");}
+  if(team.includes('sprout')){tags.push(['sg','🌱 Healer']);tips.push("Sprout plants healing flowers for the team.");}
+  if(team.includes('bobette')){tags.push(['sg','🎄 Stamina Aura']);tips.push("Bobette's passive gives +50% stamina regen nearby!");}
+  const mains=toons.filter(t=>t.rarity==='main').length;
+  if(mains>=2)tags.push(['sg','⭐ Multi-Main']);
+  if(!mains&&team.length>=2){tags.push(['sw','⚠️ No Mains']);tips.push("Consider adding a Main Character!");}
+  const avgHp=toons.reduce((a,t)=>a+t.hp,0)/toons.length;
+  if(avgHp>=4)tags.push(['sg','🛡️ Tanky']);
+  if(avgHp<=1.5){tags.push(['sw','💔 Very Fragile!']);tips.push("Very low HP — stock healing items!");}
+  te.innerHTML=tags.map(([c,l])=>`<span class="stag ${c}">${l}</span>`).join('');
+  tip.textContent=tips.length?tips.join(' '):'Solid team! Communicate and work together.';
+}
+
+// ═══════════════════════════════════════════════════════
+// RESEARCH
+// ═══════════════════════════════════════════════════════
+function renderTw(){
+  const done=TWISTEDS.filter(t=>(research[t.id]||0)>=100).length;
+  document.getElementById('resfill').style.width=(done/TWISTEDS.length*100)+'%';
+  document.getElementById('resnum').textContent=done+'/'+TWISTEDS.length+' at 100%';
+  document.getElementById('twgrid').innerHTML=TWISTEDS.map(t=>{
+    const p=research[t.id]||0,dn=p>=100;
+    return `<div class="twc"><div class="twh"><span class="twe">${t.emoji}</span><span class="twn">${t.name}${t.event?' <span style="font-size:.55rem;color:#f472b6">(Event)</span>':''}</span><span class="twp">${p}%</span></div>
+      <div class="bwrap"><div class="bfill" style="width:${p}%;background:linear-gradient(90deg,#f87171,#fbbf24)"></div></div>
+      <div class="rbtns"><button class="rbtn" onclick="addR('${t.id}',-25)">−25%</button><button class="rbtn" onclick="addR('${t.id}',25)">+25%</button><button class="rbtn" onclick="addR('${t.id}',100)" style="color:var(--grn)">✓100%</button></div>
+      <div class="twhint${dn?' done':''}">${dn?'✅':'🔒'} ${t.unlock}${t.warn?`<br>⚠️ <em>${t.warn}</em>`:''}</div>
+    </div>`;
+  }).join('');
+}
+function addR(id,v){research[id]=Math.min(100,Math.max(0,(research[id]||0)+v));save();renderTw();}
+
+// ═══════════════════════════════════════════════════════
+// HELPER
+// ═══════════════════════════════════════════════════════
+function initHelper(){
+  const s=document.getElementById('ichtgt');
+  if(s.options.length<=1){TOONS.filter(t=>t.cost>0).sort((a,b)=>a.cost-b.cost).forEach(t=>{const o=document.createElement('option');o.value=t.cost;o.textContent=`${t.emoji} ${t.name} — ${t.cost} Ichor`;s.appendChild(o);});}
+  const cl=document.getElementById('codeslist');
+  if(!cl.children.length){CODES.forEach(c=>{cl.innerHTML+=`<div class="ci"><span class="ct" onclick="cpCode('${c.code}',this)">${c.code}</span><div class="cinfo"><span class="crwd">${c.reward}</span><br>Expires: ${c.expires}</div><span class="cpd" id="cpd-${c.code}">Copied!</span></div>`;});}
+  const dt=document.getElementById('dangertier');
+  if(!dt.children.length){
+    const tiers=[{l:'🔴',n:'DEADLY',i:['Twisted Dandy (buy Tapes on even floors!)','Twisted Pebble (fastest Twisted)','Twisted Gourdy (erratic, dangerous)']},{l:'🟠',n:'DANGEROUS',i:['Twisted Vee (huge detection range)','Twisted Bassie (vine attacks, Easter 2026)','Twisted Cocoa (hops obstacles, Easter 2026)']},{l:'🟡',n:'MODERATE',i:['Twisted Flutter','Twisted Glisten (passive then aggressive)','Twisted Sprout','Twisted Shelly']},{l:'🟢',n:'MANAGEABLE',i:['Twisted Rodger (stationary, gives Tapes!)','Twisted Connie (ignores skill checks)','Twisted Goob','Twisted Finn']},];
+    dt.innerHTML=tiers.map(t=>`<div style="margin-bottom:10px;"><div style="font-family:'Fredoka One',cursive;font-size:.78rem;color:var(--txt);margin-bottom:5px;">${t.l} ${t.n}</div><div style="display:flex;flex-wrap:wrap;gap:5px;">${t.i.map(i=>`<span style="background:var(--s2);border:1px solid var(--bdr);border-radius:6px;padding:2px 8px;font-size:.68rem;color:var(--mut);">${i}</span>`).join('')}</div></div>`).join('');
+  }
+}
+function cpCode(code){try{navigator.clipboard.writeText(code);}catch(e){}const m=document.getElementById('cpd-'+code);m.style.opacity='1';setTimeout(()=>m.style.opacity='0',2000);}
+function calcIchor(){
+  const have=parseInt(document.getElementById('ichav').value)||0,need=parseInt(document.getElementById('ichtgt').value)||0;
+  const r=document.getElementById('cres');
+  if(!need){r.innerHTML='⚠️ Pick a toon first!';r.classList.add('show');return;}
+  const diff=need-have;
+  if(diff<=0){r.innerHTML=`✅ You can afford it! Have <strong>${have}</strong>, need <strong>${need}</strong>.`;r.classList.add('show');return;}
+  r.innerHTML=`Need <strong>${diff} more Ichor</strong> — ~<strong>${Math.ceil(diff/5)} machine completions</strong> or ~<strong>${Math.ceil(diff/10)} floors</strong>.`;
+  r.classList.add('show');
+}
+function spinToon(){
+  if(spinning)return;spinning=true;const btn=document.querySelector('.spinbtn');btn.textContent='Spinning…';
+  let n=0;const iv=setInterval(()=>{const r=TOONS[Math.floor(Math.random()*TOONS.length)];document.getElementById('spinem').textContent=r.emoji;document.getElementById('spinnm').textContent=r.name;document.getElementById('spindsc').textContent='';n++;if(n>14){clearInterval(iv);document.getElementById('spindsc').textContent=r.ability;btn.textContent='🎲 SPIN!';spinning=false;}},80);
+}
+
+// ═══════════════════════════════════════════════════════
+// NEWS
+// ═══════════════════════════════════════════════════════
+function renderNews(){
+  const g=document.getElementById('ngrid');if(g.children.length)return;
+  g.innerHTML=NEWS.map(n=>{
+    const tmap={a:'ta',u:'tu',p:'tp'},tlbl={a:'🟢 ACTIVE',u:'🔵 UPDATE',p:'🟣 UPCOMING'};
+    let extra='';
+    if(n.countdown){const ms=n.countdown-Date.now();if(ms>0){const d=Math.floor(ms/86400000),h=Math.floor(ms%86400000/3600000),m=Math.floor(ms%3600000/60000);extra=`<div style="padding:0 14px 11px;"><div style="font-family:'Fredoka One',cursive;font-size:.72rem;color:var(--mut);margin-bottom:6px;">⏱️ Ends in:</div><div class="cdrow"><div class="cdbox"><div class="cdnum">${d}</div><div class="cdlbl">Days</div></div><div class="cdbox"><div class="cdnum">${h}</div><div class="cdlbl">Hours</div></div><div class="cdbox"><div class="cdnum">${m}</div><div class="cdlbl">Mins</div></div></div></div>`;}}
+    return `<div class="ncard"><div class="nhead"><span class="nico">${n.icon}</span><div class="nmeta"><div class="ntitle">${n.title}</div><div class="ndate">${n.date}</div></div><span class="ntag ${tmap[n.tag]}">${tlbl[n.tag]}</span></div>${extra}<div class="nbody">${n.body}</div></div>`;
+  }).join('');
+}
+
+// ═══════════════════════════════════════════════════════
+// SKINS
+// ═══════════════════════════════════════════════════════
+const SKIN_ICONS={vintage:'🖤',store:'🛍️',event:'🎉',golden:'🥇',gamepass:'💎'};
+const SKIN_WIKI='https://dandys-world-robloxhorror.fandom.com/wiki/Toon_Skins';
+const TOON_WIKI_BASE='https://dandys-world-robloxhorror.fandom.com/wiki/';
+
+function setSkinF(f,btn){skinFilt=f;document.querySelectorAll('.skin-filters .pill').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderSkins();}
+function renderSkins(){
+  const g=document.getElementById('skin-grid');
+  let data=SKIN_DATA;
+  if(skinFilt==='main')data=data.filter(t=>t.rarity==='main');
+  else if(skinFilt==='event')data=data.filter(t=>t.rarity==='event');
+  else if(skinFilt==='base')data=data.filter(t=>t.rarity!=='event');
+  g.innerHTML=data.map(t=>`
+    <div class="skin-toon-card">
+      <div class="skin-toon-head" onclick="toggleSkinList('sl-${t.id}',this)">
+        <span class="ste">${t.emoji}</span>
+        <span class="stnm">${t.name}</span>
+        <span class="stcount">${t.skins.length} skins</span>
+        <a href="${TOON_WIKI_BASE}${encodeURIComponent(t.name)}" target="_blank" class="wiki-link" onclick="e=>e.stopPropagation()">Wiki ↗</a>
+        <span class="stoggle">▼</span>
+      </div>
+      <div class="skin-list" id="sl-${t.id}">
+        ${t.skins.map(s=>`<div class="skin-item">
+          <div class="skin-icon si-${s.type}">${SKIN_ICONS[s.type]||'✨'}</div>
+          <div class="skin-info">
+            <div class="skin-name">${s.n}</div>
+            <div class="skin-how">${s.how}</div>
+            <div class="skin-cost">${s.cost}</div>
+          </div>
+          <a href="${SKIN_WIKI}" target="_blank" class="wiki-link">Wiki ↗</a>
+        </div>`).join('')}
+      </div>
+    </div>`).join('');
+}
+function toggleSkinList(id,head){
+  const el=document.getElementById(id);
+  el.classList.toggle('open');
+  head.querySelector('.stoggle').textContent=el.classList.contains('open')?'▲':'▼';
+}
+
+// ═══════════════════════════════════════════════════════
+// GAMES
+// ═══════════════════════════════════════════════════════
+function initGames(){
+  newMemory();newScram();startQuiz();initTrivia();newWordle();renderLore();renderTier();
+  if(!chaseActive)resetChase();
+}
+
+// --- MEMORY ---
+function newMemory(){
+  const emojis=['🌒','🫧','🗞','🐟','🪞','📺','🐚','🍓'];
+  memCards=[...emojis,...emojis].sort(()=>Math.random()-.5);
+  memFlipped=[];memMatches=0;memMoves=0;memLocked=false;
+  document.getElementById('mmoves').textContent='0';
+  document.getElementById('mmatches').textContent='0';
+  const g=document.getElementById('mem-grid');
+  g.innerHTML=memCards.map((e,i)=>`<div class="mem-card" id="mc${i}" onclick="flipMem(${i})"><span class="mem-back">🌀</span><span class="mem-front">${e}</span></div>`).join('');
+}
+function flipMem(i){
+  if(memLocked||memFlipped.includes(i)||document.getElementById('mc'+i).classList.contains('matched'))return;
+  const card=document.getElementById('mc'+i);
+  card.classList.add('flipped');
+  memFlipped.push(i);
+  if(memFlipped.length===2){
+    memMoves++;document.getElementById('mmoves').textContent=memMoves;
+    memLocked=true;
+    const[a,b]=memFlipped;
+    if(memCards[a]===memCards[b]){
+      setTimeout(()=>{document.getElementById('mc'+a).classList.add('matched');document.getElementById('mc'+b).classList.add('matched');memMatches++;document.getElementById('mmatches').textContent=memMatches;memFlipped=[];memLocked=false;if(memMatches===8){document.getElementById('mmatches').textContent='8 🎉';}},400);
+    }else{
+      setTimeout(()=>{document.getElementById('mc'+a).classList.remove('flipped');document.getElementById('mc'+b).classList.remove('flipped');memFlipped=[];memLocked=false;},900);
+    }
+  }
+}
+
+// --- SCRAMBLE ---
+function newScram(){
+  const pool=TOONS.filter(t=>t.name.length<=10&&!t.name.includes('&'));
+  const t=pool[Math.floor(Math.random()*pool.length)];
+  scramWord=t.name.toUpperCase();
+  const shuffled=scramWord.split('').sort(()=>Math.random()-.5).join('');
+  document.getElementById('scram-word').textContent=shuffled;
+  document.getElementById('scram-hint').textContent=`Hint: ${t.emoji} ${t.rarity} toon`;
+  document.getElementById('scram-input').value='';
+  document.getElementById('scram-msg').textContent='';
+  document.getElementById('scram-input').focus();
+}
+function checkScram(){
+  const val=document.getElementById('scram-input').value.toUpperCase().trim();
+  const msg=document.getElementById('scram-msg');
+  if(val===scramWord){scramScore++;scramStreak++;msg.style.color='var(--grn)';msg.textContent=`✅ Correct! It's ${scramWord}!`;document.getElementById('scram-score').textContent=`Score: ${scramScore} | Streak: ${scramStreak}`;setTimeout(newScram,1200);}
+  else{scramStreak=0;msg.style.color='var(--red)';msg.textContent='❌ Nope! Try again or skip.';document.getElementById('scram-score').textContent=`Score: ${scramScore} | Streak: ${scramStreak}`;}
+}
+function skipScram(){scramStreak=0;document.getElementById('scram-msg').style.color='var(--acc3)';document.getElementById('scram-msg').textContent=`The answer was ${scramWord}`;document.getElementById('scram-score').textContent=`Score: ${scramScore} | Streak: ${scramStreak}`;setTimeout(newScram,1400);}
+document.addEventListener('keydown',e=>{if(e.key==='Enter'){if(document.activeElement.id==='scram-input')checkScram();}});
+
+// --- CHASE ---
+function resetChase(){chaseScore=0;chaseLives=3;chaseTimer=30;chaseActive=false;document.getElementById('cscore').textContent='0';document.getElementById('clives').textContent='❤️❤️❤️';document.getElementById('ctimer').textContent='30';document.getElementById('chase-msg').textContent='Tap the toon to start! Avoid the Twisted!';}
+let toonX=50,toonY=50,twistX=80,twistY=80;
+function chaseAreaClick(e){
+  if(!chaseActive){startChase();return;}
+  const rect=e.currentTarget.getBoundingClientRect();
+  const cx=(e.clientX-rect.left)/rect.width*100,cy=(e.clientY-rect.top)/rect.height*100;
+  const t=document.getElementById('chase-toon');
+  if(!t)return;
+  const tx=parseFloat(t.style.left),ty=parseFloat(t.style.top);
+  if(Math.abs(cx-tx)<12&&Math.abs(cy-ty)<12){chaseScore++;document.getElementById('cscore').textContent=chaseScore;placeToon();}
+}
+function startChase(){
+  chaseActive=true;chaseScore=0;chaseLives=3;chaseTimer=30;
+  document.getElementById('cscore').textContent='0';
+  document.getElementById('clives').textContent='❤️❤️❤️';
+  document.getElementById('chase-msg').textContent='Tap Astro 🚀 before Twisted Dandy 🌀 catches him!';
+  const area=document.getElementById('chase-area');
+  area.innerHTML=`<div class="chase-toon" id="chase-toon" style="left:50%;top:50%">🚀</div><div class="chase-twisted" id="chase-twisted" style="left:80%;top:80%">🌀</div>`;
+  placeToon();
+  if(chaseInterval)clearInterval(chaseInterval);
+  chaseInterval=setInterval(()=>{
+    chaseTimer--;document.getElementById('ctimer').textContent=chaseTimer;
+    moveTwisted();
+    if(chaseTimer<=0){endChase('Time\'s up!');return;}
+  },1000);
+}
+function placeToon(){toonX=10+Math.random()*80;toonY=10+Math.random()*80;const t=document.getElementById('chase-toon');if(t){t.style.left=toonX+'%';t.style.top=toonY+'%';}}
+function moveTwisted(){
+  const t=document.getElementById('chase-twisted');if(!t)return;
+  twistX+=(toonX-twistX)*0.2+(Math.random()-0.5)*15;
+  twistY+=(toonY-twistY)*0.2+(Math.random()-0.5)*15;
+  twistX=Math.max(5,Math.min(90,twistX));twistY=Math.max(5,Math.min(85,twistY));
+  t.style.left=twistX+'%';t.style.top=twistY+'%';
+  if(Math.abs(twistX-toonX)<8&&Math.abs(twistY-toonY)<8){chaseLives--;const lv='❤️'.repeat(chaseLives)+'🖤'.repeat(3-chaseLives);document.getElementById('clives').textContent=lv;placeToon();if(chaseLives<=0)endChase('Twisted Dandy caught Astro!');}
+}
+function endChase(msg){clearInterval(chaseInterval);chaseInterval=null;chaseActive=false;document.getElementById('chase-msg').textContent=`${msg} Score: ${chaseScore}! Tap to play again.`;const area=document.getElementById('chase-area');area.innerHTML='<div style="display:flex;align-items:center;justify-content:center;height:100%;font-family:\'Fredoka One\',cursive;font-size:1rem;color:var(--acc3);">Tap to play again!</div>';}
+
+// --- WORDLE ---
+const W5=['POPPY','LOOEY','TISHA','YATTA','COSMO','ASTRO','RUDIE','FLYTE','COCOA'];
+function newWordle(){wWord=W5[Math.floor(Math.random()*W5.length)];wGuesses=[];wLives=6;wActive=true;wCurrent='';const msg=document.getElementById('wmsg');if(msg)msg.textContent='Guess the 5-letter toon name!';resetWKeys();renderWG();renderWL();}
+function wKeyPress(key){if(!wActive)return;if(key==='⌫'){wCurrent=wCurrent.slice(0,-1);}else if(wCurrent.length<5){wCurrent+=key;}renderWGCurrent();}
+function renderWGCurrent(){
+  const g=document.getElementById('wgrid');
+  if(!g)return;
+  const cells=g.querySelectorAll('.wcell');
+  const row=wGuesses.length;
+  if(row>=6)return;
+  for(let c=0;c<5;c++){
+    const cell=cells[row*5+c];
+    if(cell&&!cell.classList.contains('correct')&&!cell.classList.contains('present')&&!cell.classList.contains('absent')){
+      cell.textContent=wCurrent[c]||'';
+      cell.style.borderColor=wCurrent[c]?'var(--acc4)':'';
+    }
+  }
+}
+function renderWG(){const g=document.getElementById('wgrid');if(!g)return;g.innerHTML='';for(let r=0;r<6;r++){const gs=wGuesses[r]||'';for(let c=0;c<5;c++){const cell=document.createElement('div');cell.className='wcell';if(r<wGuesses.length){const l=gs[c]||'';cell.textContent=l;if(l===wWord[c])cell.classList.add('correct');else if(wWord.includes(l)&&l)cell.classList.add('present');else if(l)cell.classList.add('absent');}else if(r===wGuesses.length)cell.classList.add('cur');g.appendChild(cell);}}renderWGCurrent();}
+function renderWL(){const el=document.getElementById('wlives');if(el)el.innerHTML='❤️'.repeat(wLives)+'🖤'.repeat(6-wLives);}
+function resetWKeys(){document.querySelectorAll('.wkey').forEach(k=>{k.classList.remove('correct','present','absent');});}
+function updateWKeys(guess){document.querySelectorAll('.wkey').forEach(btn=>{const letter=btn.textContent;if(letter.length!==1||!letter.match(/[A-Z]/))return;const inGuess=guess.includes(letter);if(!inGuess)return;if(wWord.includes(letter)&&wWord[guess.indexOf(letter)]===letter)btn.classList.add('correct');else if(wWord.includes(letter))btn.classList.add('present');else btn.classList.add('absent');});}
+function submitGuess(){if(!wActive)return;const g=wCurrent.toUpperCase().trim();if(g.length!==5){const msg=document.getElementById('wmsg');if(msg){msg.textContent='⚠️ 5 letters needed!';setTimeout(()=>{if(msg.textContent==='⚠️ 5 letters needed!')msg.textContent='Keep going!';},1500);}return;}wGuesses.push(g);wLives--;wCurrent='';renderWG();renderWL();updateWKeys(g);if(g===wWord){document.getElementById('wmsg').textContent=`✅ Correct! It was ${wWord}! 🎉`;wActive=false;return;}if(wLives<=0){document.getElementById('wmsg').textContent=`💔 The answer was ${wWord}! Hit 🔄 to try again.`;wActive=false;return;}document.getElementById('wmsg').textContent=`${wLives} guess${wLives!==1?'es':''} left!`;}
+
+// --- QUIZ ---
+function startQuiz(){qAns=[];qStep=0;const qi=document.getElementById('qinner'),qr=document.getElementById('qres');if(qi)qi.style.display='block';if(qr)qr.classList.remove('show');renderQStep();}
+function renderQStep(){const q=QUIZ_Q[qStep];const qdots=document.getElementById('qdots');if(qdots)qdots.innerHTML=QUIZ_Q.map((_,i)=>`<div class="qdot${i<qStep?' done':i===qStep?' cur':''}"></div>`).join('');const qq=document.getElementById('qq');if(qq)qq.textContent=q.q;const qopts=document.getElementById('qopts');if(qopts)qopts.innerHTML=q.opts.map((o,i)=>`<button class="qopt" onclick="ansQ(${i})">${o.t}</button>`).join('');}
+function ansQ(i){qAns.push(...QUIZ_Q[qStep].opts[i].tr);qStep++;if(qStep>=QUIZ_Q.length){showQRes();return;}document.querySelectorAll('.qopt').forEach((b,j)=>{if(j===i)b.classList.add('sel');b.disabled=true;});setTimeout(renderQStep,280);}
+function showQRes(){const tally={};qAns.forEach(t=>{tally[t]=(tally[t]||0)+1;});const top=Object.entries(tally).sort((a,b)=>b[1]-a[1])[0][0];const r=QUIZ_RES[top]||QUIZ_RES.support;const qi=document.getElementById('qinner'),qr=document.getElementById('qres');if(qi)qi.style.display='none';if(qr)qr.classList.add('show');document.getElementById('rem').textContent=r.emoji;document.getElementById('rnm').textContent=r.name;document.getElementById('rrar').textContent=r.rarity;document.getElementById('rdsc').textContent=r.desc;}
+
+// --- TRIVIA ---
+function initTrivia(){tvScore=0;tvIdx=0;tvQ=[...TRIVIA].sort(()=>Math.random()-.5).slice(0,10);renderTV();}
+function renderTV(){const q=tvQ[tvIdx];document.getElementById('tvscore').textContent=`Score: ${tvScore} | Q ${tvIdx+1}/${tvQ.length}`;document.getElementById('tvq').textContent=q.q;document.getElementById('tvopts').innerHTML=q.opts.map((o,i)=>`<button class="tvopt" onclick="ansTV(${i},this)">${o}</button>`).join('');document.getElementById('tvnxt').style.display='none';}
+function ansTV(i,btn){document.querySelectorAll('.tvopt').forEach(b=>b.disabled=true);const q=tvQ[tvIdx];if(i===q.a){btn.classList.add('correct');tvScore++;}else{btn.classList.add('wrong');document.querySelectorAll('.tvopt')[q.a].classList.add('reveal');}document.getElementById('tvscore').textContent=`Score: ${tvScore} | Q ${tvIdx+1}/${tvQ.length}`;const nxt=document.getElementById('tvnxt');nxt.style.display='block';nxt.textContent=tvIdx+1>=tvQ.length?`🎉 Restart (${tvScore}/${tvQ.length})`:'Next ➡️';}
+function nextTrivia(){tvIdx++;if(tvIdx>=tvQ.length)initTrivia();else renderTV();}
+
+// --- LORE ---
+function renderLore(){const c=document.getElementById('lorecards');if(!c||c.children.length)return;c.innerHTML=LORE.map((l,i)=>`<div class="card lore-card" onclick="togLore(${i})"><div class="lq">❓ ${l.q}</div><div class="la" id="la-${i}">${l.a}</div><div class="lhint">Tap to reveal ▼</div></div>`).join('');}
+function togLore(i){const el=document.getElementById('la-'+i);if(el)el.classList.toggle('show');}
+
+// --- TIER ---
+function renderTier(){const el=document.getElementById('tierdisp');if(!el||el.children.length)return;const cols={S:'#f59e0b',A:'#4ade80',B:'#60a5fa',C:'#94a3b8'};el.innerHTML=Object.entries(TIERS).map(([tier,names])=>`<div class="tierrow"><div class="tierlbl" style="color:${cols[tier]}">${tier}</div><div class="tierbar">${names.map(n=>{const t=TOONS.find(x=>x.name===n);return `<span style="display:inline-flex;align-items:center;gap:3px;font-size:.7rem;">${t?t.emoji:''}${n}</span>`;}).join('')}</div></div>`).join('');}
+
+// ═══════════════════════════════════════════════════════
+// BACKUP & RESTORE
+// ═══════════════════════════════════════════════════════
+function backupData(){
+  const data = {
+    version: 1,
+    date: new Date().toISOString(),
+    unlocked: unlocked,
+    team: team,
+    research: research,
+  };
+  const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `dandys-world-backup-${new Date().toISOString().slice(0,10)}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+  const msg = document.getElementById('backupMsg');
+  if(msg){ msg.style.color='var(--grn)'; msg.textContent='✅ Backup downloaded!'; setTimeout(()=>msg.textContent='',3000); }
+}
+
+function restoreData(event){
+  const file = event.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    try{
+      const data = JSON.parse(e.target.result);
+      if(!data.version || !Array.isArray(data.unlocked)){
+        throw new Error('Invalid backup file');
+      }
+      // Restore data
+      unlocked = data.unlocked || [];
+      team = (data.team || []).filter(id => unlocked.includes(id));
+      research = data.research || {};
+      save();
+      renderToons();
+      const msg = document.getElementById('backupMsg');
+      if(msg){ msg.style.color='var(--grn)'; msg.textContent=`✅ Restored! ${unlocked.length} toons recovered.`; }
+    } catch(err){
+      const msg = document.getElementById('backupMsg');
+      if(msg){ msg.style.color='var(--red)'; msg.textContent='❌ Invalid backup file — try again.'; }
+    }
+    event.target.value = ''; // reset input
+  };
+  reader.readAsText(file);
+}
+
+// ═══════════════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════════════
+renderToons();
+</script>
+<script>
+if('serviceWorker' in navigator){
+  window.addEventListener('load', ()=>{
+    navigator.serviceWorker.register('sw.js')
+      .then(reg => console.log('SW registered:', reg.scope))
+      .catch(err => console.log('SW failed:', err));
+  });
+}
+
+// ═══ FAVES ═══
+function tFave(id){
+  faves.includes(id)?faves=faves.filter(x=>x!==id):faves.push(id);
+  save();renderToons();
+  if(document.getElementById('tab-faves').classList.contains('active'))renderFaves();
+}
+function renderFaves(){
+  const g=document.getElementById('faves-grid');if(!g)return;
+  const list=TOONS.filter(t=>faves.includes(t.id)).sort((a,b)=>a.name.localeCompare(b.name));
+  if(!list.length){g.innerHTML='<div class="faves-empty"><div style="font-size:2.8rem;margin-bottom:10px;">☆</div><div>No favourites yet!</div><div style="font-size:.75rem;margin-top:6px;">Tap the ☆ star on any toon card to add it here.</div></div>';return;}
+  g.innerHTML=list.map(t=>tCard(t)).join('');
+}
+// ═══ ROSTER FILTER ═══
+let rosterFilt='all';
+function setRosterF(f,btn){
+  rosterFilt=f;
+  document.querySelectorAll('.roster-controls .pill').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');renderRoster();
+}
+function renderRoster(){
+  const g=document.getElementById('troster');if(!g)return;
+  const list=[...TOONS].filter(t=>{
+    if(rosterFilt==='all')return true;
+    if(rosterFilt==='event')return t.rarity==='event'||t.event;
+    if(rosterFilt==='main')return t.rarity==='main';
+    return t.rarity===rosterFilt;
+  }).sort((a,b)=>a.name.localeCompare(b.name));
+  g.innerHTML=list.map(t=>tCard(t,true)).join('');
+}
+// ═══ META TEAM COMPS ═══
+let metaSize=4;
+function setMetaSize(n){
+  metaSize=n;
+  document.getElementById('size4').classList.toggle('active',n===4);
+  document.getElementById('size8').classList.toggle('active',n===8);
+  renderMetaTeams();
+}
+const META_TEAMS_4=[
+  {name:'👑 The God Squad',tier:'S',desc:'The strongest 4-player team. Vee spots everything, Shelly extracts fast, Sprout heals, Pebble scouts silently.',toons:['vee','shelly','sprout','pebble'],tags:['Vision','Extraction','Heal','Stealth'],tips:"Use Vee's Mic Check before every machine. Pebble distracts while Shelly extracts."},
+  {name:'🚀 Speed Runners',tier:'S',desc:'Built for deep floors. Astro tops up stamina, Bassie shares items, Finn outruns everything, Vee provides full map awareness.',toons:['astro','bassie','finn','vee'],tags:['Speed','Stamina','Items','Vision'],tips:"Bassie drops items when cornered. Astro's stamina restore is key during Panic Mode sprints."},
+  {name:'🎃 Halloween Horror',tier:'A',desc:'Gourdy boosts all stats, Vee provides awareness, Sprout heals, Squirm pulls Twisted aggro.',toons:['gourdy','vee','sprout','squirm'],tags:['Stat Boost','Distract','Heal','Vision'],tips:"Use Gourdy's Pumpkin Power right before Panic Mode. Squirm draws aggro so others sprint."},
+  {name:'🛡️ The Tank Wall',tier:'A',desc:"Bobette's stamina aura keeps everyone going, Shelly extracts fast, Brusha boosts extraction, Rodger farms Tapes.",toons:['bobette','shelly','brusha','rodger'],tags:['HP','Stamina','Extraction','Tapes'],tips:"Rodger earns 20 Tapes per Twisted encounter. Brusha+Shelly is one of the fastest extraction duos."},
+  {name:'👻 Ghost Protocol',tier:'A',desc:'High-stealth team. Pebble marks enemies, Connie freezes them, Glisten slows, Flutter leaves a slowing trail.',toons:['pebble','connie','glisten','flutter'],tags:['Stealth','Slow','Freeze','Evasion'],tips:"Never get spotted. Best for players who know Twisted patterns cold."},
+  {name:'🌸 Easter Squad',tier:'A',desc:'Best Easter comp. Bassie shares items, Eggson starts floors 20% ahead, Flyte speed-boosts, Cocoa gives speed chocolates.',toons:['bassie','eggson','flyte','cocoa'],tags:['Event','Speed','Items','Extraction'],tips:"Eggson starts each floor with a machine 20% done for free. Use Cocoa's Bonbon on whoever is extracting."},
+  {name:'🧹 Skill Check Kings',tier:'B',desc:'Extraction-focused. Scraps and Looey widen skill checks, Tisha speeds everyone, Shelly pushes extraction over the top.',toons:['scraps','looey','tisha','shelly'],tags:['Skill Check','Extraction','Speed'],tips:"Stacked skill check bonuses mean almost zero failed checks. Cluster all four near machines."},
+  {name:'💀 Deep Floor Divers',tier:'B',desc:'Built for deep runs. Sprout heals, Astro tops stamina, Brightney lights machines, Blot confuses Twisteds.',toons:['sprout','astro','brightney','blot'],tags:['Sustain','Stamina','Vision','Escape'],tips:"Blot's ink puddles break Twisted line of sight. Sprout flowers keep HP up throughout."},
+  {name:'🎄 Christmas Crew',tier:'B',desc:"Full Christmas event team. Bobette's aura benefits everyone, Ginger heals in elevator, Coal stuns, Rudie sprints the team out.",toons:['bobette','ginger','coal','rudie'],tags:['Event','Heal','Stun','Sprint'],tips:"Ginger healing in the elevator between floors is huge. Coal stuns a chasing Twisted in emergencies."},
+  {name:'🔬 Ichor Farmers',tier:'B',desc:'Optimised for grinding Ichor. Rodger earns Tapes, Toodles provides items, Vee tracks all Twisteds, Brightney lights machines.',toons:['rodger','toodles','vee','brightney'],tags:['Ichor Farm','Vision','Items'],tips:"Stand near Twisted Rodger for massive Tape income. Vee's Mic Check every floor means zero surprises."},
+];
+const META_TEAMS_8=[
+  {name:'👑 Full Gardenview Elite',tier:'S',desc:'8-player powerhouse. Vee sees all, Shelly+Gourdy extract+boost, Sprout+Bobette sustain, Astro tops stamina, Pebble scouts, Bassie supplies.',toons:['vee','shelly','sprout','pebble','astro','bobette','gourdy','bassie'],tags:['All Roles','S-Tier','Event Mix'],tips:"This team has a solution for everything. Pebble and Vee on constant Twisted watch while Shelly+Gourdy extract."},
+  {name:'🚀 Speed Demon Eight',tier:'S',desc:'Pure mobility. Astro, Bassie, Finn keep the team fast. Flyte boosts movement, Vee provides awareness, Sprout heals, Pebble scouts, Rudie sprints everyone out.',toons:['astro','bassie','finn','flyte','vee','sprout','pebble','rudie'],tags:['Speed','Stamina','Sprint','Vision'],tips:"Flyte's Gust near machines gives instant team speed. Rudie's sprint stacks with Flyte. Astro restores everyone during Panic Mode."},
+  {name:'🛡️ The Fortress',tier:'A',desc:'Maximum durability. Bobette sustains stamina, Brusha+Shelly dominate extraction, Rodger farms Tapes, Boxten tanks hits, Sprout heals, Vee provides vision, Gourdy boosts stats.',toons:['bobette','brusha','shelly','rodger','boxten','sprout','vee','gourdy'],tags:['Tank','Sustain','Extraction','Tapes'],tips:"Boxten thrives in 8-player — his ability scales with teammates. Rodger + 7 = incredible Tape income."},
+  {name:'🧪 Deep Extraction Corps',tier:'A',desc:'Four pairs split across machines. Scraps+Looey stack skill checks, Shelly+Brusha push extraction, Tisha speeds, Brightney lights, Blot confuses, Vee sees all.',toons:['scraps','looey','shelly','tisha','brightney','blot','brusha','vee'],tags:['Extraction','Skill Check','Vision'],tips:"Split into pairs — each machine gets two players. Stacked Scraps+Looey bonuses = almost no failures."},
+  {name:'👻 Stealth Blitz Eight',tier:'A',desc:'8-player stealth run. Pebble+Connie lead stealth ops, Glisten+Flutter slow Twisteds, Eclipse marks threats, Cosmo enables silence, Sprout heals, Vee does one all-reveal.',toons:['pebble','connie','glisten','flutter','eclipse','cosmo','sprout','vee'],tags:['Stealth','Slow','Evasion','Heal'],tips:"Use Vee's Mic Check at floor start then go dark. Cosmo lets the squad move in silence."},
+  {name:'🎃 Full Halloween Nightmare',tier:'A',desc:'Complete Halloween roster. Gourdy boosts all stats, Soulvester+Ribecca slow Twisteds, Eclipse marks, Squirm distracts, Sprout heals, Vee sees all, Bobette sustains.',toons:['gourdy','soulvester','ribecca','eclipse','squirm','sprout','vee','bobette'],tags:['Event','Distract','Slow','Boost'],tips:"Ribecca's passive slow is always on. Squirm draws full aggro while 7 others extract. Gourdy pops stat boost for Panic Mode."},
+  {name:'🌸 Easter Festival Eight',tier:'B',desc:'Full Easter lineup plus support. Bassie supplies, Eggson boosts machines, Flyte+Cocoa speed+supply, Astro sustains, Vee spots, Sprout heals, Rudie sprints out.',toons:['bassie','eggson','flyte','cocoa','astro','vee','sprout','rudie'],tags:['Event','Speed','Items','Sustain'],tips:"Each floor starts with Eggson filling 20% of a machine for free. Flyte creates movement lanes."},
+  {name:'🎄 Winter Wonderland Eight',tier:'B',desc:'Full Christmas crew. Bobette sustains aura, Ginger heals in elevators, Coal stuns, Rudie sprints, Shelly extracts, Vee spots all, Sprout heals, Astro sustains Panic Mode.',toons:['bobette','ginger','coal','rudie','shelly','vee','sprout','astro'],tags:['Event','Heal','Extraction','Sprint'],tips:"Bobette's aura on 8 players = everyone gets 50% more stamina regen. Ginger+Sprout = almost no HP loss."},
+  {name:'🔬 Ichor Farming Crew',tier:'B',desc:'Max Ichor farming. Rodger generates Tapes, Toodles provides items, Brightney lights, Vee spots, Boxten extracts with team bonus, Scraps+Looey stack skill checks, Shelly finishes fast.',toons:['rodger','toodles','brightney','vee','boxten','scraps','looey','shelly'],tags:['Ichor Farm','Extraction','Skill Check'],tips:"8 players = Boxten ability at peak. Rodger earns 20 Tapes per Twisted with 8 people around — massive."},
+  {name:'🌀 The Wild Card Eight',tier:'B',desc:'Distraction and chaos. Squirm pulls full Twisted aggro, Eclipse marks threats, Glisten+Flutter slow chasers, Connie freezes emergencies, Blot lays ink, Sprout heals, Cosmo moves silently.',toons:['squirm','eclipse','glisten','flutter','connie','blot','sprout','cosmo'],tags:['Distract','Slow','Chaos','Evasion'],tips:"Squirm draws ALL Twisted attention while 7 others extract. Blot inks escape routes. Connie is the emergency freeze button."},
+];
+function renderMetaTeams(){
+  const g=document.getElementById('meta-grid');if(!g)return;
+  const teams=metaSize===8?META_TEAMS_8:META_TEAMS_4;
+  const tc={S:'mt-s',A:'mt-a',B:'mt-b'};
+  g.innerHTML=teams.map((m,i)=>{
+    const pills=m.toons.map(id=>{const t=TOONS.find(x=>x.id===id);return t?`<div class="meta-toon"><span>${t.emoji}</span><span style="color:var(--txt);font-weight:700;">${t.name}</span></div>`:''}).join('');
+    const tags=m.tags.map(tag=>`<span class="meta-tag ${tc[m.tier]||'mt-b'}">${tag}</span>`).join('');
+    return `<div class="meta-card"><div class="meta-title">${m.name} <span class="meta-tag ${tc[m.tier]||'mt-b'}" style="font-size:.6rem;vertical-align:middle;">Tier ${m.tier}</span></div><div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px;">${tags}</div><div class="meta-desc">${m.desc}</div><div class="meta-toons">${pills}</div><div style="font-size:.69rem;color:var(--acc4);line-height:1.5;margin-bottom:8px;">💡 ${m.tips}</div><button class="meta-apply" onclick="applyMetaTeam(${i})">⚔️ Load this team</button></div>`;
+  }).join('');
+}
+function applyMetaTeam(i){
+  const teams=metaSize===8?META_TEAMS_8:META_TEAMS_4;
+  team=teams[i].toons.filter(id=>TOONS.find(t=>t.id===id));
+  save();renderTeam();
+  document.getElementById('tslots').scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+function renderBackupStats(){
+  const el=document.getElementById('backup-stats');if(!el)return;
+  const res100=Object.values(research).filter(v=>v>=100).length;
+  el.innerHTML=`<div>🧩 <strong>Toons unlocked:</strong> ${unlocked.length} / 39</div><div>⭐ <strong>Favourites:</strong> ${faves.length} toons</div><div>⚔️ <strong>Team:</strong> ${team.length} saved</div><div>🧪 <strong>Research at 100%:</strong> ${res100} Twisteds</div>`;
+}
+
+
+// ═══════════════════════════════════════════════════════
+// LORE DATA
+// ═══════════════════════════════════════════════════════
+const LORE_DATA=[
+  {id:'astro',name:'Astro',fullname:'Astro Novalite',emoji:'🌒',rarity:'main',desig:'OA-001',
+   desc:"Dandy's best friend and the possible main protagonist of the Gardenview story. Calm, sleepy and deeply supportive — he and Dandy appeared in photos together dating back to 1988. Astro sometimes suffers from stage fright and dislikes being photographed.",
+   facts:[{i:'👤',t:'<strong>Handler:</strong> Austin Russo — defensive, enforces strict no-photography rules around Astro.'},{i:'💭',t:'<strong>Lore:</strong> Boxten suspects Astro may somehow be responsible for his frequent nightmares.'},{i:'🎭',t:'<strong>Show:</strong> Stars in "Stage Fright" and "Showtime Panic" episode posters.'}],
+   tags:['p','r'],wiki:'Astro'},
+  {id:'bassie',name:'Bassie',fullname:'Bassie Bloomington',emoji:'🧺',rarity:'main',isEvent:true,desig:'M-002',
+   desc:"The Easter Event Main Character who runs Bassie's Store. Lore hints her overwhelming fear of not living up to Gardenview founders' expectations led directly to the creation of Twisted Bassie. Prominent in official merchandise.",
+   facts:[{i:'😨',t:'<strong>Lore:</strong> Became Twisted Bassie due to fear of failing the founders\' expectations.'},{i:'🐣',t:'<strong>Unlock:</strong> 2,500 Ichor + 3,000 Baskets + 100% Twisted Bassie.'},{i:'🧸',t:'<strong>Merch:</strong> One of the first toons to receive an official Deluxe plushie.'}],
+   tags:['p','e','t'],wiki:'Bassie'},
+  {id:'blot',name:'Blot',fullname:'Blot',emoji:'🖋',rarity:'rare',desig:'SC-019',
+   desc:"An ink-themed toon who was reportedly mute in the Dandy's World TV show — yet his in-game form can speak, just backwards. Friends with Finn; the two share an aquarium-themed floor added January 2026 and received matching Christmas skins.",
+   facts:[{i:'🔇',t:'<strong>Fun fact:</strong> Mute in the show — yet speaks in-game, just backwards.'},{i:'🐟',t:'<strong>Relationship:</strong> Friends with Finn — matching Christmas skins and a shared aquarium floor.'}],
+   tags:['r','t'],wiki:'Blot'},
+  {id:'bobette',name:'Bobette',fullname:'Bobette Carolynne',emoji:'🎄',rarity:'main',isEvent:true,desig:'M-003',
+   desc:"The Christmas Event Main Character who runs Bobette's Store. Her last name Carolynne is inspired by carolling. She hates being a burden and feels she has less and less time with friends. Strangely, she doesn't remember leaving a lore note found in the Seasonal Room.",
+   facts:[{i:'🎁',t:'<strong>Ability:</strong> Precious Packaging hides her in a gift box — ALL Twisteds immediately lose interest.'},{i:'🪨',t:'<strong>Relationship:</strong> Coal the Pet Rock is Bobette\'s pet — mirrors Dandy\'s pet Pebble.'},{i:'🌟',t:'<strong>Fun fact:</strong> Would have been first toon with 5-star stats in two categories — changed before release.'}],
+   tags:['p','e','t'],wiki:'Bobette'},
+  {id:'boxten',name:'Boxten',fullname:'Boxten',emoji:'📦',rarity:'common',desig:'SC-001',
+   desc:"A shy, anxious box-themed toon who startles easily and often stutters. Despite low self-confidence he is genuinely encouraging toward others. Plagued by frequent nightmares, he suspects Astro may somehow be responsible. Loves trivia and is a devoted fan of Vee's gameshow.",
+   facts:[{i:'😰',t:'<strong>Personality:</strong> Shy and easily scared — pessimistic about himself but encouraging to teammates.'},{i:'💤',t:'<strong>Fun fact:</strong> Plagued by nightmares — suspects Astro is behind them.'},{i:'📺',t:'<strong>Hobby:</strong> Big fan of Vee\'s gameshow — loves trivia.'}],
+   tags:['p','r'],wiki:'Boxten'},
+  {id:'brightney',name:'Brightney',fullname:'Brightney',emoji:'💡',rarity:'uncommon',desig:'SC-009',
+   desc:"A lightbulb-headed toon who lights up wherever she goes. Vee considers Brightney her best gameshow contestant and speaks of her more favourably than other toons. Appears in 3 TV show episodes and has gossip with all four shopkeepers.",
+   facts:[{i:'💡',t:'<strong>Relationship:</strong> Vee\'s self-described favourite contestant.'},{i:'📺',t:'<strong>Show:</strong> Featured in 3 TV show episodes — notable for a side character.'}],
+   tags:['p','r'],wiki:'Brightney'},
+  {id:'brusha',name:'Brusha',fullname:'Brusha',emoji:'🖌',rarity:'uncommon',desig:'SC-013',
+   desc:"A paintbrush-themed artist who is passionate but slightly egotistic about her work. Brusha dismisses Scraps' artwork as childish and finds it hard to compliment others — but is actively trying to change. Lore hints her personality shifted after her show debut; old photos always show her smiling.",
+   facts:[{i:'🎨',t:'<strong>Personality:</strong> Talented but slightly egotistic — working on being kinder.'},{i:'🖼️',t:'<strong>Rivalry:</strong> Dismisses Scraps\' art as "childish."'},{i:'🔧',t:'<strong>Gameplay:</strong> The only toon with a Toggle Ability — unique in the game.'}],
+   tags:['p','r','t'],wiki:'Brusha'},
+  {id:'coal',name:'Coal',fullname:'Coal',emoji:'🗿',rarity:'event',desig:'SC-027',
+   desc:"Bobette's small pet rock — the Christmas equivalent of Dandy's pet Pebble. Coal has fully 3D eyes which made adding eyelashes impractical. Pebble can apparently understand Coal, likely due to their shared status as sentient rocks. One of the very first event toons ever added to the game.",
+   facts:[{i:'🪨',t:'<strong>Relationship:</strong> Bobette\'s pet rock — mirrors how Pebble is Dandy\'s pet.'},{i:'👁️',t:'<strong>Design:</strong> Has 3D eyes — eyelashes couldn\'t be added as a result.'},{i:'🎄',t:'<strong>Event:</strong> Free during Christmas Event at Bobette\'s Store.'}],
+   tags:['r','e','t'],wiki:'Coal'},
+  {id:'cocoa',name:'Cocoa',fullname:'Cocoa',emoji:'🍫',rarity:'event',desig:'SC-026',
+   desc:"A chubby chocolate bunny toon introduced in the 2025 Easter Event. Cocoa and Ginger are confirmed cousins. In Easter 2026, Twisted Cocoa received a major rework — she can now hop over obstacles on every map, making old hiding strategies obsolete.",
+   facts:[{i:'🍪',t:'<strong>Relationship:</strong> Cousins with Ginger.'},{i:'⚠️',t:'<strong>Easter 2026:</strong> Twisted Cocoa can now hop over obstacles — old hiding spots no longer work!'}],
+   tags:['r','e'],wiki:'Cocoa'},
+  {id:'connie',name:'Connie',fullname:'Connie',emoji:'👻',rarity:'uncommon',desig:'SC-012',
+   desc:"A ghost-like balloon toon and Soulvester's confirmed sibling. Originally designed for the cancelled 2024 Halloween Event but repurposed as a base-game toon. Her Twisted form completely ignores failed skill checks — one of the most passive Twisteds in the game.",
+   facts:[{i:'👻',t:'<strong>Relationship:</strong> Confirmed siblings with Soulvester.'},{i:'🎃',t:'<strong>History:</strong> Originally planned for the cancelled 2024 Halloween Event.'},{i:'🤫',t:'<strong>Twisted form:</strong> Passive — ignores failed skill checks entirely.'}],
+   tags:['r','t'],wiki:'Connie'},
+  {id:'cosmo',name:'Cosmo',fullname:'Cosmo',emoji:'🍩',rarity:'uncommon',desig:'SC-011',
+   desc:"A donut-themed toon who loves baking with consistently disastrous results. According to Dandy's gossip, Cosmo set a Gardenview record for the fastest fire alarm triggered by any new arrival. Cousins with Ginger. Currently teaching Boxten how to cook.",
+   facts:[{i:'🔥',t:'<strong>Fun fact:</strong> Set a Gardenview record for fastest fire alarm triggered by a new toon.'},{i:'🍪',t:'<strong>Relationship:</strong> Cousins with Ginger.'},{i:'🌙',t:'<strong>Teaching:</strong> Currently teaching Boxten how to cook.'}],
+   tags:['p','r','t'],wiki:'Cosmo'},
+  {id:'eclipse',name:'Eclipse',fullname:'Eclipse',emoji:'🐺',rarity:'rare',desig:'SC-022',
+   desc:"A determined werewolf toon who wants to prove wolves aren't inherently bad. Added during the 2025 Halloween Event as a rare toon. Her Howl ability briefly boosts her speed and marks nearby Twisteds.",
+   facts:[{i:'🐺',t:'<strong>Personality:</strong> Determined to prove wolves aren\'t all bad.'},{i:'🎃',t:'<strong>Event:</strong> Introduced during the 2025 Halloween Event.'}],
+   tags:['p','t'],wiki:'Eclipse'},
+  {id:'eggson',name:'Eggson',fullname:'Eggson',emoji:'🍳',rarity:'event',desig:'SC-024',
+   desc:"A wise, elderly boiled egg toon who gives short life-advice to younger toons. Despite his age, his stats are a perfectly balanced set of 3s. One of only two toons who speaks multiple times consecutively in dialogue — a trait he shares with Looey.",
+   facts:[{i:'🥚',t:'<strong>Personality:</strong> Wise and elderly — gives advice and short stories to younger toons.'},{i:'⚡',t:'<strong>2026 buff:</strong> Fixer Upper upgraded from 10% to 20% machine completion.'},{i:'💬',t:'<strong>Fun fact:</strong> One of only two toons who speaks multiple times consecutively.'}],
+   tags:['p','e','t'],wiki:'Eggson'},
+  {id:'finn',name:'Finn',fullname:'Finn',emoji:'🐟',rarity:'rare',desig:'SC-014',
+   desc:"A fish-themed toon and the fastest sprinter in the game. Friends with Blot — the two share an aquarium-themed floor added January 2026 and received matching Christmas skins. Has special room dialogue on Brusha's Art Floor.",
+   facts:[{i:'🏃',t:'<strong>Gameplay:</strong> Fastest toon — Reel In ability gains more speed with each floor.'},{i:'🖋️',t:'<strong>Relationship:</strong> Friends with Blot — matching Christmas skins and a shared aquarium floor.'}],
+   tags:['r','t'],wiki:'Finn'},
+  {id:'flutter',name:'Flutter',fullname:'Flutter',emoji:'🦋',rarity:'rare',desig:'SC-015',
+   desc:"A butterfly toon and Flyte's younger sister. Flutter is Gigi's best friend and appears in 3 TV show episodes. Despite Flyte being laid-back, he deeply cares for Flutter — even if she finds his protectiveness mildly annoying.",
+   facts:[{i:'🦋',t:'<strong>Relationship:</strong> Younger sister of Flyte — confirmed siblings by developer Qwel.'},{i:'💕',t:'<strong>Relationship:</strong> Best friends with Gigi.'},{i:'📺',t:'<strong>Show:</strong> Featured in 3 TV show episodes.'}],
+   tags:['p','r'],wiki:'Flutter'},
+  {id:'flyte',name:'Flyte',fullname:'Flyte',emoji:'🦋',rarity:'event',desig:'SC-025',
+   desc:"Flutter's older, more laid-back butterfly brother. Despite his relaxed personality, Flyte cares deeply for his younger sister. His Gust ability creates a speed-boosting wind zone for teammates.",
+   facts:[{i:'👨‍👧',t:'<strong>Relationship:</strong> Flutter\'s older brother — confirmed siblings by Qwel.'},{i:'🐣',t:'<strong>Unlock:</strong> 50% Twisted Flyte research + 700 Baskets (Easter Event).'},{i:'💨',t:'<strong>Ability:</strong> Gust boosts nearby toons +15% speed for 5 seconds.'}],
+   tags:['p','r','e'],wiki:'Flyte'},
+  {id:'gigi',name:'Gigi',fullname:'Gigi',emoji:'🪙',rarity:'rare',desig:'SC-016',
+   desc:"A Gachapon/coin-machine-themed toon known for collecting items and fashionable flair. Gigi is Flutter's best friend. Her Glam ability randomly produces a useful item — perfectly thematic for a lucky capsule toy character.",
+   facts:[{i:'🪙',t:'<strong>Design:</strong> Based on Gachapon — coin-operated capsule toy dispensers from Japan.'},{i:'💕',t:'<strong>Relationship:</strong> Best friends with Flutter.'}],
+   tags:['p','r'],wiki:'Gigi'},
+  {id:'ginger',name:'Ginger',fullname:'Ginger',emoji:'🍪',rarity:'event',desig:'SC-028',
+   desc:"A shy gingerbread cookie toon with the right side of her face bitten off — missing one eye. Cousins with Cosmo. She binge-watches every episode of Vee's gameshow. Her Warm Up! ability uniquely works even inside the elevator between floors.",
+   facts:[{i:'😰',t:'<strong>Personality:</strong> Shy and socially awkward.'},{i:'🍩',t:'<strong>Relationship:</strong> Cousins with Cosmo.'},{i:'🔥',t:'<strong>Fun fact:</strong> Warm Up! works inside the elevator — one of the only abilities that does.'}],
+   tags:['p','r','e','t'],wiki:'Ginger'},
+  {id:'glisten',name:'Glisten',fullname:'Glisten',emoji:'🪞',rarity:'rare',desig:'SC-017',
+   desc:"A mirror or ice-themed toon with a two-sided nature — their Twisted form has a passive phase before turning aggressive. Close to Boxten; in one interaction Glisten asked if his makeup was smudged, suggesting both toons wear cosmetics.",
+   facts:[{i:'🪞',t:'<strong>Relationship:</strong> Close to Boxten — asked him if his makeup was smudged.'},{i:'❄️',t:'<strong>Twisted form:</strong> Has a passive phase before turning aggressive.'}],
+   tags:['r','t'],wiki:'Glisten'},
+  {id:'goob',name:'Goob',fullname:'Goob',emoji:'🤗',rarity:'uncommon',desig:'SC-008',
+   desc:"A perpetually sleepy, cuddly toon who is Scraps' sibling — Scraps is the older one. The only toon to be represented by two different colours in TV show storyboards: red and blue, hinting at a dual nature.",
+   facts:[{i:'👫',t:'<strong>Relationship:</strong> Siblings with Scraps — Scraps is the older sibling.'},{i:'🎨',t:'<strong>Fun fact:</strong> Only toon shown in two different storyboard colours — red and blue.'}],
+   tags:['r','t'],wiki:'Goob'},
+  {id:'gourdy',name:'Gourdy',fullname:'Gourdy Holloway',emoji:'🎃',rarity:'main',isEvent:true,desig:'M-004',
+   desc:"The Halloween Event Main Character — a child jack-o-lantern toon and Toodles' best friend. Normally cheerful, Gourdy is deeply troubled by a complete lack of memories about his parents, Mr. and Mrs. Holloway. One of only two confirmed child toons.",
+   facts:[{i:'👶',t:'<strong>Age:</strong> One of only two confirmed child toons — the other is Toodles.'},{i:'💔',t:'<strong>Backstory:</strong> Has no memories of his parents, Mr. and Mrs. Holloway.'},{i:'🎃',t:'<strong>Unlock:</strong> 2,500 Ichor + 3,000 Candy Corn + 100% Twisted Gourdy (Halloween Event).'}],
+   tags:['p','r','e'],wiki:'Gourdy'},
+  {id:'looey',name:'Looey',fullname:'Looey',emoji:'🎈',rarity:'common',desig:'SC-004',
+   desc:"A balloon-headed toon and part of the in-universe Circus Trio with Yatta and Razzle & Dazzle. Looey and Yatta are confirmed best friends — not siblings, as many fans assumed, confirmed by developer Qwel.",
+   facts:[{i:'🎪',t:'<strong>Group:</strong> Circus Trio with Yatta and Razzle & Dazzle.'},{i:'💛',t:'<strong>Relationship:</strong> Best friends with Yatta — confirmed NOT siblings by Qwel.'}],
+   tags:['p','r'],wiki:'Looey'},
+  {id:'pebble',name:'Pebble',fullname:'Pebble Dancifer Jr.',emoji:'🪨',rarity:'main',desig:'M-001',
+   desc:"Dandy's beloved pet rock and one of the most loved toons in Gardenview. Despite being a rock, Pebble communicates entirely through barks — which every other toon understands perfectly. Unlocking Pebble requires completing ALL of Toodles' mystery missions.",
+   facts:[{i:'🗣️',t:'<strong>Communication:</strong> Speaks only in barks — all toons understand perfectly.'},{i:'👤',t:'<strong>Handler:</strong> Devan Reed — described as friendly, matching Dandy\'s outward personality.'},{i:'🔓',t:'<strong>Unlock:</strong> Only obtainable by completing ALL of Toodles\' mystery missions.'}],
+   tags:['p','r','t'],wiki:'Pebble'},
+  {id:'poppy',name:'Poppy',fullname:'Poppy',emoji:'🫧',rarity:'common',desig:'SC-002',
+   desc:"A cheerful, bubbly toon and one of the two free starter toons alongside Boxten. Poppy is often seen helping others — her passive healing ability reflects her caring nature. Friends with Boxten and Looey.",
+   facts:[{i:'🌟',t:'<strong>Role:</strong> One of the two free starter toons.'},{i:'🤝',t:'<strong>Relationships:</strong> Friends with Boxten and Looey.'}],
+   tags:['p','r'],wiki:'Poppy'},
+  {id:'razzle',name:'Razzle & Dazzle',fullname:'Razzle & Dazzle',emoji:'🎭',rarity:'rare',desig:'SC-023',
+   desc:"A dual-headed toon and part of the Circus Trio with Looey and Yatta. Their stats literally alternate between odd and even floors. Despite being fully optimised, they were rejected for a Halloween skin.",
+   facts:[{i:'🎪',t:'<strong>Group:</strong> Part of the Circus Trio with Looey and Yatta.'},{i:'🔄',t:'<strong>Ability:</strong> Showtime — stats change depending on whether the floor is odd or even.'},{i:'🚫',t:'<strong>Fun fact:</strong> Rejected for a Halloween skin despite being fully optimised.'}],
+   tags:['r','t'],wiki:'Razzle_%26_Dazzle'},
+  {id:'ribecca',name:'Ribecca',fullname:'Ribecca',emoji:'💀',rarity:'event',desig:'SC-031',
+   desc:"A skeleton-themed toon introduced during the 2025 Halloween Event. Ribecca's passive Cobweb ability automatically slows nearby Twisteds with no activation needed — one of the few non-Main event toons with a Passive Ability.",
+   facts:[{i:'💀',t:'<strong>Design:</strong> Skeleton-themed — introduced in the 2025 Halloween Event.'},{i:'🕸️',t:'<strong>Ability:</strong> Cobweb passively slows nearby Twisteds — always on, no cooldown.'}],
+   tags:['e','t'],wiki:'Ribecca'},
+  {id:'rodger',name:'Rodger',fullname:'Rodger',emoji:'🔍',rarity:'rare',desig:'SC-018',
+   desc:"A detective-themed toon who acts as a father figure to Toodles. Friends with Teagan and possibly Glisten. In his Twisted form Rodger is completely stationary — but standing near him earns you 20 Tapes per encounter.",
+   facts:[{i:'👨',t:'<strong>Relationship:</strong> Acts as a father figure to Toodles.'},{i:'🔍',t:'<strong>Twisted form:</strong> Stationary — standing near him earns 20 Tapes per encounter.'}],
+   tags:['r','t'],wiki:'Rodger'},
+  {id:'rudie',name:'Rudie',fullname:'Rudie',emoji:'🫎',rarity:'event',desig:'SC-029',
+   desc:"A reindeer-themed toon and one of the original Christmas Event toons. One of the first toons to receive Golden Skin Quests. His Hooves ability gives a sprint boost to all nearby toons.",
+   facts:[{i:'🦌',t:'<strong>Design:</strong> Reindeer-themed — one of the original Christmas Event toons.'},{i:'🎄',t:'<strong>Unlock:</strong> Free during the Christmas Event at Bobette\'s Store.'},{i:'🥇',t:'<strong>Fun fact:</strong> One of the first toons to receive Golden Skin Quests.'}],
+   tags:['e','t'],wiki:'Rudie'},
+  {id:'scraps',name:'Scraps',fullname:'Scraps',emoji:'🗞',rarity:'common',desig:'SC-003',
+   desc:"A paper-craft cat-like toon with a mischievous, energetic personality — the little-sister archetype of Gardenview. Scraps and Goob are confirmed siblings, with Scraps being the older one. She has a creative rivalry with Brusha, who dismisses her artwork as childish.",
+   facts:[{i:'👫',t:'<strong>Relationship:</strong> Siblings with Goob — Scraps is the older sibling.'},{i:'🎨',t:'<strong>Rivalry:</strong> Brusha dismisses her art as "childish."'}],
+   tags:['p','r'],wiki:'Scraps'},
+  {id:'shelly',name:'Shelly',fullname:'Shelly Fossilian',emoji:'🐚',rarity:'main',desig:'OA-003',
+   desc:"A dinosaur fossil-themed Main Character passionate about the Jurassic era and collecting fossils. Shelly often feels overlooked — few toons notice or care about her interests except Tisha and the other Mains. Her encouraging passive reflects her personality perfectly.",
+   facts:[{i:'🦕',t:'<strong>Personality:</strong> Passionate about fossils, but often feels unnoticed by others.'},{i:'💚',t:'<strong>Relationship:</strong> Good friends with Tisha — confirmed through interactions and storyboards.'},{i:'🏠',t:'<strong>Lore:</strong> Has her own room and map in Gardenview.'}],
+   tags:['p','r'],wiki:'Shelly'},
+  {id:'shrimpo',name:'Shrimpo',fullname:'Shrimpo',emoji:'🍤',rarity:'rare',desig:'SC-020',
+   desc:"A tiny, blisteringly fast shrimp toon and the game's official challenge character — only 1 heart but remarkable speed. Despite looking adorably small, Shrimpo has a notably mean streak and is one of the few toons considered villainous. Even Dandy pities her.",
+   facts:[{i:'⚡',t:'<strong>Gameplay:</strong> Challenge toon — 1 heart only, tied for fastest in the game.'},{i:'😈',t:'<strong>Personality:</strong> Mean and unpleasant — one of few toons with villainous traits.'},{i:'😢',t:'<strong>Dandy\'s gossip:</strong> "Shrimpo? Oh, you are so pitiful."'}],
+   tags:['p','t'],wiki:'Shrimpo'},
+  {id:'soulvester',name:'Soulvester',fullname:'Soulvester',emoji:'👻',rarity:'event',desig:'SC-030',
+   desc:"A ghostly knight toon and Connie's confirmed sibling, introduced in the 2025 Halloween Event. His Soul Sword applies a Slow debuff to any Twisted it strikes. Uniquely, his Vintage skin glows teal instead of white during blackouts.",
+   facts:[{i:'👻',t:'<strong>Relationship:</strong> Confirmed siblings with Connie.'},{i:'🎃',t:'<strong>Unlock:</strong> Available at Gourdy\'s Store during Halloween Event.'},{i:'✨',t:'<strong>Fun fact:</strong> Only light-emitting toon whose Vintage skin glows teal (not white) in blackouts.'}],
+   tags:['r','e','t'],wiki:'Soulvester'},
+  {id:'sprout',name:'Sprout',fullname:'Sprout Seedly',emoji:'🍓',rarity:'main',desig:'OA-004',
+   desc:"A friendly plant-themed Main Character who loves cooking but is notoriously terrible at it. Gardenview's fire alarms go off regularly because of Sprout, and his room is packed with fire extinguishers. Despite being a culinary disaster, he is warm, caring and always tries his best.",
+   facts:[{i:'🔥',t:'<strong>Fun fact:</strong> Constantly causes fires when cooking — fire extinguishers fill his room.'},{i:'👤',t:'<strong>Handler:</strong> Sam Mclaughlin — spends most of their time stopping Sprout burning down Gardenview.'},{i:'💬',t:'<strong>Dandy:</strong> Reportedly steals baked goods from Sprout and Cosmo\'s kitchen.'}],
+   tags:['p','r','t'],wiki:'Sprout'},
+  {id:'squirm',name:'Squirm',fullname:'Squirm',emoji:'🐛',rarity:'rare',desig:'SC-021',
+   desc:"The newest base-game toon, added February 2026. An anxious, introverted bookworm who genuinely looks forward to reading after every machine run. Despite his child-like appearance he is an adult. Reportedly had the bookworm role pressured onto him by Gardenview founder Arthur Walton.",
+   facts:[{i:'📚',t:'<strong>Personality:</strong> Introverted and anxious — loves books above all else.'},{i:'🦋',t:'<strong>Fun fact:</strong> No relation to Flutter or Flyte — confirmed by Qwel.'},{i:'🆕',t:'<strong>History:</strong> Added February 28, 2026 — most recently added base-game toon.'}],
+   tags:['p','t'],wiki:'Squirm'},
+  {id:'teagan',name:'Teagan',fullname:'Teagan',emoji:'🫖',rarity:'common',desig:'SC-005',
+   desc:"A tea-themed toon who regularly hosts tea parties in Gardenview — though Dandy is mysteriously banned from attending. Friends with Rodger, and has gossip interactions with all four shopkeepers, making her one of the most socially connected toons.",
+   facts:[{i:'☕',t:'<strong>Hobby:</strong> Hosts tea parties — Dandy is banned for unknown reasons.'},{i:'🤖',t:'<strong>Relationship:</strong> Friends with Rodger.'},{i:'💬',t:'<strong>Gossip:</strong> One of few toons with dialogues for all four shopkeepers.'}],
+   tags:['p','r','t'],wiki:'Teagan'},
+  {id:'tisha',name:'Tisha',fullname:'Tisha',emoji:'🧻',rarity:'common',desig:'SC-006',
+   desc:"A cleaning-obsessed toon who is perpetually overworked. Gets genuinely frustrated when toons create mess and gives the silent treatment to those who don't appreciate her work — including Vee. Her relationship with Brusha is complicated and strained.",
+   facts:[{i:'🧹',t:'<strong>Personality:</strong> Chipper but overworked — obsessed with cleaning and punctuality.'},{i:'💚',t:'<strong>Relationship:</strong> Good friends with Shelly.'},{i:'📝',t:'<strong>Fun fact:</strong> Has four dialogue interactions with Brusha — the most between any two toons.'}],
+   tags:['p','r'],wiki:'Tisha'},
+  {id:'toodles',name:'Toodles',fullname:'Toodles',emoji:'🎱',rarity:'uncommon',desig:'SC-010',
+   desc:"A mysterious mission-giving toon and one of only two confirmed child toons — the other being Gourdy. Loves dogs, which explains her Dog Plush and close bond with Pebble. Rodger acts as a father figure to her. Completing ALL her missions is the only way to unlock Pebble.",
+   facts:[{i:'👶',t:'<strong>Age:</strong> One of only two confirmed child toons — the other is Gourdy.'},{i:'🐕',t:'<strong>Relationship:</strong> Loves dogs — owns a Dog Plush and has a special bond with Pebble.'},{i:'🔑',t:'<strong>Gameplay:</strong> Completing ALL her mystery missions is the only way to unlock Pebble.'}],
+   tags:['p','r','t'],wiki:'Toodles'},
+  {id:'vee',name:'Vee',fullname:'Vee Version 1',emoji:'📺',rarity:'main',desig:'OA-002',
+   desc:"A TV-headed Main Character and host of Vee's Gameshow. Often comes across as rude but isn't intentionally mean — and harbours hidden insecurities about a rumoured 'Vee Version 2.' In January 2026 she staged a takeover of Dandy's merch website, rebranding it as 'Vee's World.'",
+   facts:[{i:'📺',t:'<strong>Fun fact:</strong> Twisted Vee forces pop-ups onto every player\'s screen every 45 seconds while active.'},{i:'💙',t:'<strong>Relationship:</strong> Considers Brightney her best contestant and favourite.'},{i:'🌐',t:'<strong>Lore event:</strong> Took over Dandy\'s merch site Jan 23 – Feb 13, 2026, rebranding it "Vee\'s World."'}],
+   tags:['p','t'],wiki:'Vee'},
+  {id:'yatta',name:'Yatta',fullname:'Yatta',emoji:'🍬',rarity:'common',desig:'SC-007',
+   desc:"A colourful candy-themed toon and part of the Circus Trio with Looey and Razzle & Dazzle. Best friends with Looey — not siblings. Has accumulated so many skins that developers intentionally skipped giving her new ones for the 2025 Christmas event.",
+   facts:[{i:'🎪',t:'<strong>Group:</strong> Part of the Circus Trio with Looey and Razzle & Dazzle.'},{i:'💛',t:'<strong>Relationship:</strong> Best friends with Looey — confirmed NOT siblings by Qwel.'},{i:'🎨',t:'<strong>Fun fact:</strong> Skipped for 2025 Christmas skins — already has too many.'}],
+   tags:['p','r','t'],wiki:'Yatta'},
+];
+
+// tag labels
+const LTAG={p:'💭 Personality',r:'🤝 Relationships',t:'✨ Trivia',e:'🎉 Event'};
+// rarity dot colours
+const LDOT={common:'#94a3b8',uncommon:'#4ade80',rare:'#60a5fa',main:'#f59e0b',event:'#f472b6'};
+const WIKI='https://dandys-world-robloxhorror.fandom.com/wiki/';
+
+let loreFilt='all';
+function setLoreF(f,btn){
+  loreFilt=f;
+  document.querySelectorAll('.lore-filters .pill').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderLoreTab();
+}
+function renderLoreTab(){
+  const g=document.getElementById('lore-grid');if(!g)return;
+  let list=[...LORE_DATA];
+  if(loreFilt==='main') list=list.filter(t=>t.rarity==='main');
+  else if(loreFilt==='event') list=list.filter(t=>t.rarity==='event'||t.isEvent);
+  else if(loreFilt!=='all') list=list.filter(t=>t.rarity===loreFilt&&!t.isEvent);
+  list.sort((a,b)=>a.name.localeCompare(b.name));
+  if(!list.length){g.innerHTML='<div class="lore-empty"><div style="font-size:2.4rem;margin-bottom:10px;">🔍</div>No toons found!</div>';return;}
+  const rl=r=>r==='main'?'⭐ Main Character':r==='event'?'🎉 Event Toon':r.charAt(0).toUpperCase()+r.slice(1);
+  g.innerHTML=list.map(t=>`<div class="lore-card">
+    <div class="lore-card-head">
+      <span class="lore-em">${t.emoji}</span>
+      <div class="lore-head-info">
+        <div class="lore-name">${t.name}</div>
+        ${t.fullname&&t.fullname!==t.name?`<div class="lore-fullname">${t.fullname}</div>`:''}
+        <div class="lore-desig">${t.isEvent?'🎉 Event '+rl(t.rarity):rl(t.rarity)}${t.desig?' · '+t.desig:''}</div>
+      </div>
+      <div class="lore-dot" style="background:${t.isEvent?'#f472b6':LDOT[t.rarity]||'#fff'}"></div>
+    </div>
+    <div class="lore-body">
+      <p class="lore-desc">${t.desc}</p>
+      <div class="lore-tags">${(t.tags||[]).map(tag=>`<span class="lore-tag lt-${tag}">${LTAG[tag]||tag}</span>`).join('')}</div>
+      <div class="lore-facts">${(t.facts||[]).map(f=>`<div class="lore-fact"><span class="lore-fact-i">${f.i}</span><span class="lore-fact-t">${f.t}</span></div>`).join('')}</div>
+      <a class="lore-wiki" href="${WIKI}${t.wiki||t.name}" target="_blank" rel="noopener">📖 Wiki ↗</a>
+    </div>
+  </div>`).join('');
+}
+
+</script>
+</body>
+</html>
