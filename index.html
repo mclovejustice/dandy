@@ -606,44 +606,44 @@ header{text-align:center;padding:20px 0 6px;}
 // ═══════════════════════════════════════════════════════
 const TOONS=[
   {id:'boxten',name:'Boxten',emoji:'📦',rarity:'common',hp:4,spd:3,stam:3,stlth:2,sk:3,cost:0,ability:'Sturdy — takes one extra hit before losing a heart',free:true},
-  {id:'poppy',name:'Poppy',emoji:'🌸',rarity:'common',hp:3,spd:3,stam:3,stlth:3,sk:3,cost:0,ability:'Cozy — passively heals nearby teammates slowly',free:true},
-  {id:'scraps',name:'Scraps',emoji:'🐱',rarity:'common',hp:3,spd:3,stam:5,stlth:3,sk:4,cost:800,ability:'Tinker — skill check windows are bigger and easier'},
-  {id:'looey',name:'Looey',emoji:'🎺',rarity:'common',hp:3,spd:3,stam:3,stlth:2,sk:4,cost:800,ability:'Fanfare — boosts skill check windows for nearby teammates'},
-  {id:'teagan',name:'Teagan',emoji:'🌊',rarity:'common',hp:3,spd:4,stam:3,stlth:3,sk:2,cost:800,ability:'Current — briefly speeds up nearby teammates'},
-  {id:'tisha',name:'Tisha',emoji:'🧹',rarity:'common',hp:3,spd:3,stam:3,stlth:3,sk:3,cost:800,ability:'Tidy Up! — speeds up toons in a nearby radius'},
-  {id:'yatta',name:'Yatta',emoji:'🎊',rarity:'common',hp:3,spd:3,stam:3,stlth:3,sk:3,cost:800,ability:'Celebration — grants a brief speed burst to the team'},
-  {id:'goob',name:'Goob',emoji:'😴',rarity:'uncommon',hp:3,spd:3,stam:4,stlth:3,sk:2,cost:1200,ability:'Sleepy Shuffle — reduces noise while moving'},
-  {id:'brightney',name:'Brightney',emoji:'☀️',rarity:'uncommon',hp:3,spd:3,stam:3,stlth:2,sk:4,cost:1200,ability:'Flash — illuminates dark areas around machines'},
-  {id:'toodles',name:'Toodles',emoji:'🗺️',rarity:'uncommon',hp:3,spd:3,stam:3,stlth:4,sk:2,cost:1200,ability:'Mystery Missions — rolls a random useful item or buff'},
-  {id:'cosmo',name:'Cosmo',emoji:'🌙',rarity:'uncommon',hp:2,spd:4,stam:4,stlth:4,sk:1,cost:1200,ability:'Moonwalk — silent movement for a short duration'},
-  {id:'connie',name:'Connie',emoji:'🎭',rarity:'uncommon',hp:3,spd:3,stam:3,stlth:4,sk:3,cost:1200,ability:'Disguise — briefly freeze a Twisted by standing still'},
+  {id:'poppy',name:'Poppy',emoji:'🫧',rarity:'common',hp:3,spd:3,stam:3,stlth:3,sk:3,cost:0,ability:'Cozy — passively heals nearby teammates slowly',free:true},
+  {id:'scraps',name:'Scraps',emoji:'🗞️',rarity:'common',hp:3,spd:3,stam:5,stlth:3,sk:4,cost:800,ability:'Tinker — skill check windows are bigger and easier'},
+  {id:'looey',name:'Looey',emoji:'🎈',rarity:'common',hp:3,spd:3,stam:3,stlth:2,sk:4,cost:800,ability:'Fanfare — boosts skill check windows for nearby teammates'},
+  {id:'teagan',name:'Teagan',emoji:'🫖',rarity:'common',hp:3,spd:4,stam:3,stlth:3,sk:2,cost:800,ability:'Current — briefly speeds up nearby teammates'},
+  {id:'tisha',name:'Tisha',emoji:'🧻',rarity:'common',hp:3,spd:3,stam:3,stlth:3,sk:3,cost:800,ability:'Tidy Up! — speeds up toons in a nearby radius'},
+  {id:'yatta',name:'Yatta',emoji:'🍬',rarity:'common',hp:3,spd:3,stam:3,stlth:3,sk:3,cost:800,ability:'Celebration — grants a brief speed burst to the team'},
+  {id:'goob',name:'Goob',emoji:'🤗',rarity:'uncommon',hp:3,spd:3,stam:4,stlth:3,sk:2,cost:1200,ability:'Sleepy Shuffle — reduces noise while moving'},
+  {id:'brightney',name:'Brightney',emoji:'💡',rarity:'uncommon',hp:3,spd:3,stam:3,stlth:2,sk:4,cost:1200,ability:'Flash — illuminates dark areas around machines'},
+  {id:'toodles',name:'Toodles',emoji:'🎱',rarity:'uncommon',hp:3,spd:3,stam:3,stlth:4,sk:2,cost:1200,ability:'Mystery Missions — rolls a random useful item or buff'},
+  {id:'cosmo',name:'Cosmo',emoji:'🍩',rarity:'uncommon',hp:2,spd:4,stam:4,stlth:4,sk:1,cost:1200,ability:'Moonwalk — silent movement for a short duration'},
+  {id:'connie',name:'Connie',emoji:'👻',rarity:'uncommon',hp:3,spd:3,stam:3,stlth:4,sk:3,cost:1200,ability:'Disguise — briefly freeze a Twisted by standing still'},
   {id:'brusha',name:'Brusha',emoji:'🖌️',rarity:'uncommon',hp:3,spd:2,stam:4,stlth:3,sk:4,cost:1200,ability:'Artistic Inspiration — boosts extraction speed nearby (Brusha slows)'},
   {id:'finn',name:'Finn',emoji:'🐟',rarity:'rare',hp:2,spd:5,stam:3,stlth:3,sk:2,cost:2000,ability:'Reel In — fastest sprint; gains extra speed per floor'},
   {id:'flutter',name:'Flutter',emoji:'🦋',rarity:'rare',hp:2,spd:4,stam:4,stlth:4,sk:1,cost:2000,ability:'Wing Dust — leaves a trail slowing Twisteds'},
-  {id:'gigi',name:'Gigi',emoji:'🎀',rarity:'rare',hp:3,spd:4,stam:3,stlth:3,sk:2,cost:2000,ability:'Glam — randomly rolls a useful item'},
-  {id:'glisten',name:'Glisten',emoji:'❄️',rarity:'rare',hp:3,spd:4,stam:3,stlth:4,sk:1,cost:2000,ability:'Frostbite — temporarily slows a nearby Twisted'},
-  {id:'rodger',name:'Rodger',emoji:'🦾',rarity:'rare',hp:4,spd:2,stam:4,stlth:2,sk:3,cost:2000,ability:'Overclock — earns 20 Tapes each time you stand near Twisted Rodger'},
-  {id:'blot',name:'Blot',emoji:'🐙',rarity:'rare',hp:3,spd:3,stam:5,stlth:4,sk:3,cost:2000,ability:'Inkblot — leaves ink puddles to confuse Twisteds'},
-  {id:'shrimpo',name:'Shrimpo',emoji:'🦐',rarity:'rare',hp:1,spd:5,stam:2,stlth:1,sk:1,cost:2000,ability:'Challenge Toon — tiny, ultra fast, only 1 heart!'},
+  {id:'gigi',name:'Gigi',emoji:'🪙',rarity:'rare',hp:3,spd:4,stam:3,stlth:3,sk:2,cost:2000,ability:'Glam — randomly rolls a useful item'},
+  {id:'glisten',name:'Glisten',emoji:'🪞',rarity:'rare',hp:3,spd:4,stam:3,stlth:4,sk:1,cost:2000,ability:'Frostbite — temporarily slows a nearby Twisted'},
+  {id:'rodger',name:'Rodger',emoji:'🔍',rarity:'rare',hp:4,spd:2,stam:4,stlth:2,sk:3,cost:2000,ability:'Overclock — earns 20 Tapes each time you stand near Twisted Rodger'},
+  {id:'blot',name:'Blot',emoji:'🖋️',rarity:'rare',hp:3,spd:3,stam:5,stlth:4,sk:3,cost:2000,ability:'Inkblot — leaves ink puddles to confuse Twisteds'},
+  {id:'shrimpo',name:'Shrimpo',emoji:'🍤',rarity:'rare',hp:1,spd:5,stam:2,stlth:1,sk:1,cost:2000,ability:'Challenge Toon — tiny, ultra fast, only 1 heart!'},
   {id:'squirm',name:'Squirm',emoji:'🐛',rarity:'rare',hp:3,spd:3,stam:3,stlth:4,sk:3,cost:3000,ability:'Distressed Delicacy — Twisteds obsessively chase her (great distractor)',unlock:'3,000 Ichor + 50% research on any Twisted + at least 3 Titles'},
-  {id:'eclipse',name:'Eclipse',emoji:'🌑',rarity:'rare',hp:3,spd:4,stam:3,stlth:2,sk:3,cost:2000,ability:'Howl — boosts own speed and marks nearby Twisteds'},
-  {id:'razzle',name:'Razzle & Dazzle',emoji:'🎠',rarity:'rare',hp:3,spd:3,stam:3,stlth:3,sk:3,cost:2000,ability:'Showtime — stats change between odd/even floors'},
-  {id:'astro',name:'Astro',emoji:'⭐',rarity:'main',hp:2,spd:3,stam:5,stlth:2,sk:3,cost:5000,ability:'Nap Time — fully restores own stamina. Passive: stamina boost nearby.',unlock:'5,000 Ichor + 100% Twisted Astro + encounter Twisted Dandy'},
-  {id:'pebble',name:'Pebble',emoji:'🐾',rarity:'main',hp:2,spd:4,stam:4,stlth:5,sk:1,cost:0,ability:"Bark! — boosts stealth & marks all nearby Twisteds.",unlock:'Complete ALL Toodles missions'},
+  {id:'eclipse',name:'Eclipse',emoji:'🐺',rarity:'rare',hp:3,spd:4,stam:3,stlth:2,sk:3,cost:2000,ability:'Howl — boosts own speed and marks nearby Twisteds'},
+  {id:'razzle',name:'Razzle & Dazzle',emoji:'🎭',rarity:'rare',hp:3,spd:3,stam:3,stlth:3,sk:3,cost:2000,ability:'Showtime — stats change between odd/even floors'},
+  {id:'astro',name:'Astro',emoji:'🌒',rarity:'main',hp:2,spd:3,stam:5,stlth:2,sk:3,cost:5000,ability:'Nap Time — fully restores own stamina. Passive: stamina boost nearby.',unlock:'5,000 Ichor + 100% Twisted Astro + encounter Twisted Dandy'},
+  {id:'pebble',name:'Pebble',emoji:'🪨',rarity:'main',hp:2,spd:4,stam:4,stlth:5,sk:1,cost:0,ability:"Bark! — boosts stealth & marks all nearby Twisteds.",unlock:'Complete ALL Toodles missions'},
   {id:'vee',name:'Vee',emoji:'📺',rarity:'main',hp:2,spd:3,stam:3,stlth:3,sk:3,cost:3500,ability:'Mic Check — highlights ALL Twisteds for 5 sec.',unlock:'3,500 Ichor + 100% Twisted Vee'},
-  {id:'shelly',name:'Shelly',emoji:'🦕',rarity:'main',hp:2,spd:2,stam:3,stlth:2,sk:5,cost:3500,ability:'Inspiration — extraction speed +75% when 3+ Twisteds researched.',unlock:'3,500 Ichor + 100% Twisted Shelly + Floor 10'},
-  {id:'sprout',name:'Sprout',emoji:'🌱',rarity:'main',hp:2,spd:3,stam:5,stlth:4,sk:2,cost:3500,ability:'Baked Sweets — heals a targeted toon for 1 heart (costs 100 Tapes, 100s cooldown). Passive: Overprotective — can see all alive toons and their current health.',unlock:'3,500 Ichor + 100% Twisted Sprout + complete all Cosmo Mastery Quests'},
-  {id:'bassie',name:'Bassie',emoji:'🌼',rarity:'main',hp:2,spd:5,stam:3,stlth:4,sk:1,cost:2500,ability:'Springful Sharing — drops all items to share with teammates.',unlock:'2,500 Ichor + 3,000 Baskets + 100% Twisted Bassie',event:'Easter 🐣'},
-  {id:'bobette',name:'Bobette',emoji:'🎁',rarity:'event',hp:2,spd:3,stam:5,stlth:2,sk:4,cost:2500,ability:'Precious Packaging — hides in gift box. Festive Aura — nearby toons get +50% stamina regen.',unlock:'2,500 Ichor + 3,000 Ornaments + 100% Twisted Bobette',event:'Christmas 🎄'},
-  {id:'coal',name:'Coal',emoji:'🪨',rarity:'event',hp:3,spd:4,stam:4,stlth:3,sk:2,cost:0,ability:'Rock Solid — briefly stuns a Twisted.',unlock:"Free at Bobette\'s Store (Christmas Event)",event:'Christmas 🎄'},
+  {id:'shelly',name:'Shelly',emoji:'🐚',rarity:'main',hp:2,spd:2,stam:3,stlth:2,sk:5,cost:3500,ability:'Inspiration — extraction speed +75% when 3+ Twisteds researched.',unlock:'3,500 Ichor + 100% Twisted Shelly + Floor 10'},
+  {id:'sprout',name:'Sprout',emoji:'🍓',rarity:'main',hp:2,spd:3,stam:5,stlth:4,sk:2,cost:3500,ability:'Baked Sweets — heals a targeted toon for 1 heart (costs 100 Tapes, 100s cooldown). Passive: Overprotective — can see all alive toons and their current health.',unlock:'3,500 Ichor + 100% Twisted Sprout + complete all Cosmo Mastery Quests'},
+  {id:'bassie',name:'Bassie',emoji:'🧺',rarity:'main',hp:2,spd:5,stam:3,stlth:4,sk:1,cost:2500,ability:'Springful Sharing — drops all items to share with teammates.',unlock:'2,500 Ichor + 3,000 Baskets + 100% Twisted Bassie',event:'Easter 🐣'},
+  {id:'bobette',name:'Bobette',emoji:'🎄',rarity:'event',hp:2,spd:3,stam:5,stlth:2,sk:4,cost:2500,ability:'Precious Packaging — hides in gift box. Festive Aura — nearby toons get +50% stamina regen.',unlock:'2,500 Ichor + 3,000 Ornaments + 100% Twisted Bobette',event:'Christmas 🎄'},
+  {id:'coal',name:'Coal',emoji:'🗿',rarity:'event',hp:3,spd:4,stam:4,stlth:3,sk:2,cost:0,ability:'Rock Solid — briefly stuns a Twisted.',unlock:"Free at Bobette\'s Store (Christmas Event)",event:'Christmas 🎄'},
   {id:'ginger',name:'Ginger',emoji:'🍪',rarity:'event',hp:3,spd:4,stam:2,stlth:3,sk:4,cost:0,ability:'Warm Up! — heals nearby toon using Tapes.',unlock:"Free at Bobette\'s Store (Christmas Event)",event:'Christmas 🎄'},
-  {id:'rudie',name:'Rudie',emoji:'🦌',rarity:'event',hp:3,spd:3,stam:3,stlth:3,sk:3,cost:0,ability:'Hooves — grants a sprint boost to nearby toons.',unlock:"Free at Bobette\'s Store (Christmas Event)",event:'Christmas 🎄'},
+  {id:'rudie',name:'Rudie',emoji:'🫎',rarity:'event',hp:3,spd:3,stam:3,stlth:3,sk:3,cost:0,ability:'Hooves — grants a sprint boost to nearby toons.',unlock:"Free at Bobette\'s Store (Christmas Event)",event:'Christmas 🎄'},
   {id:'gourdy',name:'Gourdy',emoji:'🎃',rarity:'main',hp:2,spd:3,stam:1,stlth:1,sk:5,cost:2500,ability:'Pumpkin Power — boosts all nearby toons stats briefly.',unlock:'2,500 Ichor + 3,000 Candy Corn + 100% Twisted Gourdy',event:'Halloween 🎃'},
   {id:'soulvester',name:'Soulvester',emoji:'👻',rarity:'event',hp:3,spd:4,stam:5,stlth:3,sk:5,cost:0,ability:"Soul Sword — slows a Twisted with a sword swing.",unlock:"Halloween Event (Gourdy's Store)",event:'Halloween 🎃'},
-  {id:'ribecca',name:'Ribecca',emoji:'🕸️',rarity:'event',hp:3,spd:4,stam:2,stlth:4,sk:3,cost:0,ability:'Cobweb — passively slows Twisteds nearby.',unlock:'Halloween Event',event:'Halloween 🎃'},
-  {id:'eggson',name:'Eggson',emoji:'🥚',rarity:'event',hp:3,spd:3,stam:3,stlth:3,sk:3,cost:700,ability:'Fixer Upper — instantly fills 20% of a machine at floor start.',unlock:'50% Twisted Eggson + 700 Baskets (Easter Event)',event:'Easter 🐣'},
+  {id:'ribecca',name:'Ribecca',emoji:'💀',rarity:'event',hp:3,spd:4,stam:2,stlth:4,sk:3,cost:0,ability:'Cobweb — passively slows Twisteds nearby.',unlock:'Halloween Event',event:'Halloween 🎃'},
+  {id:'eggson',name:'Eggson',emoji:'🍳',rarity:'event',hp:3,spd:3,stam:3,stlth:3,sk:3,cost:700,ability:'Fixer Upper — instantly fills 20% of a machine at floor start.',unlock:'50% Twisted Eggson + 700 Baskets (Easter Event)',event:'Easter 🐣'},
   {id:'flyte',name:'Flyte',emoji:'🦋',rarity:'event',hp:3,spd:4,stam:4,stlth:4,sk:2,cost:700,ability:'Gust — wind zone boosts nearby toons +15% speed for 5 sec.',unlock:'50% Twisted Flyte + 700 Baskets (Easter Event)',event:'Easter 🐣'},
-  {id:'cocoa',name:'Cocoa',emoji:'🐰',rarity:'event',hp:3,spd:3,stam:4,stlth:4,sk:2,cost:700,ability:'Bonbon — gives a chocolate item with a speed boost to a nearby toon.',unlock:'700 Baskets + Twisted Cocoa research (Easter Event)',event:'Easter 🐣'},
+  {id:'cocoa',name:'Cocoa',emoji:'🍫',rarity:'event',hp:3,spd:3,stam:4,stlth:4,sk:2,cost:700,ability:'Bonbon — gives a chocolate item with a speed boost to a nearby toon.',unlock:'700 Baskets + Twisted Cocoa research (Easter Event)',event:'Easter 🐣'},
 ];
 
 const TWISTEDS=[
@@ -673,7 +673,7 @@ const TWISTEDS=[
 ];
 
 const SKIN_DATA=[
-  {id:'astro',name:'Astro',emoji:'⭐',rarity:'main',skins:[
+  {id:'astro',name:'Astro',emoji:'🌒',rarity:'main',skins:[
     {n:'Vintage Astro',type:'vintage',how:'Complete all Astro Mastery quests',cost:'Free (Mastery)'},
     {n:'Star-Time Astro',type:'gamepass',how:'Buy Star-Time Cosmetic Pack (Robux)',cost:'200 Robux'},
     {n:'Cosmic Voyager Astro',type:'store',how:"Buy from Dyle's Store",cost:'600 Ichor'},
@@ -687,24 +687,24 @@ const SKIN_DATA=[
     {n:'ChocoBerry Vee',type:'store',how:"Buy from Dyle's Store",cost:'600 Ichor'},
     {n:'Holiday Vee',type:'event',how:'Buy during Christmas Event',cost:'Ornaments + Ichor'},
   ]},
-  {id:'shelly',name:'Shelly',emoji:'🦕',rarity:'main',skins:[
+  {id:'shelly',name:'Shelly',emoji:'🐚',rarity:'main',skins:[
     {n:'Vintage Shelly',type:'vintage',how:'Complete all Shelly Mastery quests',cost:'Free (Mastery)'},
     {n:'Star-Time Shelly',type:'gamepass',how:'Buy Star-Time Cosmetic Pack (Robux)',cost:'200 Robux'},
     {n:'Fossil Glow Shelly',type:'store',how:"Buy from Dyle's Store",cost:'600 Ichor'},
     {n:'Christmas Shelly',type:'event',how:'Buy during Christmas Event',cost:'Ornaments + Ichor'},
   ]},
-  {id:'sprout',name:'Sprout',emoji:'🌱',rarity:'main',skins:[
+  {id:'sprout',name:'Sprout',emoji:'🍓',rarity:'main',skins:[
     {n:'Vintage Sprout',type:'vintage',how:'Complete all Sprout Mastery quests',cost:'Free (Mastery)'},
     {n:'Star-Time Sprout',type:'gamepass',how:'Buy Star-Time Cosmetic Pack (Robux)',cost:'200 Robux'},
     {n:'ChocoBerry Sprout',type:'store',how:"Buy from Dyle's Store",cost:'600 Ichor'},
     {n:'Autumn Bloom Sprout',type:'store',how:"Buy from Dyle's Store",cost:'600 Ichor'},
   ]},
-  {id:'pebble',name:'Pebble',emoji:'🐾',rarity:'main',skins:[
+  {id:'pebble',name:'Pebble',emoji:'🪨',rarity:'main',skins:[
     {n:'Vintage Pebble',type:'vintage',how:'Complete all Pebble Mastery quests',cost:'Free (Mastery)'},
     {n:'Star-Time Pebble',type:'gamepass',how:'Buy Star-Time Cosmetic Pack (Robux)',cost:'200 Robux'},
     {n:'Christmas Pebble',type:'event',how:'Buy during Christmas Event',cost:'Ornaments + Ichor'},
   ]},
-  {id:'bassie',name:'Bassie',emoji:'🌼',rarity:'main',skins:[
+  {id:'bassie',name:'Bassie',emoji:'🧺',rarity:'main',skins:[
     {n:'Vintage Bassie',type:'vintage',how:'Complete all Bassie Mastery quests',cost:'Free (Mastery)'},
     {n:'Golden Bassie',type:'golden',how:'Complete all Bassie Holiday Quests (Easter Event)',cost:'Free (Quest) — Event only!'},
     {n:'Egg Hunting Bassie',type:'golden',how:'Complete all 12 daily logins in Easter 2026 event',cost:'Free (Daily Login) — Event only!'},
@@ -716,7 +716,7 @@ const SKIN_DATA=[
     {n:'Midnight Sleeper Gourdy',type:'store',how:"Buy from Dyle's Store",cost:'600 Ichor'},
     {n:'Halloween Gourdy',type:'event',how:"Buy from Gourdy's Store (Halloween Event)",cost:'Pumpkins + Ichor'},
   ]},
-  {id:'bobette',name:'Bobette',emoji:'🎁',rarity:'event',skins:[
+  {id:'bobette',name:'Bobette',emoji:'🎄',rarity:'event',skins:[
     {n:'Vintage Bobette',type:'vintage',how:'Complete all Bobette Mastery quests',cost:'Free (Mastery)'},
     {n:'Golden Bauble Bobette',type:'golden',how:'Complete all Bobette Holiday Quests (Christmas Event)',cost:'Free (Quest) — Event only!'},
     {n:'Hot Chocolate Bobette',type:'golden',how:'Complete 12 days of Christmas 2025 Advent Calendar',cost:'Free (Advent Calendar) — Event only!'},
@@ -728,22 +728,22 @@ const SKIN_DATA=[
     {n:'Clear Dream Boxten',type:'store',how:"Buy from Dyle's Store",cost:'600 Ichor'},
     {n:'Wisteria Boxten',type:'store',how:"Buy from Dyle's Store",cost:'600 Ichor'},
   ]},
-  {id:'poppy',name:'Poppy',emoji:'🌸',rarity:'common',skins:[
+  {id:'poppy',name:'Poppy',emoji:'🫧',rarity:'common',skins:[
     {n:'Vintage Poppy',type:'vintage',how:'Complete all Poppy Mastery quests',cost:'Free (Mastery)'},
     {n:'Rose Gold Poppy',type:'store',how:"Buy from Dyle's Store",cost:'600 Ichor'},
     {n:'Christmas Poppy',type:'event',how:'Buy during Christmas Event',cost:'Ornaments'},
   ]},
-  {id:'scraps',name:'Scraps',emoji:'🐱',rarity:'common',skins:[
+  {id:'scraps',name:'Scraps',emoji:'🗞️',rarity:'common',skins:[
     {n:'Vintage Scraps',type:'vintage',how:'Complete all Scraps Mastery quests',cost:'Free (Mastery)'},
     {n:'Rusty Scraps',type:'store',how:"Buy from Dyle's Store",cost:'600 Ichor'},
     {n:'Spooky Scraps',type:'event',how:'Buy during Halloween Event',cost:'Pumpkins'},
   ]},
-  {id:'blot',name:'Blot',emoji:'🐙',rarity:'rare',skins:[
+  {id:'blot',name:'Blot',emoji:'🖋️',rarity:'rare',skins:[
     {n:'Vintage Blot',type:'vintage',how:'Complete all Blot Mastery quests',cost:'Free (Mastery)'},
     {n:'Cozy Pink Blot',type:'store',how:"Buy from Dyle's Store",cost:'600 Ichor'},
     {n:'Showtime Blot',type:'gamepass',how:'Buy Showtime Cosmetic Pack (Robux)',cost:'200 Robux'},
   ]},
-  {id:'goob',name:'Goob',emoji:'😴',rarity:'uncommon',skins:[
+  {id:'goob',name:'Goob',emoji:'🤗',rarity:'uncommon',skins:[
     {n:'Vintage Goob',type:'vintage',how:'Complete all Goob Mastery quests',cost:'Free (Mastery)'},
     {n:'Dreamy Goob',type:'store',how:"Buy from Dyle's Store",cost:'600 Ichor'},
   ]},
@@ -755,30 +755,30 @@ const SKIN_DATA=[
     {n:'Vintage Flutter',type:'vintage',how:'Complete all Flutter Mastery quests',cost:'Free (Mastery)'},
     {n:'Moonlit Flutter',type:'store',how:"Buy from Dyle's Store",cost:'600 Ichor'},
   ]},
-  {id:'gigi',name:'Gigi',emoji:'🎀',rarity:'rare',skins:[
+  {id:'gigi',name:'Gigi',emoji:'🪙',rarity:'rare',skins:[
     {n:'Vintage Gigi',type:'vintage',how:'Complete all Gigi Mastery quests',cost:'Free (Mastery)'},
     {n:'Pastel Gigi',type:'store',how:"Buy from Dyle's Store",cost:'600 Ichor'},
   ]},
-  {id:'shrimpo',name:'Shrimpo',emoji:'🦐',rarity:'rare',skins:[
+  {id:'shrimpo',name:'Shrimpo',emoji:'🍤',rarity:'rare',skins:[
     {n:'Vintage Shrimpo',type:'vintage',how:'Complete all Shrimpo Mastery quests',cost:'Free (Mastery)'},
     {n:'Spicy Shrimpo',type:'store',how:"Buy from Dyle's Store",cost:'600 Ichor'},
   ]},
-  {id:'cosmo',name:'Cosmo',emoji:'🌙',rarity:'uncommon',skins:[
+  {id:'cosmo',name:'Cosmo',emoji:'🍩',rarity:'uncommon',skins:[
     {n:'Vintage Cosmo',type:'vintage',how:'Complete all Cosmo Mastery quests',cost:'Free (Mastery)'},
     {n:'Snow-Time Cosmo',type:'gamepass',how:'Buy Snow-Time Cosmetic Pack (Robux)',cost:'200 Robux'},
     {n:'Galaxy Cosmo',type:'store',how:"Buy from Dyle's Store",cost:'600 Ichor'},
   ]},
-  {id:'yatta',name:'Yatta',emoji:'🎊',rarity:'common',skins:[
+  {id:'yatta',name:'Yatta',emoji:'🍬',rarity:'common',skins:[
     {n:'Vintage Yatta',type:'vintage',how:'Complete all Yatta Mastery quests',cost:'Free (Mastery)'},
     {n:'Colorful April Yatta',type:'store',how:'Was available via limited April Fools code (now expired)',cost:'Code only — Expired'},
     {n:'Showtime Yatta',type:'gamepass',how:'Buy Showtime Cosmetic Pack (Robux)',cost:'200 Robux'},
   ]},
-  {id:'looey',name:'Looey',emoji:'🎺',rarity:'common',skins:[
+  {id:'looey',name:'Looey',emoji:'🎈',rarity:'common',skins:[
     {n:'Vintage Looey',type:'vintage',how:'Complete all Looey Mastery quests',cost:'Free (Mastery)'},
     {n:'Showtime Looey',type:'gamepass',how:'Buy Showtime Cosmetic Pack (Robux)',cost:'200 Robux'},
     {n:'Christmas Looey',type:'event',how:'Buy during Christmas Event',cost:'Ornaments'},
   ]},
-  {id:'eggson',name:'Eggson',emoji:'🥚',rarity:'event',skins:[
+  {id:'eggson',name:'Eggson',emoji:'🍳',rarity:'event',skins:[
     {n:'Vintage Eggson',type:'vintage',how:'Complete all Eggson Mastery quests',cost:'Free (Mastery)'},
     {n:'Golden Eggson',type:'golden',how:'Complete all Eggson Holiday Quests (Easter Event)',cost:'Free (Quest) — Event only!'},
     {n:'Spring Eggson',type:'event',how:"Buy from Bassie's Store (Easter Event)",cost:'Baskets + Ichor'},
@@ -788,12 +788,12 @@ const SKIN_DATA=[
     {n:'Golden Flyte',type:'golden',how:'Complete all Flyte Holiday Quests (Easter Event)',cost:'Free (Quest) — Event only!'},
     {n:'Spring Flyte',type:'event',how:"Buy from Bassie's Store (Easter Event)",cost:'Baskets'},
   ]},
-  {id:'cocoa',name:'Cocoa',emoji:'🐰',rarity:'event',skins:[
+  {id:'cocoa',name:'Cocoa',emoji:'🍫',rarity:'event',skins:[
     {n:'Vintage Cocoa',type:'vintage',how:'Complete all Cocoa Mastery quests',cost:'Free (Mastery)'},
     {n:'Golden Cocoa',type:'golden',how:'Complete all Cocoa Holiday Quests (Easter Event — Part 2)',cost:'Free (Quest) — Event only!'},
     {n:'Spring Cocoa',type:'event',how:"Buy from Bassie's Store (Easter Event)",cost:'Baskets'},
   ]},
-  {id:'razzle',name:'Razzle & Dazzle',emoji:'🎠',rarity:'rare',skins:[
+  {id:'razzle',name:'Razzle & Dazzle',emoji:'🎭',rarity:'rare',skins:[
     {n:'Vintage Razzle & Dazzle',type:'vintage',how:'Complete all Razzle & Dazzle Mastery quests',cost:'Free (Mastery)'},
     {n:'Showtime Razzle & Dazzle',type:'gamepass',how:'Buy Showtime Cosmetic Pack (Robux)',cost:'200 Robux'},
   ]},
@@ -803,12 +803,12 @@ const SKIN_DATA=[
     {n:'Holiday Ginger',type:'event',how:"Buy from Bobette\'s Store (Christmas Event)",cost:'Ornaments'},
     {n:'Snow-Time Ginger',type:'gamepass',how:'Buy Snow-Time Cosmetic Pack (Robux)',cost:'200 Robux'},
   ]},
-  {id:'coal',name:'Coal',emoji:'🪨',rarity:'event',skins:[
+  {id:'coal',name:'Coal',emoji:'🗿',rarity:'event',skins:[
     {n:'Vintage Coal',type:'vintage',how:'Complete all Coal Mastery quests',cost:'Free (Mastery)'},
     {n:'Holiday Coal',type:'event',how:"Buy from Bobette\'s Store (Christmas Event)",cost:'Ornaments'},
     {n:'Snow-Time Coal',type:'gamepass',how:'Buy Snow-Time Cosmetic Pack (Robux)',cost:'200 Robux'},
   ]},
-  {id:'rudie',name:'Rudie',emoji:'🦌',rarity:'event',skins:[
+  {id:'rudie',name:'Rudie',emoji:'🫎',rarity:'event',skins:[
     {n:'Vintage Rudie',type:'vintage',how:'Complete all Rudie Mastery quests',cost:'Free (Mastery)'},
     {n:'Golden Rudie',type:'golden',how:'Complete all Rudie Golden Skin Quests (Christmas Event)',cost:'Free (Quest) — Event only!'},
     {n:'Holiday Rudie',type:'event',how:"Buy from Bobette\'s Store (Christmas Event)",cost:'Ornaments'},
@@ -911,9 +911,9 @@ const QUIZ_Q=[
 
 const QUIZ_RES={
   speed:{emoji:'🐟',name:'Finn',rarity:'Rare',desc:"Lightning fast and always moving — Finn's incredible speed perfectly matches your energy!"},
-  stealth:{emoji:'🐾',name:'Pebble',rarity:'⭐ Main',desc:"Quiet and clever. Pebble\'s stealth mastery is built for careful thinkers like you."},
-  tank:{emoji:'🦕',name:'Shelly',rarity:'⭐ Main',desc:"Tough, reliable, great under pressure. Shelly is the backbone of any team!"},
-  support:{emoji:'🌸',name:'Poppy',rarity:'Common',desc:"Warm and caring. Poppy's healing aura perfectly matches your supportive nature!"},
+  stealth:{emoji:'🪨',name:'Pebble',rarity:'⭐ Main',desc:"Quiet and clever. Pebble\'s stealth mastery is built for careful thinkers like you."},
+  tank:{emoji:'🐚',name:'Shelly',rarity:'⭐ Main',desc:"Tough, reliable, great under pressure. Shelly is the backbone of any team!"},
+  support:{emoji:'🫧',name:'Poppy',rarity:'Common',desc:"Warm and caring. Poppy's healing aura perfectly matches your supportive nature!"},
   utility:{emoji:'📺',name:'Vee',rarity:'⭐ Main',desc:"Strategic — Vee's ability to reveal ALL Twisteds makes you the ultimate team asset."},
   skillcheck:{emoji:'⚙️',name:'Scraps',rarity:'Common',desc:"Smart and machine-focused. Scraps' giant skill check windows mean you extract faster than anyone!"},
 };
